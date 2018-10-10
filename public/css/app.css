@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@charset "UTF-8";
 
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
@@ -17964,7 +17964,6 @@ body {
 .side-menu .side-header {
   padding: 10px;
   background-color: #172029;
-  color: white;
   text-align: center;
 }
 
@@ -17975,6 +17974,10 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.side-menu .side-header .menu-label h1 {
+  color: white !important;
 }
 
 .side-menu .side-header h1 {
@@ -18023,6 +18026,13 @@ body {
   border-radius: 0px;
   background-color: #090d12;
   border-right: solid #d91515;
+}
+
+.side-menu .side-body .menu-list {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  margin-left: 0px;
+  padding-left: 0px;
 }
 
 .side-menu .side-body .menu-list a {
@@ -18173,13 +18183,19 @@ body {
   display: none;
 }
 
+.side-menu-change .side-body .menu-list {
+  margin-left: 0px;
+  padding-left: 0px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
 .side-menu-change .side-body .menu-list span {
   display: none;
 }
 
 .side-menu-change .side-body .menu-list i {
   font-size: 18px;
-  margin-left: 15px;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
@@ -18203,6 +18219,17 @@ body {
 
 .dropdown-space .navbar-item .text-item {
   margin-right: 90px;
+}
+
+.dropdown-space .navbar-item .mute-text,
+.dropdown-space .navbar-item .name-text {
+  font-size: 16px;
+  margin: 0px;
+}
+
+.dropdown-space ul {
+  list-style-type: none;
+  margin-top: 0px;
 }
 
 .box-dropdown-custom {

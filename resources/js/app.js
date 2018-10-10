@@ -6,19 +6,31 @@
  */
 
 require('./bootstrap');
+window.Vue = require('vue');
+
 import Buefy from 'buefy';
-Vue.use(Buefy, axios);
+import router from './routes.js';
+import Editor from '@tinymce/tinymce-vue';
+
+window.Slug = require('slug');
+Slug.defaults.mode = 'rfc3986';
+
+window.VueRouter = require('vue-router').default;
+
+
+Vue.use(Buefy, VueRouter, axios);
 
 window.Vue = require('vue');
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+const AppLayout = Vue.component('app-layout', require('./components/appLayout.vue'))
+const editor = Vue.component('editor', Editor)
+const slugWidget = Vue.component('slug-widget', require('./components/slugWidget.vue'));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-const app = new Vue({
-    el: '#app'
-});
+new Vue(
+    Vue.util.extend(
+        {router},
+        AppLayout,
+        editor,
+        slugWidget,
+    )
+).$mount('#mainLayout');

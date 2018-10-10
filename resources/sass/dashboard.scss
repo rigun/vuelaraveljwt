@@ -14,13 +14,15 @@
     .side-header{
         padding: 10px;
         background-color: #172029;
-        color:white;
         text-align: center;
         .menu-label{
             margin-bottom: 0px;
             height: 50px;
             overflow: hidden;
             display:flex;
+            h1{
+                color:white !important;
+            }
         }
         h1{
             font-size: 17px;
@@ -61,6 +63,9 @@
         }
 
         .menu-list{
+            transition: 0.5s;
+            margin-left:0px;
+            padding-left:0px;
             a{
                 color: white !important;
                 opacity: 0.54;
@@ -189,13 +194,17 @@
             }
         }
         .menu-list{
+            margin-left:0px;
+            padding-left:0px;
+            transition: 0.5s;
+
             span{
                 display: none;
             }
             i{
                 font-size: 18px;
-                margin-left: 15px;
                 transition: 0.5s;
+
             }
           
         }
@@ -216,11 +225,21 @@
         .text-item{
             margin-right: 90px;
         }
+        .mute-text, .name-text{
+            font-size:16px;
+            margin:0px;
+        }
+        
+    }
+    ul{
+        list-style-type: none;
+        margin-top: 0px;
     }
 }
 .box-dropdown-custom{
     background-color: #dbdbdb;
     border-radius: 0px;
+
     top: 100%;
 }
 .arrow-up{

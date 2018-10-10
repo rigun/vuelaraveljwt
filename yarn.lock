@@ -2,6 +2,12 @@
 # yarn lockfile v1
 
 
+"@tinymce/tinymce-vue@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-vue/-/tinymce-vue-1.1.0.tgz#ff58fb2658f5a7d1abcb7ed5e01bf570da671a81"
+  dependencies:
+    vue "^2.5.13"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -1749,6 +1755,14 @@ dotenv-expand@^4.2.0:
 dotenv@^4.0.0:
   version "4.0.0"
   resolved "http://registry.npmjs.org/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
+
+dropzone@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/dropzone/-/dropzone-4.3.0.tgz#48b0b8f2ad092872e4b535b672a7c3f1a1d67c91"
+
+dropzone@^5.5.0:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/dropzone/-/dropzone-5.5.1.tgz#06e2f513e61d6aa363d4b556f18574f47cf7ba26"
 
 duplexify@^3.4.2, duplexify@^3.6.0:
   version "3.6.0"
@@ -5079,6 +5093,12 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
+slug@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/slug/-/slug-0.9.1.tgz#af08f608a7c11516b61778aa800dce84c518cfda"
+  dependencies:
+    unicode ">= 0.3.1"
+
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
@@ -5578,6 +5598,10 @@ uglifyjs-webpack-plugin@^1.1.8:
     webpack-sources "^1.1.0"
     worker-farm "^1.5.2"
 
+"unicode@>= 0.3.1":
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/unicode/-/unicode-11.0.1.tgz#735bd422ec75cf28d396eb224d535d168d5f1db6"
+
 union-value@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/union-value/-/union-value-1.0.0.tgz#5c71c34cb5bad5dcebe3ea0cd08207ba5aa1aea4"
@@ -5711,6 +5735,12 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-dropzone@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/vue-dropzone/-/vue-dropzone-1.0.4.tgz#4c09ac22ea26932992af06bb57243cdd0d80bef0"
+  dependencies:
+    dropzone "^4.3.0"
+
 vue-hot-reload-api@^2.2.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
@@ -5733,6 +5763,10 @@ vue-loader@^13.7.1:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
+vue-router@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
+
 vue-style-loader@^3.0.0:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-3.1.2.tgz#6b66ad34998fc9520c2f1e4d5fa4091641c1597a"
@@ -5751,9 +5785,19 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@^2.5.7:
+vue2-dropzone@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/vue2-dropzone/-/vue2-dropzone-3.5.2.tgz#602630b1577d861810555646b72338de69feebe2"
+  dependencies:
+    dropzone "^5.5.0"
+
+vue@^2.5.13, vue@^2.5.7:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
+
+vuex@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.0.1.tgz#e761352ebe0af537d4bb755a9b9dc4be3df7efd2"
 
 watchpack@^1.4.0:
   version "1.6.0"
