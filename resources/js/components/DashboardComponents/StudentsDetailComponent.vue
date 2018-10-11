@@ -41,27 +41,7 @@
     </div>
     <div class="tabs is-boxed">
             
-    <ul>
-        <li class="is-active">
-        <a>
-            <span class="icon is-small"><i class="fa fa-image" aria-hidden="true"></i></span>
-            <span>Detail</span>
-        </a>
-        </li>
-        <li>
-        <a>
-            <span class="icon is-small"><i class="fa fa-music" aria-hidden="true"></i></span>
-            <span>Post</span>
-        </a>
-        </li>
-        <li>
-        <a>
-            <span class="icon is-small"><i class="fa fa-film" aria-hidden="true"></i></span>
-            <span>Publish</span>
-        </a>
-        </li>
     
-    </ul>
     </div>
     <div class="columns">
         <div class="column">
@@ -220,7 +200,6 @@
         <div class="modal-card">
           <header class="modal-card-head">
             <p class="modal-card-title">Perbaharui Data Siswa</p>
-            <button class="delete" aria-label="close" v-on:click="modalUpdate()"></button>
           </header>
             <form v-on:submit.prevent ="updateStudent()">
 
@@ -290,12 +269,16 @@
                             </select>
                         </div>
                     </div>
+                    <div class="column">
+                      <label for="name" class="label">Password</label>
+                       <div class="field">
+                            <p class="control">
+                                <b-checkbox v-model="dataStudent.password_options" >reset</b-checkbox>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="field">
-                  <p class="control">
-                    <b-checkbox v-model="dataStudent.password_options" >reset</b-checkbox>
-                  </p>
-                </div>
+                
               </div> <!-- end of .column -->
             </div> <!-- end of .columns for forms -->       
           </section>
@@ -342,14 +325,13 @@ export default {
               }
             },
         updateStudent(){
-              let uri = 'http://127.0.0.1:8000/api/siswa/update/'+this.$route.params.id;
+              let uri = '/api/siswa/update/'+this.$route.params.id;
               axios.patch(uri, this.dataStudent,{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
                 alert(response.data.msg);
-                console.log(response);
                 this.activeUpdate = false;
                 this.getStudent();
               }).catch(error => {
@@ -359,7 +341,7 @@ export default {
                 });
             },
         getStudent(){
-            let uri = 'http://127.0.0.1:8000/api/siswa/detail/'+this.$route.params.id;
+            let uri = '/api/siswa/detail/'+this.$route.params.id;
             axios.get(uri,{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')

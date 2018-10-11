@@ -3,10 +3,10 @@
 <div class="flex-container m-b-35">
       <div class="columns m-t-10">
         <div class="column">
-          <h1 class="title">Karya Siswa</h1>
+          <h1 class="title">Pengumuman</h1>
         </div>
         <div class="column">
-          <router-link v-bind:to="{ name: 'KaryaSiswaPost', params: { detail: 'create', id:'new' }}" class="button is-primary is-pulled-right"><i class="fa fa-user-plus m-r-10"></i> Tambahkan Karya Siswa</router-link>
+          <router-link v-bind:to="{ name: 'PengumumanPost', params: { detail: 'create', id:'new' }}" class="button is-primary is-pulled-right"><i class="fa fa-user-plus m-r-10"></i> Tambahkan Pengumuman</router-link>
         </div>
       </div>
       <div class="columns m-t-10">
@@ -51,7 +51,7 @@
                   <td>{{ karya.created_at }}</td>
                   <td><span v-if="karya.status == 1">Publish</span><span v-if="karya.status == 0">Draft</span></td>
                   <td>
-                      <router-link v-bind:to="{name: 'KaryaSiswaPost', params: {detail: 'update', id:karya.id}}"  class="button is-primary m-r-5"  >Detail</router-link>
+                      <router-link v-bind:to="{name: 'PengumumanPost', params: {detail: 'update', id:karya.id}}"  class="button is-primary m-r-5"  >Detail</router-link>
                       <a class="button is-danger" href="#" v-on:click.prevent="modalDelete();setIdDelete(karya)">Hapus</a></td>
                 </tr>
             
@@ -83,7 +83,7 @@
             <form v-on:submit.prevent ="deleteCreation()">
 
             <section class="modal-card-body">
-                <p>Data Karya Siswa yang dihapus tidak dapat dikembalikan lagi, apakah anda yakin ingin menghapusnya ? </p>
+                <p>Data Pengumuman yang dihapus tidak dapat dikembalikan lagi, apakah anda yakin ingin menghapusnya ? </p>
           </section>
           <footer class="modal-card-foot">
             <button class="button is-warning">Hapus Data</button>
@@ -139,7 +139,7 @@
         },
          methods: {
             getCreation(){
-                  let uri = '/api/importantpost/Karya Siswa';
+                  let uri = '/api/importantpost/Pengumuman';
                   axios.get(uri,{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')

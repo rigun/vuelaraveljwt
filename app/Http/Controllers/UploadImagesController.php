@@ -50,8 +50,8 @@ class UploadImagesController extends Controller
 
     public function show($id)
     {
-
-
+        $picture = Upload::findOrFail($id);
+        return $picture;
     }
     /**
      * Saving images uploaded through XHR Request.
@@ -93,8 +93,10 @@ class UploadImagesController extends Controller
             $upload->type = "imageUpload";
             $upload->save();
         }
+
+        $picture = Upload::where('filename',$save_name)->first();
         return Response::json([
-            'message' => 'Image saved Successfully'
+            'picture' => $picture
         ], 200);
     }
 

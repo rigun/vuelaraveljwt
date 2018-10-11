@@ -225,7 +225,7 @@
               }).then((response) => {
                       this.admins = response.data.data;
                   }).catch(error => {
-                      console.log(error.response)
+                      // console.log(error.response)
                   });
             },
             modalCreate: function(event){
@@ -286,7 +286,6 @@
                 }
             }).then((response) => {
                 alert(response.data.msg);
-                console.log(response);
                 this.activeUpdate = false;
                 this.dataAdmin = this.dataAdminNull;
                 this.getAdmin();

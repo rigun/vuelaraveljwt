@@ -3,7 +3,7 @@
     <div class="flex-container m-b-35">
         <div class="columns m-t-10">
             <div class="column">
-                <h1 class="title">Karya Siswa</h1>
+                <h1 class="title">Prestasi</h1>
             </div>
         </div>
            
@@ -41,25 +41,6 @@
 
             <div class="column is-one-quarter-desktop is-narrow-tablet">
                 <div class="card">
-                    <div class="card-content">
-                    <div class="columns">
-                            
-                            <div class="column" v-if="picture == ''">
-                              <vue-dropzone ref="myVueDropzone" id="dropzone" 
-                                        @vdropzone-success="vsuccess"
-                                        @vdropzone-file-added="vfileAdded" 
-                                    :options="dropzoneOptions"
-                                    :duplicateCheck="true">
-                                    </vue-dropzone>
-                            </div>
-                            <div class="column" v-else>
-                                <img :src="'/images/upload/'+picture" />
-                                <button class="button button-primary" @click="deletePicture()">Hapus Foto </button>
-                            </div>
-
-                        </div>
-
-                    </div>
                     <div class="card-content">
 
                         <div class="columns">
@@ -101,32 +82,16 @@
 </template>
 
 <script>
-import vue2Dropzone from 'vue2-dropzone'
-import 'vue2-dropzone/dist/vue2Dropzone.min.css'
-
     export default {
-       components: {
-            vueDropzone: vue2Dropzone,
-        },
+       
         data(){
             
             return{
-                dropzoneOptions: {
-                    url:'/api/images-save',
-                    thumbnailWidth: 150,
-                    maxFilesize: 2,
-                    addRemoveLinks: true,
-                    headers: {
-                      Authorization :'Bearer ' + localStorage.getItem('token')
-                  },
-                },
                 content:'',
                 title: '',
                 slug: '',
                 created_at: '',
-                id:'',
-                 picture: '',
-                picture_id: ''
+                id:''
             }
         },
         watch: {
@@ -138,8 +103,6 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     this.slug = '';
                     this.created_at = '';
                     this.id = '';
-                    this.picture = '';
-                    this.picture_id = ''
                     return this.getPost();
 
                 }
@@ -151,13 +114,6 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
             }
         },
          methods: {
-             vfileAdded(file){
-                this.dropzoneOptions.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
-            },
-            vsuccess(file, response) {
-                this.picture_id = response.picture.id;
-               this.getPicture();
-            },
             updateSlug: function(val) {
              this.slug = val;
             },
@@ -165,7 +121,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                 notifications.toast(msg, {type: `is-${type}`});
             },
             getPost(){
-                let uri = '/api/importantpost/detail/'+this.$route.params.id+'/Karya Siswa';
+                let uri = '/api/importantpost/detail/'+this.$route.params.id+'/Prestasi';
                 axios.get(uri,{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -177,7 +133,6 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                         this.title = response.data[0].title;
                         this.slug = response.data[0].slug;
                         this.created_at = response.data[0].created_at;
-                        this.picture = response.data[0].picture;
                     }else{
                         // console.log(reponse);
                     }
@@ -187,42 +142,20 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                 if(this.$route.params.detail == 'update'){
                     var uri = '/api/importantpost/update/'+this.$route.params.id;
                 }else{
-                    var uri = '/api/importantpost/create/Karya Siswa';
+                    var uri = '/api/importantpost/create/Prestasi';
                 }
-              axios.post(uri, {content: this.content, slug: this.slug, title: this.title, picture: this.picture},{
+              axios.post(uri, {content: this.content, slug: this.slug, title: this.title},{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
                   alert('sukses');
-                  this.$router.push({ name: 'KaryaSiswaList' });
+                  this.$router.push({ name: 'PrestasiList' });
                 // this.getPost();
               }).catch(error => {
                 // this.getPost();
                 });
-            },
-            getPicture(){
-               let uri = '/api/images-detail/'+this.picture_id;
-                axios.get(uri,{
-                    headers: {
-                        Authorization: 'Bearer ' + localStorage.getItem('token')
-                    }
-                }).then((response) => {
-                    console.log(response);
-                    this.picture = response.data.filename;
-                });
-            },
-            deletePicture(){
-                let uri = '/api/images-delete/'+this.picture_id;
-                    axios.delete(uri,{
-                        headers: {
-                            Authorization: 'Bearer ' + localStorage.getItem('token')
-                        }
-                    }).then((response) => {
-                        this.picture_id='';
-                        this.picture = '';
-                    });
-            },
+            }
          },
         computed: {
             

@@ -14,17 +14,17 @@ use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Purifier;
 
-class KaryaSiswaController extends Controller
+class ImportantPostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($kategori)
     {
-        $kategori = Kategori::where('name','Karya Siswa')->first();
-        return $kategori->post->with('user')->get();
+        $data = Kategori::where('name',$kategori)->first();
+        return $data->post()->with('user')->get();
     }
 
     /**
@@ -43,13 +43,14 @@ class KaryaSiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $kategori)
     {
         $this->validateWith([
             'slug' => 'required',
             'title' => 'required',
             'content' => 'required',
-            'kategori_name' => 'required',
+            'picture' => 'required'
+
           ]);
           
         $post = new Post;
@@ -58,9 +59,11 @@ class KaryaSiswaController extends Controller
         $post->content = Purifier::clean($request->content);
         $post->published_at = date("Y-m-d h:i:s");
         $post->author_id = JWTAuth::parseToken()->authenticate()->id;
+        $post->status = 0;
+        $post->picture = $request->picture;
         $post->save();
 
-        $category = Kategori::where('name', $request->kategori_name)->first();
+        $category = Kategori::where('name', $kategori)->first();
         $post->kategori()->attach($category);
 
         return $post;
@@ -72,10 +75,10 @@ class KaryaSiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,$kategori)
     {
-        $kategori = Kategori::where('name', $id)->first();
-        return $kategori->post;
+        $kategori = Kategori::where('name',$kategori)->first();
+        return $kategori->post()->where('id',$id)->get();
     }
 
     /**
@@ -102,7 +105,8 @@ class KaryaSiswaController extends Controller
             'slug' => 'required',
             'title' => 'required',
             'content' => 'required',
-            'kategori_name' => 'required',
+            'picture' => 'required'
+
         ]);
         
 
@@ -111,11 +115,9 @@ class KaryaSiswaController extends Controller
         $post->title = $request->title;
         $post->content = Purifier::clean($request->content);
         $post->published_at = date("Y-m-d h:i:s");
-        $post->author_id = JWTAuth::parseToken()->authenticate()->id;
+        $post->status = 1;
+        $post->picture = $request->picture;
         $post->save();
-
-        $category = Kategori::where('name', $request->kategori_name)->first();
-        $post->kategori()->attach($category);
 
         return $post;
     }
@@ -128,7 +130,13 @@ class KaryaSiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        if($post->count()>0){
+            $post->delete();
+            return response()->json(['statur'=>'success','msg'=>'Data siswa berhasil dihapus']);
+        } else {
+            return response()->json(['statur'=>'error','msg'=>'Gagal menghapus data Siswa']);
+        }
     }
     public function apiCheckUnique(Request $request)
     {

@@ -14,7 +14,7 @@
                  <div class="card-content">
                      Jumlah Siswa
                      <p class="center">
-                         0
+                         {{number.user}}
                      </p>
                  </div>
              </div>
@@ -24,7 +24,7 @@
                  <div class="card-content">
                      Jumlah Post (Draf)
                     <p class="center">
-                         0
+                         {{number.postDraf}}
                      </p>
                  </div>
              </div>
@@ -34,69 +34,14 @@
                  <div class="card-content">
                      Jumlah Post (Publish)
                     <p class="center">
-                         0
+                         {{number.postPublish}}
                      </p>
                  </div>
              </div>
          </div>
 
      </div>
-     <div class="columns">
-         <div class="column">
-             <div class="card">
-                 <div class="card-content">
-
-                     <div class="columns">
-                        <div class="column is-one-third">
-                            <label class="label">
-                                Kontak*
-                            </label>
-                        </div>
-                            <label class="label" style="padding: 0.75rem">
-                                :
-                            </label>
-                        <div class="column">
-                            <label class="label">
-                                082238097626
-                            </label>
-                        </div>
-                    </div>
-                     <div class="columns">
-                        <div class="column is-one-third">
-                            <label class="label">
-                                Kontak (opsional)
-                            </label>
-                        </div>
-                            <label class="label" style="padding: 0.75rem">
-                                :
-                            </label>
-                        <div class="column">
-                            <label class="label">
-                                -
-                            </label>
-                        </div>
-                    </div>
-                     <div class="columns">
-                        <div class="column is-one-third">
-                            <label class="label">
-                                Email 
-                            </label>
-                        </div>
-                            <label class="label" style="padding: 0.75rem">
-                                :
-                            </label>
-                        <div class="column">
-                            <label class="label">
-                                -
-                            </label>
-                        </div>
-                    </div>
-            
-                 </div>
-             </div>
-         </div>
-
-     </div>
+    
      <div class="columns">
          <div class="column">
              <div class="card">
@@ -105,6 +50,8 @@
                             @vdropzone-mounted="vmounted" 
                             @vdropzone-success="vsuccess"
                             @vdropzone-success-multiple="vsuccessMuliple" 
+                            @vdropzone-file-added="vfileAdded" 
+                            @vdropzone-files-added="vfilesAdded" 
                         :options="dropzoneOptions"
                         :duplicateCheck="true">
                         </vue-dropzone>
@@ -140,29 +87,37 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
         components: {
             vueDropzone: vue2Dropzone,
         },
+        mounted(){
+            this.getCount();
+        },
         data(){
             return{
+                header: localStorage.getItem('token'),
                 dropzoneOptions: {
-                    url: 'http://127.0.0.1:8000/api/images-save',
+                    url: '/api/images-save',
                     thumbnailWidth: 150,
                     maxFilesize: 2,
                     addRemoveLinks: true,
-                    headers: {
-                      Authorization :'Bearer ' + localStorage.getItem('token')
-                  },
+                    headers: {  Authorization : ''},
                   autoProcessQueue:true,
-                  accept(file, done) {
-                     done();
-                    },
                 },
-                dataFoto: []
+                dataFoto: [],
+                number:{
+                    user:0,
+                    postDraf:0,
+                    postPublish:0
+                },
             }
         },
         methods:{
             vmounted() {
-                dropzoneOptions.headers = {  Authorization :'Bearer ' + localStorage.getItem('token')}
-
                  this.getPicture();
+            },
+            vfileAdded(file){
+                this.dropzoneOptions.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+            },
+            vfilesAdded(file) {
+                this.dropzoneOptions.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
             },
             getPicture(){
                let uri = '/api/images-show';
@@ -172,6 +127,17 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     }
                 }).then((response) => {
                     this.dataFoto = response.data;
+                    
+                });
+            },
+            getCount(){
+                let uri = '/api/count';
+                axios.get(uri,{
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                }).then((response) => {
+                    this.number = response.data;
                     
                 });
             },
@@ -186,6 +152,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     });
             },
             vsuccess(file, response) {
+                console.log(response);
                this.getPicture();
             },
             vsuccessMuliple(files, response) {

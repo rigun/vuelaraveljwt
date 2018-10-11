@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->longText('content');
             $table->integer('status')->default(1);
-            $table->unsignedBigInteger('comment_count')->default(0);
+            $table->string('picture');
             $table->dateTime('published_at');
             $table->timestamps();
 

@@ -11,6 +11,7 @@ window.Vue = require('vue');
 import Buefy from 'buefy';
 import router from './routes.js';
 import Editor from '@tinymce/tinymce-vue';
+import jQuery from 'jquery';
 
 window.Slug = require('slug');
 Slug.defaults.mode = 'rfc3986';
@@ -18,7 +19,7 @@ Slug.defaults.mode = 'rfc3986';
 window.VueRouter = require('vue-router').default;
 
 
-Vue.use(Buefy, VueRouter, axios);
+Vue.use(Buefy, VueRouter, axios, jQuery);
 
 window.Vue = require('vue');
 

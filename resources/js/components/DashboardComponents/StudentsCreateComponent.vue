@@ -226,7 +226,7 @@
         },
          methods: {
             getStudent(){
-                  let uri = 'http://127.0.0.1:8000/api/siswa';
+                  let uri = '/api/siswa';
                   axios.get(uri,{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -234,7 +234,7 @@
               }).then((response) => {
                       this.siswas = response.data.data;
                   }).catch(error => {
-                      console.log(error.response)
+                      // console.log(error.response)
                   });
             },
             getThisYear(){
@@ -262,7 +262,7 @@
               this.id = data.id;
             },
             createStudent: function() {
-              let uri = 'http://127.0.0.1:8000/api/siswa/create';
+              let uri = '/api/siswa/create';
               axios.post(uri, this.dataStudent,{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -279,7 +279,7 @@
                 });
             },
             deleteStudent(){
-              let uri = 'http://127.0.0.1:8000/api/siswa/delete/'+this.id;
+              let uri = '/api/siswa/delete/'+this.id;
               axios.delete(uri,{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')

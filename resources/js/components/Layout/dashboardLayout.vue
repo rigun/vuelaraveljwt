@@ -69,8 +69,8 @@
                         <li><router-link v-bind:to="{path: '/dashboard/siswa'}"><i class="fa fa-users m-r-10" aria-hidden="true"></i>  <span>Manage Siswa</span> </router-link></li>
                         <li><router-link v-bind:to="{path: '/dashboard/slider'}"><i class="fa fa-slideshare m-r-10" aria-hidden="true"></i>  <span>Manage Slider</span> </router-link></li>
                         <li><router-link v-bind:to="{ name: 'KaryaSiswaList'}"><i class="fa fa-bookmark m-r-10" aria-hidden="true"></i>  <span>Karya Siswa</span> </router-link></li>
-                        <li><router-link v-bind:to="{ name: 'PostComponent', params: { kategori: 'Pengumuman' }}"><i class="fa fa-bookmark m-r-10" aria-hidden="true"></i>  <span>Pengumuman</span> </router-link></li>
-                        <li><router-link v-bind:to="{path: '/dashboard/ppdb'}"><i class="fa fa-file m-r-10" aria-hidden="true"></i>  <span>PPDB</span> </router-link></li>
+                        <li><router-link v-bind:to="{ name: 'PengumumanList'}"><i class="fa fa-bookmark m-r-10" aria-hidden="true"></i>  <span>Pengumuman</span> </router-link></li>
+                        <li><router-link v-bind:to="{ name: 'PostComponent', params: { kategori: 'PPDB' }}"><i class="fa fa-file m-r-10" aria-hidden="true"></i>  <span>PPDB</span> </router-link></li>
                     </ul>
 
                     <div class="side-label">
@@ -82,7 +82,7 @@
                     <ul id="listTentang" class="menu-list dropdown-hiddenSide">
                             
                         <li><router-link v-bind:to="{ name: 'PostComponent', params: { kategori: 'Sejarah' }}"> <i class="fa fa-history m-r-10" aria-hidden="true"></i> <span>Sejarah</span></router-link></li>
-                        <li><router-link v-bind:to="{path: '/dashboard/so'}"><i class="fa fa-address-book m-r-10" aria-hidden="true"></i>  <span>Struktur Organisasi</span></router-link></li>
+                        <li><router-link v-bind:to="{ name: 'PostComponent', params: { kategori: 'Struktur Organisasi' }}"><i class="fa fa-address-book m-r-10" aria-hidden="true"></i>  <span>Struktur Organisasi</span></router-link></li>
                         <li><router-link v-bind:to="{ name: 'PostComponent', params: { kategori: 'Kerjasama' }}"><i class="fa fa-balance-scale m-r-10" aria-hidden="true"></i>  <span>Kerjasama</span></router-link></li>
                         <li><router-link v-bind:to="{ name: 'PostComponent', params: { kategori: 'Fasilitas' }}"><i class="fa fa-certificate m-r-10" aria-hidden="true"></i>  <span>Fasilitas</span></router-link></li>
                     </ul>
@@ -107,7 +107,7 @@
                     <ul id="listSiswa" class="menu-list dropdown-hiddenSide">
                         <li><router-link v-bind:to="{ name: 'PostComponent', params: { kategori: 'Peraturan Akademik' }}"><i class="fa fa-list m-r-10" aria-hidden="true"></i>  <span>Peraturan Akademik</span></router-link></li>
                         <li><router-link v-bind:to="{ name: 'PostComponent', params: { kategori: 'Ekstrakurikuler' }}"><i class="fa fa-flag m-r-10" aria-hidden="true"></i>  <span>Ekstrakulikuler</span></router-link></li>
-                        <li><router-link v-bind:to="{ name: 'PostComponent', params: { kategori: 'Prestasi' }}"><i class="fa fa-star m-r-10" aria-hidden="true"></i>  <span>Prestasi</span></router-link></li>
+                        <li><router-link v-bind:to="{ name: 'PrestasiList' }"><i class="fa fa-star m-r-10" aria-hidden="true"></i>  <span>Prestasi</span></router-link></li>
                     </ul>
                     
                 </div>
@@ -131,8 +131,24 @@
                 error:'',
             }
         },
+        created(){
+            axios.get('/api/user', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            })
+            .then(response => {
+                if(response.data.status == "Token is Expired"){
+                    this.$router.push({ name: 'Logout' })
+                }else {
+                    this.user = response.data.user;
+                }
+            }).catch(error => {
+                this.error = error;
+            })  
+        },
         mounted(){
-            this.getUser();
+             this.getUser();
         },
         methods:{
             getUser(){
@@ -142,25 +158,22 @@
                     }
                 }).then(response => {
                     localStorage.setItem('token', response.data.access_token);
-                    axios.get('/api/user', {
-                            headers: {
-                                Authorization: 'Bearer ' + localStorage.getItem('token')
+                      axios.get('/api/user', {
+                        headers: {
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
                             }
                         })
                         .then(response => {
-                            console.log(response);
                             if(response.data.status == "Token is Expired"){
                                 this.$router.push({ name: 'Logout' })
                             }else {
                                 this.user = response.data.user;
-
-
                             }
                         }).catch(error => {
                             this.error = error;
                         })  
                 }).catch(error => {
-                    alert(error);
+                    this.$router.push({ name: 'Logout' })
                 });
             }
         }

@@ -18,7 +18,9 @@
                               <vue-dropzone ref="myVueDropzone1" id="dropzone1" 
                                         @vdropzone-mounted="vmounted" 
                                         @vdropzone-success="vsuccess"
-                                        @vdropzone-success-multiple="vsuccessMuliple" 
+                                        @vdropzone-success-multiple="vsuccessMuliple"
+                                        @vdropzone-file-added="vfileAdded" 
+                            @vdropzone-files-added="vfilesAdded"  
                                     :options="dropzoneOptions1"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
@@ -32,7 +34,9 @@
                          <div class="column is-one-third" v-if="dataSlider.slider2 == ''">
                               <vue-dropzone ref="myVueDropzone2" id="dropzone2" 
                                         @vdropzone-success="vsuccess"
-                                        @vdropzone-success-multiple="vsuccessMuliple" 
+                                        @vdropzone-success-multiple="vsuccessMuliple"
+                                        @vdropzone-file-added="vfileAdded" 
+                            @vdropzone-files-added="vfilesAdded"  
                                     :options="dropzoneOptions2"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
@@ -46,7 +50,9 @@
                          <div class="column is-one-third" v-if="dataSlider.slider3 == ''">
                               <vue-dropzone ref="myVueDropzone3" id="dropzone3" 
                                         @vdropzone-success="vsuccess"
-                                        @vdropzone-success-multiple="vsuccessMuliple" 
+                                        @vdropzone-success-multiple="vsuccessMuliple"
+                                        @vdropzone-file-added="vfileAdded" 
+                            @vdropzone-files-added="vfilesAdded"  
                                     :options="dropzoneOptions3"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
@@ -59,7 +65,9 @@
                          <div class="column is-one-third" v-if="dataSlider.slider4 == ''">
                               <vue-dropzone ref="myVueDropzone1" id="dropzone4" 
                                         @vdropzone-success="vsuccess"
-                                        @vdropzone-success-multiple="vsuccessMuliple" 
+                                        @vdropzone-success-multiple="vsuccessMuliple"
+                                        @vdropzone-file-added="vfileAdded" 
+                            @vdropzone-files-added="vfilesAdded"  
                                     :options="dropzoneOptions4"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
@@ -72,7 +80,9 @@
                          <div class="column is-one-third" v-if="dataSlider.slider5 == ''">
                               <vue-dropzone ref="myVueDropzone2" id="dropzone2" 
                                         @vdropzone-success="vsuccess"
-                                        @vdropzone-success-multiple="vsuccessMuliple" 
+                                        @vdropzone-success-multiple="vsuccessMuliple"
+                                        @vdropzone-file-added="vfileAdded" 
+                            @vdropzone-files-added="vfilesAdded"  
                                     :options="dropzoneOptions5"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
@@ -85,7 +95,9 @@
                          <div class="column is-one-third" v-if="dataSlider.slider6 == ''">
                               <vue-dropzone ref="myVueDropzone3" id="dropzone3" 
                                         @vdropzone-success="vsuccess"
-                                        @vdropzone-success-multiple="vsuccessMuliple" 
+                                        @vdropzone-success-multiple="vsuccessMuliple"
+                                        @vdropzone-file-added="vfileAdded" 
+                            @vdropzone-files-added="vfilesAdded"  
                                     :options="dropzoneOptions6"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
@@ -98,7 +110,9 @@
                          <div class="column is-one-third" v-if="dataSlider.slider7 == ''">
                               <vue-dropzone ref="myVueDropzone1" id="dropzone1" 
                                         @vdropzone-success="vsuccess"
-                                        @vdropzone-success-multiple="vsuccessMuliple" 
+                                        @vdropzone-success-multiple="vsuccessMuliple"
+                                        @vdropzone-file-added="vfileAdded" 
+                            @vdropzone-files-added="vfilesAdded"  
                                     :options="dropzoneOptions7"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
@@ -111,7 +125,9 @@
                          <div class="column is-one-third" v-if="dataSlider.slider8 == ''">
                               <vue-dropzone ref="myVueDropzone2" id="dropzone2" 
                                         @vdropzone-success="vsuccess"
-                                        @vdropzone-success-multiple="vsuccessMuliple" 
+                                        @vdropzone-success-multiple="vsuccessMuliple"
+                                        @vdropzone-file-added="vfileAdded" 
+                            @vdropzone-files-added="vfilesAdded"  
                                     :options="dropzoneOptions8"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
@@ -124,7 +140,9 @@
                          <div class="column is-one-third" v-if="dataSlider.slider9 == ''">
                               <vue-dropzone ref="myVueDropzone3" id="dropzone3" 
                                         @vdropzone-success="vsuccess"
-                                        @vdropzone-success-multiple="vsuccessMuliple" 
+                                        @vdropzone-success-multiple="vsuccessMuliple"
+                                        @vdropzone-file-added="vfileAdded" 
+                            @vdropzone-files-added="vfilesAdded"  
                                     :options="dropzoneOptions9"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
@@ -137,7 +155,9 @@
                          <div class="column is-one-third" v-if="dataSlider.slider10 == ''">
                               <vue-dropzone ref="myVueDropzone3" id="dropzone3" 
                                         @vdropzone-success="vsuccess"
-                                        @vdropzone-success-multiple="vsuccessMuliple" 
+                                        @vdropzone-success-multiple="vsuccessMuliple"
+                                        @vdropzone-file-added="vfileAdded" 
+                            @vdropzone-files-added="vfilesAdded"  
                                     :options="dropzoneOptions10"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
@@ -176,7 +196,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     maxFilesize: 2,
                     addRemoveLinks: true,
                     headers: {
-                      'Authorization' :'Bearer ' + localStorage.getItem('token')
+                      Authorization :'Bearer ' + localStorage.getItem('token')
                   },
                 },
                 dropzoneOptions2: {
@@ -185,7 +205,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     maxFilesize: 2,
                     addRemoveLinks: true,
                     headers: {
-                      'Authorization' :'Bearer ' + localStorage.getItem('token')
+                      Authorization :'Bearer ' + localStorage.getItem('token')
                   },
                 },
                 dropzoneOptions3: {
@@ -194,7 +214,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     maxFilesize: 2,
                     addRemoveLinks: true,
                     headers: {
-                      'Authorization' :'Bearer ' + localStorage.getItem('token')
+                      Authorization :'Bearer ' + localStorage.getItem('token')
                   },
                   autoProcessQueue:true,
                   accept(file, done) {
@@ -207,7 +227,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     maxFilesize: 2,
                     addRemoveLinks: true,
                     headers: {
-                      'Authorization' :'Bearer ' + localStorage.getItem('token')
+                      Authorization :'Bearer ' + localStorage.getItem('token')
                   },
                 },
                 dropzoneOptions5: {
@@ -216,7 +236,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     maxFilesize: 2,
                     addRemoveLinks: true,
                     headers: {
-                      'Authorization' :'Bearer ' + localStorage.getItem('token')
+                      Authorization :'Bearer ' + localStorage.getItem('token')
                   },
                 },
                 dropzoneOptions6: {
@@ -225,7 +245,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     maxFilesize: 2,
                     addRemoveLinks: true,
                     headers: {
-                      'Authorization' :'Bearer ' + localStorage.getItem('token')
+                      Authorization :'Bearer ' + localStorage.getItem('token')
                   },
                   autoProcessQueue:true,
                   accept(file, done) {
@@ -238,7 +258,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     maxFilesize: 2,
                     addRemoveLinks: true,
                     headers: {
-                      'Authorization' :'Bearer ' + localStorage.getItem('token')
+                      Authorization :'Bearer ' + localStorage.getItem('token')
                   },
                 },
                 dropzoneOptions8: {
@@ -247,7 +267,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     maxFilesize: 2,
                     addRemoveLinks: true,
                     headers: {
-                      'Authorization' :'Bearer ' + localStorage.getItem('token')
+                      Authorization :'Bearer ' + localStorage.getItem('token')
                   },
                 },
                 dropzoneOptions9: {
@@ -256,7 +276,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     maxFilesize: 2,
                     addRemoveLinks: true,
                     headers: {
-                      'Authorization' :'Bearer ' + localStorage.getItem('token')
+                      Authorization :'Bearer ' + localStorage.getItem('token')
                   },
                   autoProcessQueue:true,
                   accept(file, done) {
@@ -269,7 +289,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     maxFilesize: 2,
                     addRemoveLinks: true,
                     headers: {
-                      'Authorization' :'Bearer ' + localStorage.getItem('token')
+                      Authorization :'Bearer ' + localStorage.getItem('token')
                   },
                   autoProcessQueue:true,
                   accept(file, done) {
@@ -307,16 +327,31 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
         },
         methods:{
             vmounted(){
-                this.dropzoneOptions1.headers = {  Authorization :'tes'};
-                this.dropzoneOptions2.headers = {  Authorization :'Bearer ' + localStorage.getItem('token')};
-                this.dropzoneOptions3.headers = {  Authorization :'Bearer ' + localStorage.getItem('token')};
-                this.dropzoneOptions4.headers = {  Authorization :'Bearer ' + localStorage.getItem('token')};
-                this.dropzoneOptions5.headers = {  Authorization :'Bearer ' + localStorage.getItem('token')};
-                this.dropzoneOptions6.headers = {  Authorization :'Bearer ' + localStorage.getItem('token')};
-                this.dropzoneOptions7.headers = {  Authorization :'Bearer ' + localStorage.getItem('token')};
-                this.dropzoneOptions8.headers = {  Authorization :'Bearer ' + localStorage.getItem('token')};
-                this.dropzoneOptions9.headers = {  Authorization :'Bearer ' + localStorage.getItem('token')};
-                this.dropzoneOptions10.headers = {  Authorization :'Bearer ' + localStorage.getItem('token')};
+                
+            },
+            vfileAdded(file){
+                this.dropzoneOptions1.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions2.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions3.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions4.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions5.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions6.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions7.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions8.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions9.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions10.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+            },
+            vfilesAdded(file) {
+                this.dropzoneOptions1.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions2.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions3.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions4.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions5.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions6.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions7.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions8.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions9.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                this.dropzoneOptions10.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
             },
             getPicture(){
                
@@ -411,11 +446,3 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
         }
     }
 </script>
-Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9yZWZyZXNoIiwiaWF0IjoxNTM5MTc0NDY2LCJleHAiOjE1MzkxODAyOTgsIm5iZiI6MTUzOTE3NjY5OCwianRpIjoiRGNLazdvZ29JQlpmM1VTeCIsInN1YiI6MywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.B_o5jsIGSgYz-MUK6ZhGkmiI17PUs76ClNNyDI9zN9U
-
-Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9yZWZyZXNoIiwiaWF0IjoxNTM5MTc0NDY2LCJleHAiOjE1MzkxODAyOTgsIm5iZiI6MTUzOTE3NjY5OCwianRpIjoiRGNLazdvZ29JQlpmM1VTeCIsInN1YiI6MywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.B_o5jsIGSgYz-MUK6ZhGkmiI17PUs76ClNNyDI9zN9U
-
-Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9yZWZyZXNoIiwiaWF0IjoxNTM5MTc0NDY2LCJleHAiOjE1MzkxODAyOTgsIm5iZiI6MTUzOTE3NjY5OCwianRpIjoiRGNLazdvZ29JQlpmM1VTeCIsInN1YiI6MywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.B_o5jsIGSgYz-MUK6ZhGkmiI17PUs76ClNNyDI9zN9U
-Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9yZWZyZXNoIiwiaWF0IjoxNTM5MTc0NDY2LCJleHAiOjE1MzkxODA3MTMsIm5iZiI6MTUzOTE3NzExMywianRpIjoiSzRRMkoxbVFkZGdxRVV0NSIsInN1YiI6MywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.XgmS0chjUvfkN0R41hhXctHrEsb9NB1yD6J0KKrrlEg
-Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9yZWZyZXNoIiwiaWF0IjoxNTM5MTc0NDY2LCJleHAiOjE1MzkxODA3MTMsIm5iZiI6MTUzOTE3NzExMywianRpIjoiSzRRMkoxbVFkZGdxRVV0NSIsInN1YiI6MywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.XgmS0chjUvfkN0R41hhXctHrEsb9NB1yD6J0KKrrlEg
-Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9yZWZyZXNoIiwiaWF0IjoxNTM5MTc0NDY2LCJleHAiOjE1MzkxODAyOTgsIm5iZiI6MTUzOTE3NjY5OCwianRpIjoiRGNLazdvZ29JQlpmM1VTeCIsInN1YiI6MywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.B_o5jsIGSgYz-MUK6ZhGkmiI17PUs76ClNNyDI9zN9U

@@ -13,7 +13,9 @@ return [
         'Prestasi',
         'Pengumuman',
         'Terbaru',
-        'Karya Siswa'
+        'Karya Siswa',
+        'PPDB',
+        'Struktur Organisasi',
     ]
   
 ];

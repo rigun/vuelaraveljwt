@@ -19,6 +19,10 @@ const PostComponent = Vue.component('PostComponent', require('./components/Dashb
 const SliderComponent = Vue.component('SliderComponent', require('./components/DashboardComponents/SliderComponent.vue'))
 const KaryaSiswaList = Vue.component('KaryaSiswaList', require('./components/DashboardComponents/KaryaSiswaListComponent.vue'))
 const KaryaSiswaPost = Vue.component('KaryaSiswaPost', require('./components/DashboardComponents/KaryaSiswaPostComponent.vue'))
+const PengumumanList = Vue.component('PengumumanList', require('./components/DashboardComponents/PengumumanListComponent.vue'))
+const PengumumanPost = Vue.component('PengumumanPost', require('./components/DashboardComponents/PengumumanPostComponent.vue'))
+const PrestasiList = Vue.component('PrestasiList', require('./components/DashboardComponents/PrestasiListComponent.vue'))
+const PrestasiPost = Vue.component('PrestasiPost', require('./components/DashboardComponents/PrestasiPostComponent.vue'))
 
 
 const routes = [
@@ -67,9 +71,33 @@ const routes = [
               },
               {
                   name: 'KaryaSiswaPost',
-                  path: 'karyaSiswa/detail',
+                  path: 'karyaSiswa/detail/:detail/:id',
                   component: KaryaSiswaPost
-              }
+              },
+              {
+                  name: 'PengumumanList',
+                  path: 'pengumuman',
+                  component: PengumumanList
+              
+              },
+              {
+                  name: 'PengumumanPost',
+                  path: 'pengumuman/detail/:detail/:id',
+                  component: PengumumanPost
+              },
+              {
+                name: 'PrestasiList',
+                path: 'prestasi',
+                component: PrestasiList
+            
+            },
+            {
+                name: 'PrestasiPost',
+                path: 'prestasi/detail/:detail/:id',
+                component: PrestasiPost
+            }
+          
+             
           ]
       },
     {
@@ -100,7 +128,7 @@ router.beforeEach((to, from, next) => {
 
     // if logged in redirect to dashboard
     if(to.path === '/login' && store.state.isLoggedIn) {
-        next({ name: 'DashboardLayout' })
+        next({ name: 'DashboardContent' })
         return
     }
     // if logged in redirect to dashboard

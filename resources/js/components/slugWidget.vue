@@ -140,7 +140,7 @@
 
         //   if (this.api_token && slug) {
           if (slug) {
-            axios.get('http://127.0.0.1:8000/api/posts/unique', {
+            axios.get('/api/posts/unique', {
               params: {
                 api_token: vm.api_token,
                 slug: slug

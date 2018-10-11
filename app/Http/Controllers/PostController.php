@@ -49,6 +49,7 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
             'kategori_name' => 'required',
+            'picture' => 'required'
           ]);
           
         $post = new Post;
@@ -57,6 +58,7 @@ class PostController extends Controller
         $post->content = Purifier::clean($request->content);
         $post->published_at = date("Y-m-d h:i:s");
         $post->author_id = JWTAuth::parseToken()->authenticate()->id;
+        $post->picture = $request->picture;
         $post->save();
 
         $category = Kategori::where('name', $request->kategori_name)->first();
@@ -102,6 +104,8 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
             'kategori_name' => 'required',
+            'picture' => 'required'
+
         ]);
         
 
@@ -111,10 +115,10 @@ class PostController extends Controller
         $post->content = Purifier::clean($request->content);
         $post->published_at = date("Y-m-d h:i:s");
         $post->author_id = JWTAuth::parseToken()->authenticate()->id;
+        $post->picture = $request->picture;
         $post->save();
 
-        $category = Kategori::where('name', $request->kategori_name)->first();
-        $post->kategori()->attach($category);
+        
 
         return $post;
     }
@@ -132,5 +136,12 @@ class PostController extends Controller
     public function apiCheckUnique(Request $request)
     {
         return json_encode(!Post::where('slug', '=', $request->slug)->exists());
+    }
+
+    public function getCount(){
+        $user = User::whereRoleIs('user')->count();
+        $postDraf = Post::where('status','0')->count();
+        $postPublish = Post::where('status','1')->count();
+        return json_encode(['user'=>$user,'postDraf'=>$postDraf,'postPublish'=>$postPublish]);
     }
 }

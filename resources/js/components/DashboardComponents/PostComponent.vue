@@ -42,24 +42,44 @@
             <div class="column is-one-quarter-desktop is-narrow-tablet">
                 <div class="card">
                     <div class="card-content">
+                    <div class="columns">
+                            
+                            <div class="column" v-if="picture == ''">
+                              <vue-dropzone ref="myVueDropzone" id="dropzone" 
+                                        @vdropzone-success="vsuccess"
+                                        @vdropzone-file-added="vfileAdded" 
+                                    :options="dropzoneOptions"
+                                    :duplicateCheck="true">
+                                    </vue-dropzone>
+                            </div>
+                            <div class="column" v-else>
+                                <img :src="'/images/upload/'+picture" />
+                                <button class="button button-primary" @click="deletePicture()">Hapus Foto </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="card-content">
 
                         <div class="columns">
                             <div class="column is-one-fifth" style="align-self:center">
                                <i class="fa fa-archive" style="padding:0px;font-size: 21px;"></i>
                             </div>
-                            <div class="column ">
-                                 <strong>Draft</strong> Tersimpan
+                            <div class="column " v-if="created_at != ''">
+                                 <strong>Status</strong> Publish
                                  <p>dibuat pada tanggal </p>
-                                 <p>08-10-2018</p>
+                                 <p>{{created_at}}</p>
+                            </div>
+                            <div class="column " v-else>
+                                 <strong>Status</strong> Belum Dipublish
                             </div>
                         </div>
                     </div>
                         <hr style="margin:0px;">
                     <div class="card-content">
                     <div class="columns">
-                            <div class="column">
-                                 <button class="button is-fullwidth" > Draft</button>
-                            </div>
+                            
                             <div class="column">
                                 <button type="submit" class="button is-success is-fullwidth" > Publish</button>
                             </div>
@@ -79,16 +99,31 @@
 </template>
 
 <script>
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
     export default {
-       
+       components: {
+            vueDropzone: vue2Dropzone,
+        },
         data(){
             
             return{
+                dropzoneOptions: {
+                    url:'/api/images-save',
+                    thumbnailWidth: 150,
+                    maxFilesize: 2,
+                    addRemoveLinks: true,
+                    headers: {
+                      Authorization :'Bearer ' + localStorage.getItem('token')
+                  },
+                },
                 content:'',
                 title: '',
                 slug: '',
                 created_at: '',
-                id:''
+                id:'',
+                picture: '',
+                picture_id: ''
             }
         },
         watch: {
@@ -100,6 +135,8 @@
                     this.slug = '';
                     this.created_at = '';
                     this.id = '';
+                    this.picture = '';
+                    this.picture_id = ''
                     return this.getPost();
 
                 }
@@ -109,6 +146,13 @@
             this.getPost();
         },
          methods: {
+              vfileAdded(file){
+                this.dropzoneOptions.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+            },
+            vsuccess(file, response) {
+                this.picture_id = response.picture.id;
+               this.getPicture();
+            },
             updateSlug: function(val) {
              this.slug = val;
             },
@@ -116,7 +160,7 @@
                 notifications.toast(msg, {type: `is-${type}`});
             },
             getPost(){
-                let uri = 'http://127.0.0.1:8000/api/posts/detail/'+this.$route.params.kategori;
+                let uri = '/api/posts/detail/'+this.$route.params.kategori;
                 axios.get(uri,{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -128,18 +172,19 @@
                         this.title = response.data[0].title;
                         this.slug = response.data[0].slug;
                         this.created_at = response.data[0].created_at;
+                        this.picture = response.data[0].picture;
                     }else{
-                        console.log(reponse);
+                        // console.log(reponse);
                     }
                 });
             },
             createPost(){
                 if((this.$route.params.kategori != 'Pengumuman' || this.$route.params.kategori != 'Karya Siswa' || this.$route.params.kategori!='Prestasi') && this.id != ''){
-                    var uri = 'http://127.0.0.1:8000/api/posts/update/'+this.id;
+                    var uri = '/api/posts/update/'+this.id;
                 }else{
-                    var uri = 'http://127.0.0.1:8000/api/posts/create';
+                    var uri = '/api/posts/create';
                 }
-              axios.post(uri, {content: this.content, slug: this.slug, title: this.title, kategori_name: this.$route.params.kategori},{
+              axios.post(uri, {content: this.content, slug: this.slug, title: this.title, kategori_name: this.$route.params.kategori, picture: this.picture},{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
@@ -148,7 +193,29 @@
               }).catch(error => {
                 this.getPost();
                 });
-            }
+            },
+             getPicture(){
+               let uri = '/api/images-detail/'+this.picture_id;
+                axios.get(uri,{
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                }).then((response) => {
+                    console.log(response);
+                    this.picture = response.data.filename;
+                });
+            },
+            deletePicture(){
+                let uri = '/api/images-delete/'+this.picture_id;
+                    axios.delete(uri,{
+                        headers: {
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
+                        }
+                    }).then((response) => {
+                        this.picture_id='';
+                        this.picture = '';
+                    });
+            },
          },
         computed: {
             
