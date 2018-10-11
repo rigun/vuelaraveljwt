@@ -1,0 +1,318 @@
+@font-face {
+    font-family: futura;
+    src: url(../fonts/futura/futur.ttf);
+}
+@font-face {
+    font-family: futuraBold;
+    src: url(../fonts/futura/Futura\ Bold\ font.ttf);
+}
+@font-face{
+    font-family: futuraBook;
+    src: url(../fonts/futura/Futura\ Book\ font.ttf);
+}
+@font-face{
+    font-family: futuraHeavy;
+    src: url(../fonts/futura/Futura\ Heavy\ font.ttf);
+}
+.navbar-custom .navSecond div{
+height: 0px;
+transition: 0.3s;
+}
+.navbar-custom .middle{
+    border-radius: 97px;
+    width: 80px;
+    overflow: hidden;
+    font-size: 0px;
+    padding: 8px;
+    transition: 0.3s;
+}
+.bg-navFirst{
+    background-color: #CBCCCE;
+}
+.bg-navSecond{
+    background-color: white;
+    z-index: 1;
+}
+
+.bg-navThird{
+    background-color: #FFE500;
+}
+
+.navbarLogin, .bg-navbar{
+    width: 100%;
+}
+.navbarLogin{
+    padding-right: 58px;
+}
+#mainNav{
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1366px;
+    padding:0px;
+    font-family: futuraHeavy;
+    color: black;
+    height: 200px;
+    background: transparent;
+    box-shadow: none;
+}
+.navSecond div{
+    height: 52px;
+    transition: 0.3s;
+}
+.dropdown-content{
+    height: auto !important;
+}
+#navbarResponsive{
+    width: 100%;
+}
+.navThird{
+    position: relative;
+    top: 0px;
+}
+.nav-item a{
+    width: 100%;
+    margin: auto;
+}
+#navbarResponsive .col-6{
+    padding: 0px;
+}
+.colLeft{
+    padding-right: 20px;
+}
+.colRight{
+    padding-left: 20px;
+}
+.row{
+    width: 100%;
+    margin: 0px !important;
+}
+.navbarLogin .navbar-nav{
+    float: right;
+}
+.container{
+    max-width: 1366px;
+}
+
+/* ////////////////Logo */
+
+.middle {
+    height: auto !important;
+    background-color: white;
+    border: solid 1px black;
+    border-bottom-left-radius: 64px;
+    border-bottom-right-radius: 64px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+    max-width: 150px;
+    position: relative;
+    width: 130px;
+    transition: 0.3s;
+}
+.middle img{
+    width: 60px;
+}
+.middle p{
+    margin-bottom: 0px;
+}
+
+/* Dropdown Navbar */
+ /* Navbar container */
+ .navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial;
+  }
+
+  /* Links inside the navbar */
+  .navbar a {
+    float: left;
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  /* The dropdown container */
+  .dropdown {
+    overflow: hidden;
+    margin: auto;
+    width: 100%;
+  }
+
+  /* Dropdown button */
+  .dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 14px 16px;
+    background-color: inherit;
+    width: 100%;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+  }
+
+  /* Add a red background color to navbar links on hover */
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #ffe500;
+    color: black;
+      text-decoration: none;
+  }
+  .navbar .nav-item a:hover{
+      background: white;
+      text-decoration: none;
+      color: black;
+  }
+
+  /* Dropdown content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  }
+
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  /* Add a grey background color to dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Slider */
+     /*jssor slider loading skin spin css*/
+     .jssorl-009-spin img {
+        animation-name: jssorl-009-spin;
+        animation-duration: 1.6s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    @keyframes jssorl-009-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    /*jssor slider bullet skin 111 css*/
+    .jssorb111 .i {position:absolute;color:#fff;font-family:"Helvetica neue",Helvetica,Arial,sans-serif;text-align:center;cursor:pointer;z-index:0;}
+    .jssorb111 .i .n {display:none;}
+    .jssorb111 .i .b {fill:#fff;stroke:#000;stroke-width:500;stroke-miterlimit:10;stroke-opacity:.5;}
+    .jssorb111 .i:hover .b {fill:#fea900;stroke:#fea900;stroke-width:6000;stroke-opacity:1;}
+    .jssorb111 .iav .b {fill:#000;stroke-width:6000;stroke-opacity:1;}
+    .jssorb111 .i.idn {opacity:.3;}
+    .jssorb111 .iav .n, .jssorb111 .i:hover .n {display:block;}
+
+    /*jssor slider thumbnail skin 121 css*/
+    .jssort121 .p {position:absolute;top:0;left:0;border-bottom:1px solid rgba(255,255,255,.2);box-sizing:border-box;color:#fff;background:rgba(0,0,0,.1);opacity:.7;}
+    .jssort121 .p .t {position:absolute;padding:10px;box-sizing:border-box;top:0;left:0;width:100%;height:100%;line-height:24px;overflow:hidden;}
+    .jssort121 .p .i {margin-right:0px;position:relative;top:0;left:0;width:96px;height:48px;border:none;float:left;}
+    .jssort121 .pav, .jssort121 .p:hover {color:#000;background:rgba(255,255,255,.7);}
+    .jssort121 .p:hover {opacity:.75;}
+    .jssort121 .pav, .jssort121 .p:hover.pdn {opacity:1;}
+    .jssort121 .ti {position:relative;font-size:14px;font-weight:bold;}
+    .jssort121 .d {position:relative;font-size:12px;}
+    /*.jssort121 .d:before {content:'\a';white-space:pre;}*/
+
+    #article{
+        position: relative;
+        top: 140px;
+    }
+
+    .box-article{
+        width: 100%;
+        max-width: 300px;
+        margin: auto;
+        margin-top: 30px;
+        padding: 10px;
+        text-align: justify;
+    }
+    .box-article h4{
+        color: #FCB316;
+    }
+    .box-article img{
+        width: 100%;
+        border-bottom: solid 2px #FCB316;
+    }
+.btn-box button{
+    border-radius: 12px;
+
+    background-image: linear-gradient(to right, #FCB316, #ffe500);
+
+    padding: 8px 31px;
+
+    color: black;
+
+    box-shadow: none;
+
+    border: solid 1px gray;
+
+    font-size: 22px;
+
+    font-weight: bold;
+}
+.btn-box button:hover{
+    pointer-events:cursor;
+    background-image: linear-gradient(to left, #FCB316, #ffe500);
+}
+.btn-box{
+    margin: auto;
+}
+
+#vm{
+    margin-top: 40px;
+}
+.bg-VM{
+    background: #ffe500;
+    color: black;
+    text-align: center;
+
+}
+
+.bg-text{
+    background: url(../img/021.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+.box-textVM{
+    text-align: justify;
+    width: 100%;
+    max-width: 300px;
+    margin: 40px auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 10px;
+    border-top: solid 3px #FCAF17;
+}
+.content{
+    height: 80px;
+}
+.box-pengumuman{
+    border-left: solid 1px black;
+}
+#KaryaSS{
+    margin-top: 40px;
+}
+#CU{
+    border-top: solid 2px black;
+    background-color: #BCBEC0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
