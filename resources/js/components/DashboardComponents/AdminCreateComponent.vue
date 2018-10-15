@@ -13,7 +13,7 @@
         <div class="column">
             <div class="field has-addons">
                 <p class="control">
-                    <input class="input" type="text" placeholder="Cari. . ">
+                    <input class="input" type="text" placeholder="Cari. . " >
                 </p>
                 <p class="control">
                     <a class="button is-static">
@@ -42,7 +42,7 @@
             <tbody>
                   
                 <tr v-for="(admin, index) in filterAdmin " :key="admin.id">
-                  <th>{{ index + 1 }}</th>
+                  <th>{{ index + 1 + start}}</th>
                   <td>{{ admin.name }}</td>
                   <td>{{ admin.username }}</td>
                   <td>{{ admin.created_at }}</td>
@@ -52,12 +52,13 @@
             </tbody>
           </table>
           <div class="footer-table-pagination">
-            <span class="is-pulled-left">
-                
-            </span>
-            <span class="is-pulled-right">
-           
-            </span>
+            <vue-ads-pagination v-if="countAdmin!=0"
+                :page="0"
+                :itemsPerPage="100"
+                :total-items="countAdmin"
+                :max-visible-pages="3"
+                @page-change="pageChange"
+            />
         </div>  
         </div>
        
@@ -186,7 +187,11 @@
 </template>
 
 <script>
+import VueAdsPagination from 'vue-ads-pagination';
     export default {
+       components: {
+          VueAdsPagination,
+      },
         data(){
             return{
                 active: false,
@@ -210,12 +215,23 @@
                   roles:2
                   },
                 admins:[],
+                page: 0,
+                start: 0,
+                end: 0,
+                countAdmin: 0,
             }
         },
         created: function() {
             this.getAdmin();
+            
         },
          methods: {
+           pageChange(page, start, end) {
+              this.page = page;
+              this.start = start;
+              this.end = end;
+          },
+         
             getAdmin(){
                   let uri = '/api/admin';
                   axios.get(uri,{
@@ -224,6 +240,7 @@
                   }
               }).then((response) => {
                       this.admins = response.data;
+                      this.countAdmin = this.admins.length;
                   }).catch(error => {
                       // console.log(error.response)
                   });
@@ -318,9 +335,14 @@
         computed: {
             filterAdmin: function(){
                 if(this.admins.length) {
-                    return this.admins;
+                    return this.admins.filter((row, index) => {
+                            
+                            if(index >= this.start && index < this.end) return true;
+                          });
                 }
-            }
-        }
-    }
+            },
+            
+        },
+        
+}
 </script>

@@ -41,8 +41,8 @@
 
             <tbody>
                   
-                <tr v-for="(siswa, index) in siswas" :key="siswa.id">
-                  <th>{{ index + 1 }}</th>
+                <tr v-for="(siswa, index) in filterStudent" :key="siswa.id">
+                  <th>{{ index + 1 +start }}</th>
                   <td>{{ siswa.name }}</td>
                   <td>{{ siswa.username }}</td>
                   <td>{{ siswa.created_at }}</td>
@@ -54,12 +54,13 @@
             </tbody>
           </table>
           <div class="footer-table-pagination">
-            <span class="is-pulled-left">
-                
-            </span>
-            <span class="is-pulled-right">
-           
-            </span>
+            <vue-ads-pagination v-if="count!=0"
+                :page="0"
+                :itemsPerPage="100"
+                :total-items="count"
+                :max-visible-pages="3"
+                @page-change="pageChange"
+            />
         </div>  
         </div>
        
@@ -189,7 +190,12 @@
 }    
 </style>
 <script>
+import VueAdsPagination from 'vue-ads-pagination';
+
     export default {
+      components: {
+          VueAdsPagination,
+      },
         data(){
             return{
                 active: false,
@@ -218,6 +224,10 @@
                   },
                 siswas:[],
                 year:'',
+                page: 0,
+                start: 0,
+                end: 0,
+                count: 0,
             }
         },
         created: function() {
@@ -225,6 +235,11 @@
             this.getStudent();
         },
          methods: {
+          pageChange(page, start, end) {
+              this.page = page;
+              this.start = start;
+              this.end = end;
+          },
             getStudent(){
                   let uri = '/api/siswa';
                   axios.get(uri,{
@@ -233,6 +248,7 @@
                   }
               }).then((response) => {
                       this.siswas = response.data;
+                      this.count = this.siswas.length;
                   }).catch(error => {
                       // console.log(error.response)
                   });
@@ -300,7 +316,10 @@
         computed: {
             filterStudent: function(){
                 if(this.siswas.length) {
-                    return this.siswas;
+                    return this.siswas.filter((row, index) => {
+                
+                        if(index >= this.start && index < this.end) return true;
+                      });
                 }
             }
         }

@@ -44,7 +44,7 @@
             <tbody>
                   
                 <tr v-for="(karya, index) in filterCreation" :key="karya.id">
-                  <th>{{ index + 1 }}</th>
+                  <th>{{ index + 1 + start }}</th>
                   <td>{{ karya.title }}</td>
                   <td>{{ karya.user.name }}</td>
                   <td>http://127.0.0.1/blog/{{ karya.slug }}</td>
@@ -58,12 +58,13 @@
             </tbody>
           </table>
           <div class="footer-table-pagination">
-            <span class="is-pulled-left">
-                
-            </span>
-            <span class="is-pulled-right">
-           
-            </span>
+            <vue-ads-pagination v-if="count!=0"
+                :page="0"
+                :itemsPerPage="100"
+                :total-items="count"
+                :max-visible-pages="3"
+                @page-change="pageChange"
+            />
         </div>  
         </div>
        
@@ -104,7 +105,12 @@
 }    
 </style>
 <script>
+import VueAdsPagination from 'vue-ads-pagination';
+
     export default {
+      components: {
+          VueAdsPagination,
+      },
         data(){
             return{
                 active: false,
@@ -132,12 +138,21 @@
                   },
                 karyas:[],
                 year:'',
+                 page: 0,
+                start: 0,
+                end: 0,
+                count: 0,
             }
         },
         created: function() {
             this.getCreation();
         },
          methods: {
+           pageChange(page, start, end) {
+              this.page = page;
+              this.start = start;
+              this.end = end;
+          },
             getCreation(){
                   let uri = '/api/importantpost/Karya Siswa';
                   axios.get(uri,{
@@ -147,6 +162,7 @@
               }).then((response) => {
                 console.log(response.data);
                       this.dataCreation = response.data;
+                      this.count = this.dataCreation.length;
                   }).catch(error => {
                       // console.log(error);
                   });
@@ -194,7 +210,10 @@
         computed: {
             filterCreation: function(){
                 if(this.dataCreation.length) {
-                    return this.dataCreation;
+                    return this.dataCreation.filter((row, index) => {
+                            
+                            if(index >= this.start && index < this.end) return true;
+                          });
                 }
             }
         }

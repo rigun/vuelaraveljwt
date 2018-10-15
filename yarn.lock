@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@fortawesome/fontawesome-free@^5.3.1":
+  version "5.4.1"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.4.1.tgz#6194786c1a705ab84253e06429834466670e3c3f"
+
 "@tinymce/tinymce-vue@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@tinymce/tinymce-vue/-/tinymce-vue-1.1.0.tgz#ff58fb2658f5a7d1abcb7ed5e01bf570da671a81"
@@ -5743,6 +5747,13 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-ads-pagination@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/vue-ads-pagination/-/vue-ads-pagination-2.0.0.tgz#ac99b00b3b767709345eafdc407bcdddeec57ea2"
+  dependencies:
+    "@fortawesome/fontawesome-free" "^5.3.1"
+    vue "^2.5.16"
+
 vue-dropzone@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/vue-dropzone/-/vue-dropzone-1.0.4.tgz#4c09ac22ea26932992af06bb57243cdd0d80bef0"
@@ -5803,7 +5814,7 @@ vue2-dropzone@^3.5.2:
   dependencies:
     dropzone "^5.5.0"
 
-vue@^2.5.13, vue@^2.5.7:
+vue@^2.5.13, vue@^2.5.16, vue@^2.5.7:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
 
