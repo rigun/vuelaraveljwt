@@ -13,7 +13,7 @@
         <div class="column">
             <div class="field has-addons">
                 <p class="control">
-                    <input class="input" type="text" placeholder="Cari. . ">
+                    <input class="input" type="text"  v-model="search" placeholder="Cari Nama. . ">
                 </p>
                 <p class="control">
                     <a class="button is-static">
@@ -198,6 +198,7 @@ import VueAdsPagination from 'vue-ads-pagination';
       },
         data(){
             return{
+                search: '',
                 active: false,
                 activeDelete:false,
                 id:'',
@@ -317,7 +318,7 @@ import VueAdsPagination from 'vue-ads-pagination';
             filterStudent: function(){
                 if(this.siswas.length) {
                     return this.siswas.filter((row, index) => {
-                
+                            if(this.search != '') return row.name.toLowerCase().includes(this.search.toLowerCase());                                            
                         if(index >= this.start && index < this.end) return true;
                       });
                 }

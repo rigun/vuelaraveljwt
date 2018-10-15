@@ -18122,8 +18122,8 @@ body {
   width: 100%;
 }
 
-#app .dashboardContent-change {
-  width: calc(100% - 80px);
+.dashboardContent-change .dashboardContent {
+  width: calc(100% - 80px) !important;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }

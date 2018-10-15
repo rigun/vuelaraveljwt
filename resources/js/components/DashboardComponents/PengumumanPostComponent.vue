@@ -31,7 +31,7 @@
                                 Post
                             </label>
                             <p class="control">
-                                <editor v-model="content" :init="{plugins: 'image imagetools'}"></editor>
+                                <editor v-model="content" :init="{plugins: 'image imagetools', height: '500'}"></editor>
                             </p>
                         </div>
                         

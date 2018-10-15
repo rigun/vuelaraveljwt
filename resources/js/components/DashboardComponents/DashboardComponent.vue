@@ -67,6 +67,7 @@
                         <div class="column is-one-third" v-for="foto in dataFoto" :key="foto.id">
                             <img :src="'/images/upload/'+foto.filename" />
                             <button class="button button-primary" @click="deletePicture(foto.id)">Hapus Foto </button>
+                            <button class="button button-primary" @click="copyToClipboard(foto.filename)">Copy link</button>
                         </div>
                         
                      </div>
@@ -110,6 +111,25 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
             }
         },
         methods:{
+            copyToClipboard: function(val) {
+                let temp = document.createElement('textarea');
+                temp.value = '/images/upload/'+val;
+                document.body.appendChild(temp);
+                temp.select();
+                try {
+                    let success = document.execCommand('copy');
+                    let type = (success ? 'success' : 'warning');
+                    let msg = (success ? `Copied to Clipboard: ${val}` : "Copy failed, your browser may not support this feature");
+                    this.$emit('copied', type, msg, val);
+                    console.log("Copied to Clipboard:", val);
+                } catch (err) {
+                    this.$emit('copy-failed', val);
+                    console.log("Copy failed, your browser may not support this feature.");
+                    console.log("Attempted to copy:", val);
+                }
+                document.body.removeChild(temp);
+            },
+            
             vmounted() {
                  this.getPicture();
             },

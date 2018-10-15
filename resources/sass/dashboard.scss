@@ -118,10 +118,14 @@
             width: 100%;
         }
     }
-    .dashboardContent-change{
-        width: calc(100% - 80px);
+
+}
+.dashboardContent-change{
+    .dashboardContent{
+        width: calc(100% - 80px) !important;
         transition: 0.4s;
     }
+
 }
 .size-50{
     font-size: 50px;

@@ -13,7 +13,7 @@
         <div class="column">
             <div class="field has-addons">
                 <p class="control">
-                    <input class="input" type="text" placeholder="Cari. . " >
+                    <input class="input" type="text" v-model="search" placeholder="Cari. . " >
                 </p>
                 <p class="control">
                     <a class="button is-static">
@@ -194,6 +194,7 @@ import VueAdsPagination from 'vue-ads-pagination';
       },
         data(){
             return{
+                search: '',
                 active: false,
                 activeUpdate: false,
                 activeDelete:false,
@@ -336,7 +337,7 @@ import VueAdsPagination from 'vue-ads-pagination';
             filterAdmin: function(){
                 if(this.admins.length) {
                     return this.admins.filter((row, index) => {
-                            
+                            if(this.search != '') return row.name.toLowerCase().includes(this.search.toLowerCase());
                             if(index >= this.start && index < this.end) return true;
                           });
                 }
