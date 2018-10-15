@@ -1,6 +1,6 @@
 <template id="admin-list">
 <div class="contentlist">
-    <div class="flex-container m-b-35">
+    <div class="flex-container ">
         <div class="columns m-t-10">
             <div class="column">
                 <h1 class="title">{{$route.params.kategori}}</h1>
@@ -109,7 +109,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
             
             return{
                 dropzoneOptions: {
-                    url:'/api/images-save',
+                    url:'/api/images-save/post',
                     thumbnailWidth: 150,
                     maxFilesize: 2,
                     addRemoveLinks: true,
@@ -172,7 +172,8 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                         this.title = response.data[0].title;
                         this.slug = response.data[0].slug;
                         this.created_at = response.data[0].created_at;
-                        this.picture = response.data[0].picture;
+                        this.picture_id = response.data[0].picture_id;
+                        this.getPicture();
                     }else{
                         // console.log(reponse);
                     }
@@ -184,7 +185,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                 }else{
                     var uri = '/api/posts/create';
                 }
-              axios.post(uri, {content: this.content, slug: this.slug, title: this.title, kategori_name: this.$route.params.kategori, picture: this.picture},{
+              axios.post(uri, {content: this.content, slug: this.slug, title: this.title, kategori_name: this.$route.params.kategori, picture_id: this.picture_id},{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }

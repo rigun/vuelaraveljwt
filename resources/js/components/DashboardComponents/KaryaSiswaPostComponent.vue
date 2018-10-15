@@ -1,6 +1,6 @@
 <template id="admin-list">
 <div class="contentlist">
-    <div class="flex-container m-b-35">
+    <div class="flex-container">
         <div class="columns m-t-10">
             <div class="column">
                 <h1 class="title">Karya Siswa</h1>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="column" v-else>
                                 <img :src="'/images/upload/'+picture" />
-                                <button class="button button-primary" @click="deletePicture()">Hapus Foto </button>
+                                <a class="button button-primary" @click="deletePicture()">Hapus Foto </a>
                             </div>
 
                         </div>
@@ -112,7 +112,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
             
             return{
                 dropzoneOptions: {
-                    url:'/api/images-save',
+                    url:'/api/images-save/post',
                     thumbnailWidth: 150,
                     maxFilesize: 2,
                     addRemoveLinks: true,
@@ -171,16 +171,15 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                    if(response.data[0] != null){
-                        this.id = response.data[0].id;
-                        this.content = response.data[0].content;
-                        this.title = response.data[0].title;
-                        this.slug = response.data[0].slug;
-                        this.created_at = response.data[0].created_at;
-                        this.picture = response.data[0].picture;
-                    }else{
-                        // console.log(reponse);
-                    }
+                  
+                    this.id = response.data.post.id;
+                    this.content = response.data.post.content;
+                    this.title = response.data.post.title;
+                    this.slug = response.data.post.slug;
+                    this.created_at = response.data.post.created_at;
+                    this.picture = response.data.picture.filename;
+                    this.picture_id = response.data.picture.id;
+                  
                 });
             },
             createPost(){
@@ -189,7 +188,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                 }else{
                     var uri = '/api/importantpost/create/Karya Siswa';
                 }
-              axios.post(uri, {content: this.content, slug: this.slug, title: this.title, picture: this.picture},{
+              axios.post(uri, {content: this.content, slug: this.slug, title: this.title, picture_id: this.picture_id},{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }

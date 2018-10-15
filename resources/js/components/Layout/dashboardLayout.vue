@@ -1,8 +1,10 @@
 <template>
    <div class="content">
-       
-    <div id="topnav" class="topnav">
-        <nav class="navbar has-shadow">
+    <vue-topprogress ref="topProgress"></vue-topprogress>
+    <div v-if="loading == true"></div>
+    <div  v-else>
+    <div id="topnav" class="topnav" >
+        <nav class="navbar has-shadow dashnav" style="padding: 0px">
                 <div class="navbar-start">
                     <div class="navbar-item box-hamburger">
                         <div class="hamburger" onclick="myHamburger(this)">
@@ -114,21 +116,27 @@
             </aside>
         </div>
         <div id="app">
-            <main class="py-4 dashboardContent">
+            <main class="dashboardContent">
             <transition name="fade">
             <router-view></router-view>
             </transition>
             </main>
         </div>
+        </div>
    </div>
 </template>
 
 <script>
+import { vueTopprogress } from 'vue-top-progress'
        export default {
+            components: {
+            vueTopprogress
+        },
         data() {
             return {
                 user: {name:'', roles:[{name: ''}]},
                 error:'',
+                loading: true,
             }
         },
         created(){
@@ -148,6 +156,7 @@
             })  
         },
         mounted(){
+            this.$refs.topProgress.start()
              this.getUser();
         },
         methods:{
@@ -164,6 +173,8 @@
                             }
                         })
                         .then(response => {
+                            this.$refs.topProgress.done();
+                            this.loading = false;
                             if(response.data.status == "Token is Expired"){
                                 this.$router.push({ name: 'Logout' })
                             }else {

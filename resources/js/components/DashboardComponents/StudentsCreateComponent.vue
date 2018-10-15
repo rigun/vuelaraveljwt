@@ -1,6 +1,6 @@
 <template id="students-list">
 <div class="contentlist">
-<div class="flex-container m-b-35">
+<div class="flex-container ">
       <div class="columns m-t-10">
         <div class="column">
           <h1 class="title">Manage Siswa</h1>
@@ -41,7 +41,7 @@
 
             <tbody>
                   
-                <tr v-for="(siswa, index) in filterStudent" :key="siswa.id">
+                <tr v-for="(siswa, index) in siswas" :key="siswa.id">
                   <th>{{ index + 1 }}</th>
                   <td>{{ siswa.name }}</td>
                   <td>{{ siswa.username }}</td>
@@ -232,7 +232,7 @@
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                      this.siswas = response.data.data;
+                      this.siswas = response.data;
                   }).catch(error => {
                       // console.log(error.response)
                   });

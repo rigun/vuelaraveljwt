@@ -20,7 +20,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::whereRoleIs('user')->paginate(10);
+        $users = User::whereRoleIs('user')->get();
         return view('manage.users.index')->withUsers($users);
     }
 
@@ -35,7 +35,7 @@ class UserController extends Controller
     }
 
     public function apiIndex(){
-        $users = User::with('detail')->whereRoleIs('user')->paginate(10);
+        $users = User::with('detail')->whereRoleIs('user')->get();
         return $users;
     }
     /**

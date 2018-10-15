@@ -49,7 +49,7 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
             'kategori_name' => 'required',
-            'picture' => 'required'
+            'picture_id' => 'required'
           ]);
           
         $post = new Post;
@@ -58,7 +58,7 @@ class PostController extends Controller
         $post->content = Purifier::clean($request->content);
         $post->published_at = date("Y-m-d h:i:s");
         $post->author_id = JWTAuth::parseToken()->authenticate()->id;
-        $post->picture = $request->picture;
+        $post->picture_id = $request->picture_id;
         $post->save();
 
         $category = Kategori::where('name', $request->kategori_name)->first();
@@ -104,7 +104,7 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
             'kategori_name' => 'required',
-            'picture' => 'required'
+            'picture_id' => 'required'
 
         ]);
         
@@ -115,7 +115,7 @@ class PostController extends Controller
         $post->content = Purifier::clean($request->content);
         $post->published_at = date("Y-m-d h:i:s");
         $post->author_id = JWTAuth::parseToken()->authenticate()->id;
-        $post->picture = $request->picture;
+        $post->picture_id = $request->picture_id;
         $post->save();
 
         

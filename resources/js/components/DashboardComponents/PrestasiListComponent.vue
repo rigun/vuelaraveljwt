@@ -1,6 +1,6 @@
 <template id="students-list">
 <div class="contentlist">
-<div class="flex-container m-b-35">
+<div class="flex-container">
       <div class="columns m-t-10">
         <div class="column">
           <h1 class="title">Prestasi</h1>

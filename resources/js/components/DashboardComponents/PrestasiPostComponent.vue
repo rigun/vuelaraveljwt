@@ -1,6 +1,6 @@
 <template id="admin-list">
 <div class="contentlist">
-    <div class="flex-container m-b-35">
+    <div class="flex-container">
         <div class="columns m-t-10">
             <div class="column">
                 <h1 class="title">Prestasi</h1>
@@ -41,6 +41,25 @@
 
             <div class="column is-one-quarter-desktop is-narrow-tablet">
                 <div class="card">
+                      <div class="card-content">
+                    <div class="columns">
+                            
+                            <div class="column" v-if="picture == ''">
+                              <vue-dropzone ref="myVueDropzone" id="dropzone" 
+                                        @vdropzone-success="vsuccess"
+                                        @vdropzone-file-added="vfileAdded" 
+                                    :options="dropzoneOptions"
+                                    :duplicateCheck="true">
+                                    </vue-dropzone>
+                            </div>
+                            <div class="column" v-else>
+                                <img :src="'/images/upload/'+picture" />
+                                <a class="button button-primary" @click="deletePicture()">Hapus Foto </a>
+                            </div>
+
+                        </div>
+
+                    </div>
                     <div class="card-content">
 
                         <div class="columns">
@@ -82,16 +101,31 @@
 </template>
 
 <script>
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
     export default {
-       
+        components: {
+            vueDropzone: vue2Dropzone,
+        },
         data(){
             
             return{
+               dropzoneOptions: {
+                    url:'/api/images-save/post',
+                    thumbnailWidth: 150,
+                    maxFilesize: 2,
+                    addRemoveLinks: true,
+                    headers: {
+                      Authorization :'Bearer ' + localStorage.getItem('token')
+                  },
+                },
                 content:'',
                 title: '',
                 slug: '',
                 created_at: '',
-                id:''
+                id:'',
+                 picture: '',
+                picture_id: ''
             }
         },
         watch: {
@@ -103,6 +137,8 @@
                     this.slug = '';
                     this.created_at = '';
                     this.id = '';
+                    this.picture = '';
+                    this.picture_id = ''
                     return this.getPost();
 
                 }
@@ -114,6 +150,13 @@
             }
         },
          methods: {
+              vfileAdded(file){
+                this.dropzoneOptions.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+            },
+            vsuccess(file, response) {
+                this.picture_id = response.picture.id;
+               this.getPicture();
+            },
             updateSlug: function(val) {
              this.slug = val;
             },
@@ -127,15 +170,13 @@
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                    if(response.data[0] != null){
-                        this.id = response.data[0].id;
-                        this.content = response.data[0].content;
-                        this.title = response.data[0].title;
-                        this.slug = response.data[0].slug;
-                        this.created_at = response.data[0].created_at;
-                    }else{
-                        // console.log(reponse);
-                    }
+                    this.id = response.data.post.id;
+                    this.content = response.data.post.content;
+                    this.title = response.data.post.title;
+                    this.slug = response.data.post.slug;
+                    this.created_at = response.data.post.created_at;
+                    this.picture = response.data.picture.filename;
+                    this.picture_id = response.data.picture.id;
                 });
             },
             createPost(){
@@ -144,7 +185,7 @@
                 }else{
                     var uri = '/api/importantpost/create/Prestasi';
                 }
-              axios.post(uri, {content: this.content, slug: this.slug, title: this.title},{
+              axios.post(uri, {content: this.content, slug: this.slug, title: this.title,picture_id: this.picture_id},{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
@@ -155,7 +196,29 @@
               }).catch(error => {
                 // this.getPost();
                 });
-            }
+            },
+            getPicture(){
+               let uri = '/api/images-detail/'+this.picture_id;
+                axios.get(uri,{
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                }).then((response) => {
+                    console.log(response);
+                    this.picture = response.data.filename;
+                });
+            },
+            deletePicture(){
+                let uri = '/api/images-delete/'+this.picture_id;
+                    axios.delete(uri,{
+                        headers: {
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
+                        }
+                    }).then((response) => {
+                        this.picture_id='';
+                        this.picture = '';
+                    });
+            },
          },
         computed: {
             

@@ -7,7 +7,6 @@
 
 require('./bootstrap');
 window.Vue = require('vue');
-
 import Buefy from 'buefy';
 import router from './routes.js';
 import Editor from '@tinymce/tinymce-vue';
@@ -35,6 +34,5 @@ new Vue(
         AppLayout,
         editor,
         slugWidget,
-
     )
 ).$mount('#mainLayout');

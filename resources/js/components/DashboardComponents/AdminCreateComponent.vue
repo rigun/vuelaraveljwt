@@ -1,6 +1,6 @@
 <template id="admin-list">
 <div class="contentlist">
-<div class="flex-container m-b-35">
+<div class="flex-container">
       <div class="columns m-t-10">
         <div class="column">
           <h1 class="title">Manage Admin</h1>
@@ -223,7 +223,7 @@
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                      this.admins = response.data.data;
+                      this.admins = response.data;
                   }).catch(error => {
                       // console.log(error.response)
                   });

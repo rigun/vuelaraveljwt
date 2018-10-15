@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Kategori;
 use App\User;
+use App\Upload;
 use DB;
 use Session;
 use Input;
@@ -16,6 +17,13 @@ use Purifier;
 
 class ImportantPostController extends Controller
 {
+    private $photos_path;
+ 
+    public function __construct()
+    {
+        $this->photos_path = public_path('/images/upload');
+    }
+ 
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +57,7 @@ class ImportantPostController extends Controller
             'slug' => 'required',
             'title' => 'required',
             'content' => 'required',
-            'picture' => 'required'
+            'picture_id' => 'required'
 
           ]);
           
@@ -60,7 +68,7 @@ class ImportantPostController extends Controller
         $post->published_at = date("Y-m-d h:i:s");
         $post->author_id = JWTAuth::parseToken()->authenticate()->id;
         $post->status = 0;
-        $post->picture = $request->picture;
+        $post->picture_id = $request->picture_id;
         $post->save();
 
         $category = Kategori::where('name', $kategori)->first();
@@ -78,7 +86,17 @@ class ImportantPostController extends Controller
     public function show($id,$kategori)
     {
         $kategori = Kategori::where('name',$kategori)->first();
-        return $kategori->post()->where('id',$id)->get();
+        $post = $kategori->post()->where('id',$id)->first();
+        $image = Upload::findOrFail($post->picture_id);
+        return json_encode(['post'=>$post,'picture'=>$image]);
+    }
+
+    public function showAll($kategori)
+    {
+        $kategori = Kategori::where('name',$kategori)->first();
+        $post = $kategori->post;
+        $image = Upload::findOrFail($post->id);
+        return json_encode(['post'=>$post,'image'=>$image]);
     }
 
     /**
@@ -105,7 +123,7 @@ class ImportantPostController extends Controller
             'slug' => 'required',
             'title' => 'required',
             'content' => 'required',
-            'picture' => 'required'
+            'picture_id' => 'required'
 
         ]);
         
@@ -116,7 +134,7 @@ class ImportantPostController extends Controller
         $post->content = Purifier::clean($request->content);
         $post->published_at = date("Y-m-d h:i:s");
         $post->status = 1;
-        $post->picture = $request->picture;
+        $post->picture_id = $request->picture_id;
         $post->save();
 
         return $post;
@@ -132,6 +150,21 @@ class ImportantPostController extends Controller
     {
         $post = Post::findOrFail($id);
         if($post->count()>0){
+            $uploaded_image = Upload::findOrFail($post->picture_id);
+            $file_path = $this->photos_path . '/' . $uploaded_image->filename;
+            $resized_file = $this->photos_path . '/' . $uploaded_image->resized_name;
+     
+            if (file_exists($file_path)) {
+                unlink($file_path);
+            }
+     
+            if (file_exists($resized_file)) {
+                unlink($resized_file);
+            }
+     
+            if (!empty($uploaded_image)) {
+                $uploaded_image->delete();
+            }
             $post->delete();
             return response()->json(['statur'=>'success','msg'=>'Data siswa berhasil dihapus']);
         } else {

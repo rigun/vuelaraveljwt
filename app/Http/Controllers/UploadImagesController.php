@@ -29,7 +29,7 @@ class UploadImagesController extends Controller
     {
         $author_id = JWTAuth::parseToken()->authenticate()->id;
         // $author_id = 3;
-        $photos = Upload::where('author_id', $author_id)->get();
+        $photos = Upload::where([['author_id', $author_id],['type','imageUpload']])->get();
         return $photos;
     }
     public function showSlide()
@@ -91,6 +91,46 @@ class UploadImagesController extends Controller
             $upload->original_name = basename($photo->getClientOriginalName());
             $upload->author_id = JWTAuth::parseToken()->authenticate()->id;
             $upload->type = "imageUpload";
+            $upload->save();
+        }
+
+        $picture = Upload::where('filename',$save_name)->first();
+        return Response::json([
+            'picture' => $picture
+        ], 200);
+    }
+    public function storePost(Request $request)
+    {
+        $photos = $request->file('file');
+ 
+        if (!is_array($photos)) {
+            $photos = [$photos];
+        }
+ 
+        if (!is_dir($this->photos_path)) {
+            mkdir($this->photos_path, 0777);
+        }
+ 
+        for ($i = 0; $i < count($photos); $i++) {
+            $photo = $photos[$i];
+            $name = sha1(date('YmdHis') . str_random(30));
+            $save_name = $name . '.' . $photo->getClientOriginalExtension();
+            $resize_name = $name . str_random(2) . '.' . $photo->getClientOriginalExtension();
+ 
+            Image::make($photo)
+                ->resize(250, null, function ($constraints) {
+                    $constraints->aspectRatio();
+                })
+                ->save($this->photos_path . '/' . $resize_name);
+ 
+            $photo->move($this->photos_path, $save_name);
+ 
+            $upload = new Upload();
+            $upload->filename = $save_name;
+            $upload->resized_name = $resize_name;
+            $upload->original_name = basename($photo->getClientOriginalName());
+            $upload->author_id = JWTAuth::parseToken()->authenticate()->id;
+            $upload->type = "postPicture";
             $upload->save();
         }
 
