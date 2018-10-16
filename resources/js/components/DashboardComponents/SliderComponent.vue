@@ -362,7 +362,11 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
             }
         },
         created(){
+            if(localStorage.getItem('roles') == 'user'){
+                this.$router.push({ name: 'DashboardContent' });
+            }else{
             this.getPicture();
+            }
         },
         methods:{
             copyToClipboard: function(val) {

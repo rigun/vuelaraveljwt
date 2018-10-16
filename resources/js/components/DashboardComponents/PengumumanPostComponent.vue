@@ -145,9 +145,14 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
             }
         },
         created: function() {
-            if(this.$route.params.detail == 'update'){
-                this.getPost();
-            }
+            if(localStorage.getItem('roles') == 'user'){
+                  this.$router.push({ name: 'DashboardContent' });
+          }else{
+                if(this.$route.params.detail == 'update'){
+                    this.getPost();
+                }
+          }
+            
         },
          methods: {
               vfileAdded(file){

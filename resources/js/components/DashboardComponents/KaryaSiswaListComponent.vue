@@ -25,6 +25,27 @@
         
         </div>
         
+        <div class="column">
+            <div class="field is-horizontal is-pulled-right">
+              <div class="field-label is-normal">
+                <label class="label">Filter</label>
+              </div>
+              <div class="field-body">
+                <div class="field is-narrow">
+                  <div class="control">
+                    <div class="select is-fullwidth">
+                      <select  v-model="filter">
+                        <option>Semua</option>
+                        <option>Draft</option>
+                        <option>Publish</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        
       </div>
 
       <div class="card p-b-20">
@@ -145,6 +166,7 @@ import VueAdsPagination from 'vue-ads-pagination';
                 start: 0,
                 end: 0,
                 count: 0,
+                filter: 'Semua'
             }
         },
         created: function() {
@@ -214,8 +236,16 @@ import VueAdsPagination from 'vue-ads-pagination';
             filterCreation: function(){
                 if(this.dataCreation.length) {
                     return this.dataCreation.filter((row, index) => {
-                            if(this.search != '') return row.title.toLowerCase().includes(this.search.toLowerCase());                            
-                            if(index >= this.start && index < this.end) return true;
+                            if(this.search != '') return row.title.toLowerCase().includes(this.search.toLowerCase());
+                            if(this.filter != 'Semua'){
+                              if(this.filter == 'Publish'){
+                                if(row.status == 1) return true;
+                              }else if(this.filter == 'Draft'){
+                                if(row.status == 0) return true;
+                              }
+                            }else{
+                              if(index >= this.start && index < this.end) return true;
+                            }                           
                           });
                 }
             }

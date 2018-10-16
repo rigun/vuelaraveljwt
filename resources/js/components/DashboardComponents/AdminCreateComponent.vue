@@ -223,7 +223,11 @@ import VueAdsPagination from 'vue-ads-pagination';
             }
         },
         created: function() {
+          if(localStorage.getItem('roles') == 'user'){
+                  this.$router.push({ name: 'DashboardContent' });
+          }else{
             this.getAdmin();
+          }
             
         },
          methods: {

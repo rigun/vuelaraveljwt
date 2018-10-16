@@ -232,8 +232,13 @@ import VueAdsPagination from 'vue-ads-pagination';
             }
         },
         created: function() {
+          if(localStorage.getItem('roles') == 'user'){
+                this.$router.push({ name: 'DashboardContent' });
+            }else{
             this.getThisYear();
             this.getStudent();
+
+            }
         },
          methods: {
           pageChange(page, start, end) {

@@ -307,8 +307,13 @@ export default {
         }
     },
     created: function() {
+        if(localStorage.getItem('roles') == 'user'){
+                this.$router.push({ name: 'DashboardContent' });
+            }else{
         this.getStudent();
         this.getThisYear();
+
+            }
     },
     methods:{
         
