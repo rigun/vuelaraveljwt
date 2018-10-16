@@ -16,13 +16,11 @@ import JssorSlider from 'jssor-slider';
 
 window.Slug = require('slug');
 Slug.defaults.mode = 'rfc3986';
-
 window.VueRouter = require('vue-router').default;
 
 
 Vue.use(Buefy, VueRouter, axios, jQuery, JssorSlider, bootstrap);
 
-window.Vue = require('vue');
 
 const AppLayout = Vue.component('app-layout', require('./components/appLayout.vue'))
 const editor = Vue.component('editor', Editor)

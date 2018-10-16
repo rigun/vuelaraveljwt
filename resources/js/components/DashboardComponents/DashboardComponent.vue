@@ -10,14 +10,14 @@
      
      <div class="columns">
          <div class="column">
-             <div class="card">
-                 <div class="card-content" v-if="roles != 'user'">
+             <div class="card " >
+                 <div class="card-content dashboardCardPrimary" v-if="roles != 'user'">
                      Jumlah Siswa
                      <p class="center">
                          {{number.user}}
                      </p>
                  </div>
-                 <div class="card-content" v-else>
+                 <div class="card-content dashboardCardPrimary" v-else>
                      ID Pengguna anda
                      <p class="center">
                          {{number.user}}
@@ -27,7 +27,7 @@
          </div>
          <div class="column">
              <div class="card">
-                 <div class="card-content">
+                 <div class="card-content dashboardCardWarning">
                      Jumlah Post (Draf)
                     <p class="center">
                          {{number.postDraf}}
@@ -37,7 +37,7 @@
          </div>
          <div class="column">
              <div class="card">
-                 <div class="card-content">
+                 <div class="card-content dashboardCardSuccess">
                      Jumlah Post (Publish)
                     <p class="center">
                          {{number.postPublish}}
@@ -71,9 +71,9 @@
                  <div class="card-content">
                      <div class="columns  is-multiline">
                         <div class="column is-one-third" v-for="foto in dataFoto" :key="foto.id">
-                            <img :src="'/images/upload/'+foto.filename" />
-                            <button class="button button-primary" @click="deletePicture(foto.id)">Hapus Foto </button>
-                            <button class="button button-primary" @click="copyToClipboard(foto.filename)">Copy link</button>
+                            <img :src="'/images/upload/'+foto.filename" class="m-b-20" />
+                            <button class="button button-primary is-danger" @click="deletePicture(foto.id)">Hapus Foto </button>
+                            <button class="button button-primary is-info" @click="copyToClipboard(foto.filename)">Copy link</button>
                         </div>
                         
                      </div>
@@ -89,7 +89,6 @@
 <script>
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
-
     export default {
         components: {
             vueDropzone: vue2Dropzone,
@@ -132,12 +131,23 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     let type = (success ? 'success' : 'warning');
                     let msg = (success ? `Copied to Clipboard: ${val}` : "Copy failed, your browser may not support this feature");
                     this.$emit('copied', type, msg, val);
-                    console.log("Copied to Clipboard:", val);
+                    this.$toast.open({
+                        duration: 5000,
+                        message: 'Berhasil di copy',
+                        position: 'is-bottom',
+                        type: 'is-success'
+                    })
+                    
                 } catch (err) {
                     this.$emit('copy-failed', val);
-                    console.log("Copy failed, your browser may not support this feature.");
-                    console.log("Attempted to copy:", val);
+                    this.$toast.open({
+                        duration: 5000,
+                        message: 'Coba lagi',
+                        position: 'is-bottom',
+                        type: 'is-danger'
+                    })
                 }
+               
                 document.body.removeChild(temp);
             },
             
@@ -184,13 +194,31 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                 });
             },
             deletePicture(id){
+                 this.$toast.open({
+                        duration: 500,
+                        message: 'Menghapus',
+                        position: 'is-bottom',
+                        type: 'is-info',
+                        queue: false,
+                    })
                 let uri = '/api/images-delete/'+id;
                     axios.delete(uri,{
                         headers: {
                             Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     }).then((response) => {
+                         this.$toast.open({
+                            message: 'Berhasil di hapus',
+                            position: 'is-bottom',
+                            type: 'is-success'
+                        })
                         this.getPicture();
+                    }).catch(error=>{
+                        this.$toast.open({
+                            message: 'Silahkan coba lagi',
+                            position: 'is-bottom',
+                            type: 'is-danger'
+                        })
                     });
             },
             vsuccess(file, response) {

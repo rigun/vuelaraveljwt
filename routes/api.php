@@ -32,7 +32,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::delete('/siswa/delete/{id}', 'UserController@destroy');
 
     Route::get('/importantpost/{kategori}', 'ImportantPostController@Index');
-    // Route::get('/importantpost/detail/{id}/{kategori}', 'ImportantPostController@show');
+    Route::get('/importantpost/siswa/{kategori}', 'ImportantPostController@IndexSiswa');
+    Route::get('/importantpost/detail/{id}/{kategori}', 'ImportantPostController@show');
     Route::post('/importantpost/create/{kategori}','ImportantPostController@store');
     Route::post('/importantpost/update/{id}', 'ImportantPostController@update');
     Route::post('/importantpost/update/siswa/{id}', 'ImportantPostController@updateSiswa');
@@ -62,7 +63,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
 Route::get('/images-show/slider/', 'UploadImagesController@showSlide');
 Route::get('/importantpost/detail/{kategori}', 'ImportantPostController@showAll');
-Route::get('/importantpost/detail/{id}/{kategori}', 'ImportantPostController@show');
+// Route::get('/importantpost/detail/{id}/{kategori}', 'ImportantPostController@show');
 
 // Route::get('/images-show', 'UploadImagesController@index');
 // Route::get('/karyaSiswa', 'KaryaSiswaController@Index');

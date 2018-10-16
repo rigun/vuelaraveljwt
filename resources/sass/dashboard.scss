@@ -61,6 +61,11 @@
             background-color: #090d12;
             border-right: solid #d91515;
         }
+        .router-link-exact-active {
+            border-radius: 0px;
+            background-color: #090d12;
+            border-right: solid #d91515;
+        }
 
         .menu-list{
             transition: 0.5s;

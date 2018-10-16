@@ -74,7 +74,7 @@
                   <td><span v-if="karya.status == 1">Publish</span><span v-if="karya.status == 0">Draft</span></td>
                   <td >
                       <router-link v-bind:to="{name: 'KaryaSiswaPost', params: {detail: 'update', id:karya.id}}"  class="button is-primary m-r-5"  >Detail</router-link>
-                      <a class="button is-danger" href="#" v-on:click.prevent="modalDelete();setIdDelete(karya)">Hapus</a></td>
+                      <a class="button is-danger" href="#"  v-on:click.prevent="modalDelete();setIdDelete(karya)">Hapus</a></td>
                 </tr>
             
             </tbody>
@@ -109,7 +109,7 @@
                 <p>Data Karya Siswa yang dihapus tidak dapat dikembalikan lagi, apakah anda yakin ingin menghapusnya ? </p>
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-warning">Hapus Data</button>
+            <button class="button is-warning" :class="{'is-loading' : load}" @click="updateLoad()">Hapus Data</button>
             <a class="button is-danger" v-on:click="modalDelete()" >Cancel</a>
           </footer>
           </form>
@@ -166,7 +166,9 @@ import VueAdsPagination from 'vue-ads-pagination';
                 start: 0,
                 end: 0,
                 count: 0,
-                filter: 'Semua'
+                filter: 'Semua',
+                load: false,
+
             }
         },
         created: function() {
@@ -178,8 +180,17 @@ import VueAdsPagination from 'vue-ads-pagination';
               this.start = start;
               this.end = end;
           },
+          updateLoad(){
+            this.load = true;
+          },
             getCreation(){
-                  let uri = '/api/importantpost/Karya Siswa';
+               this.load = false;
+              
+                  if(localStorage.getItem('roles') == 'user'){
+                    var uri = '/api/importantpost/siswa/Karya Siswa';
+                  }else{
+                    var uri = '/api/importantpost/Karya Siswa';
+                  };
                   axios.get(uri,{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -220,15 +231,27 @@ import VueAdsPagination from 'vue-ads-pagination';
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                alert("Data Siswa berhasil dihapus");
                 this.activeDelete = false;
                 this.id = '';
                 this.getCreation();
+                    this.$toast.open({
+                  duration: 2000,
+                  message: 'Berhasil di hapus',
+                  position: 'is-bottom',
+                  type: 'is-success',
+                  queue: false,
+              })
               }).catch(error => {
-                alert("Mohon maaf, terjadi kesalahan, silahkan coba lagi.");
                 this.activeDelete = false;
                 this.id = '';
                 this.getCreation();
+                  this.$toast.open({
+                  duration: 2000,
+                  message: 'Coba lagi',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             }
          },

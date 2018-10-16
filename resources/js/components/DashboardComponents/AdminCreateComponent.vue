@@ -103,7 +103,7 @@
             </div> <!-- end of .columns for forms -->       
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-success">Buat Admin</button>
+            <button class="button is-success" :class="{'is-loading' : load}" @click="updateLoad()">Buat Admin</button>
 
             <a class="button is-danger" v-on:click="modalCreate" >Cancel</a>
           </footer>
@@ -153,7 +153,7 @@
             </div> <!-- end of .columns for forms -->       
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-success">Ubah Data</button>
+            <button class="button is-success"  :class="{'is-loading' : load}" @click="updateLoad()">Ubah Data</button>
 
             <a class="button is-danger" v-on:click="modalUpdate()" >Cancel</a>
           </footer>
@@ -175,7 +175,7 @@
                 <p>Admin yang dihapus tidak dapat dikembalikan lagi, apakah anda yakin ingin menghapusnya ? </p>
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-warning">Hapus Data</button>
+            <button class="button is-warning"  :class="{'is-loading' : load}" @click="updateLoad()">Hapus Data</button>
 
             <a class="button is-danger" v-on:click="modalDelete()" >Cancel</a>
           </footer>
@@ -220,6 +220,7 @@ import VueAdsPagination from 'vue-ads-pagination';
                 start: 0,
                 end: 0,
                 countAdmin: 0,
+                load: false,
             }
         },
         created: function() {
@@ -236,8 +237,11 @@ import VueAdsPagination from 'vue-ads-pagination';
               this.start = start;
               this.end = end;
           },
-         
+          updateLoad(){
+            this.load = true;
+          },
             getAdmin(){
+              this.load = false;
                   let uri = '/api/admin';
                   axios.get(uri,{
                   headers: {
@@ -284,6 +288,7 @@ import VueAdsPagination from 'vue-ads-pagination';
               this.dataAdmin = data;
             },
             createAdmin: function() {
+             
               let uri = '/api/admin/create';
               axios.post(uri, this.dataAdmin,{
                 headers: {
@@ -292,30 +297,61 @@ import VueAdsPagination from 'vue-ads-pagination';
             }).then((response) => {
                 this.active = false;
                 this.dataAdmin = this.dataAdminNull;
-                this.getAdmin();
+                   this.getAdmin();
+                this.$toast.open({
+                    duration: 2000,
+                    message: 'Admin berhasil di tambahkan',
+                    position: 'is-bottom',
+                    type: 'is-success',
+                    queue: false,
+                });
               }).catch(error => {
                 alert(error);
                 this.active = false;
                 this.dataAdmin = this.dataAdminNull;
                 this.getAdmin();
+                this.$toast.open({
+                  duration: 2000,
+                  message: 'Terjadi Kesalahan, Silahkan coba lagi',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             },
             updateAdmin(){
+              
               let uri = '/api/admin/update/'+this.dataAdmin.id;
               axios.patch(uri, this.dataAdmin,{
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
             }).then((response) => {
-                alert(response.data.msg);
+               
                 this.activeUpdate = false;
                 this.dataAdmin = this.dataAdminNull;
                 this.getAdmin();
+
+                 this.$toast.open({
+                  duration: 2000,
+                  message: response.data.msg,
+                  position: 'is-bottom',
+                  type: 'is-success',
+                  queue: false,
+              })
               }).catch(error => {
-                alert("username sudah ada");
+              
                 this.activeUpdate = false;
                 this.dataAdmin = this.dataAdminNull;
                 this.getAdmin();
+
+                  this.$toast.open({
+                  duration: 2000,
+                  message: 'Coba lagi dengan username yang berbeda',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             },
             deleteAdmin(){
@@ -325,15 +361,29 @@ import VueAdsPagination from 'vue-ads-pagination';
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
             }).then((response) => {
-                alert("Admin berhasil dihapus");
                 this.activeDelete = false;
                 this.id = '';
                 this.getAdmin();
+                
+                  this.$toast.open({
+                  duration: 2000,
+                  message: 'Berhasil di hapus',
+                  position: 'is-bottom',
+                  type: 'is-success',
+                  queue: false,
+              })
               }).catch(error => {
-                alert("username sudah ada");
                 this.activeDelete = false;
                 this.id = '';
                 this.getAdmin();
+                
+                  this.$toast.open({
+                  duration: 2000,
+                  message: 'Coba lagi',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             }
          },

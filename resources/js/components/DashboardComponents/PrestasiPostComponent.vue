@@ -53,8 +53,8 @@
                                     </vue-dropzone>
                             </div>
                             <div class="column" v-else>
-                                <img :src="'/images/upload/'+picture" />
-                                <a class="button button-primary" @click="deletePicture()">Hapus Foto </a>
+                                <img class="m-b-10" :src="'/images/upload/'+picture" />
+                                <a class="button button-primary is-danger" :class="{'is-loading' : loadPicture}" @click="deletePicture()">Hapus Foto </a>
                             </div>
 
                         </div>
@@ -80,10 +80,10 @@
                     <div class="card-content">
                     <div class="columns">
                             <div class="column" v-if="$route.params.detail == 'create'" >
-                                 <button type="submit" class="button is-fullwidth"  > Draft</button>
+                                 <button type="submit" class="button is-info is-fullwidth" :class="{'is-loading' : load}" @click="updateLoad()"> Draft</button>
                             </div>
                             <div class="column" v-else>
-                                <button type="submit" class="button is-success is-fullwidth" > Publish</button>
+                                <button type="submit" class="button is-success is-fullwidth" :class="{'is-loading' : load}" @click="updateLoad()"> Publish</button>
                             </div>
                         </div>
 
@@ -125,7 +125,9 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                 created_at: '',
                 id:'',
                  picture: '',
-                picture_id: ''
+                picture_id: '',
+                load: false,
+                loadPicture: false,
             }
         },
         watch: {
@@ -145,11 +147,19 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
             }
         },
         created: function() {
+            if(localStorage.getItem('roles') == 'user'){
+                this.$router.push({ name: 'DashboardContent' });
+            }else{
             if(this.$route.params.detail == 'update'){
                 this.getPost();
             }
+
+            }
         },
          methods: {
+              updateLoad(){
+                this.load = true;
+            },
               vfileAdded(file){
                 this.dropzoneOptions.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
             },
@@ -190,11 +200,24 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                  alert('sukses');
+                  this.load = false;
+                 this.$toast.open({
+                    duration: 2000,
+                    message: 'Berhasil ditambahkan',
+                    position: 'is-bottom',
+                    type: 'is-success',
+                    queue: false,
+                });
                   this.$router.push({ name: 'PrestasiList' });
-                // this.getPost();
               }).catch(error => {
-                // this.getPost();
+                 this.load = false;
+                 this.$toast.open({
+                    duration: 2000,
+                    message: 'Data tidak lengkap',
+                    position: 'is-bottom',
+                    type: 'is-danger',
+                    queue: false,
+                });
                 });
             },
             getPicture(){
@@ -209,6 +232,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                 });
             },
             deletePicture(){
+                this.loadPicture = true;
                 let uri = '/api/images-delete/'+this.picture_id;
                     axios.delete(uri,{
                         headers: {
@@ -217,6 +241,14 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     }).then((response) => {
                         this.picture_id='';
                         this.picture = '';
+                        this.loadPicture = false;
+                        this.$toast.open({
+                            duration: 2000,
+                            message: 'Berhasil dihapus, silahkan ganti dengan yang baru',
+                            position: 'is-bottom',
+                            type: 'is-warning',
+                            queue: false,
+                        });
                     });
             },
          },

@@ -35,7 +35,7 @@
                     <div class="navbar-dropdown arrow-up"></div>
                         <ul class="navbar-dropdown is-boxed  is-right box-dropdown-custom">
                             <li><a class="navbar-item" href="#">Notifications</a></li>
-                            <li><a class="navbar-item" href="#">Settings</a></li>
+                            <li><a class="navbar-item" href="#">Profile</a></li>
                             <hr class="navbar-divider">
                             <li>  <router-link v-bind:to="{name: 'Logout'}" class="navbar-item">
                                         <span class="icon">

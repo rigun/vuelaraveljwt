@@ -148,7 +148,7 @@
             </div> <!-- end of .columns for forms -->       
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-success">Buat Student</button>
+            <button class="button is-success" :class="{'is-loading' : load}" @click="updateLoad()">Buat Student</button>
 
             <a class="button is-danger" v-on:click="modalCreate" >Cancel</a>
           </footer>
@@ -172,7 +172,7 @@
                 <p>Data siswa yang dihapus tidak dapat dikembalikan lagi, apakah anda yakin ingin menghapusnya ? </p>
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-warning">Hapus Data</button>
+            <button class="button is-warning" :class="{'is-loading' : load}" @click="updateLoad()">Hapus Data</button>
             <a class="button is-danger" v-on:click="modalDelete()" >Cancel</a>
           </footer>
           </form>
@@ -229,6 +229,8 @@ import VueAdsPagination from 'vue-ads-pagination';
                 start: 0,
                 end: 0,
                 count: 0,
+                load: false,
+
             }
         },
         created: function() {
@@ -245,6 +247,9 @@ import VueAdsPagination from 'vue-ads-pagination';
               this.page = page;
               this.start = start;
               this.end = end;
+          },
+                    updateLoad(){
+            this.load = true;
           },
             getStudent(){
                   let uri = '/api/siswa';
@@ -293,11 +298,24 @@ import VueAdsPagination from 'vue-ads-pagination';
                 this.active = false;
                 this.dataStudent = this.dataStudentNull;
                 this.getStudent();
+                this.$toast.open({
+                    duration: 2000,
+                    message: 'Siswa berhasil di tambahkan',
+                    position: 'is-bottom',
+                    type: 'is-success',
+                    queue: false,
+                });
               }).catch(error => {
-                alert("username sudah ada");
                 this.active = false;
                 this.dataStudent = this.dataStudentNull;
                 this.getStudent();
+                this.$toast.open({
+                  duration: 2000,
+                  message: 'Terjadi Kesalahan, Silahkan coba lagi',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             },
             deleteStudent(){
@@ -307,15 +325,27 @@ import VueAdsPagination from 'vue-ads-pagination';
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                alert("Data Siswa berhasil dihapus");
                 this.activeDelete = false;
                 this.id = '';
                 this.getStudent();
+                 this.$toast.open({
+                  duration: 2000,
+                  message: 'Berhasil di hapus',
+                  position: 'is-bottom',
+                  type: 'is-success',
+                  queue: false,
+              })
               }).catch(error => {
-                alert("Mohon maaf, terjadi kesalahan, silahkan coba lagi.");
                 this.activeDelete = false;
                 this.id = '';
                 this.getStudent();
+                this.$toast.open({
+                  duration: 2000,
+                  message: 'Coba lagi',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             }
          },

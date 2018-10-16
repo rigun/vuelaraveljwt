@@ -26,7 +26,7 @@ body{
         border: solid 1px #dbdbdb;
     }
     .login-body{
-        min-height: 350px;
+        min-height: 240px;
         padding: 20px;
         border-radius: 3px;
       
@@ -73,5 +73,33 @@ body{
                 background-color: #172029;
             }
         }
+    }
+}
+
+.dashboardCardPrimary{
+    background-color: #61ace9;
+    border-color: transparent;
+    color: #fff;
+    text-align:center;
+    .center{
+        font-size: 50px;
+    }
+}
+.dashboardCardWarning{
+    background-color: #ffec3d;;
+    border-color: transparent;
+    color: black;
+    text-align:center;
+    .center{
+        font-size: 50px;
+    }
+}
+.dashboardCardSuccess{
+    background-color: #35b76c;;
+    border-color: transparent;
+    color: #fff;
+    text-align:center;
+    .center{
+        font-size: 50px;
     }
 }

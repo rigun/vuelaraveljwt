@@ -48,7 +48,8 @@
             <div class="card">
                 <div class="card-content">
                     <img v-if="dataStudent.detail == null || dataStudent.detail.foto == null" src="/images/empty_avatar.jpg">
-                    <img v-else :src="{image}">
+                    <img v-else :src="'/images/upload/'+picture" />
+                   
 
                 </div>
             </div>
@@ -283,7 +284,7 @@
             </div> <!-- end of .columns for forms -->       
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-success">Perbaharui Data</button>
+            <button class="button is-success" :class="{'is-loading' : load}" @click="updateLoad()">Perbaharui Data</button>
 
             <a class="button is-danger" v-on:click="modalUpdate()" >Cancel</a>
           </footer>
@@ -304,6 +305,9 @@ export default {
             error: null,
             activeUpdate: false,
             year:'',
+            picture:'',
+            picture_id: null,
+            load: false,
         }
     },
     created: function() {
@@ -312,11 +316,12 @@ export default {
             }else{
         this.getStudent();
         this.getThisYear();
-
             }
     },
     methods:{
-        
+        updateLoad(){
+            this.load = true;
+        },
         getThisYear(){
             this.year = new Date().getFullYear();
         },
@@ -336,16 +341,31 @@ export default {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                alert(response.data.msg);
+                
                 this.activeUpdate = false;
                 this.getStudent();
+                this.$toast.open({
+                    duration: 2000,
+                    message: response.data.msg,
+                    position: 'is-bottom',
+                    type: 'is-success',
+                    queue: false,
+                });
               }).catch(error => {
-                alert("username sudah ada");
+                
                 this.activeUpdate = false;
                 this.getStudent();
+                this.$toast.open({
+                    duration: 2000,
+                    message: 'Coba lagi',
+                    position: 'is-bottom',
+                    type: 'is-danger',
+                    queue: false,
+                });
                 });
             },
         getStudent(){
+            this.load = false;
             let uri = '/api/siswa/detail/'+this.$route.params.id;
             axios.get(uri,{
                   headers: {
@@ -355,7 +375,8 @@ export default {
                 this.dataStudent = response.data[0];
                 this.dataStudent.password_options =false;
                 if(this.dataStudent.detail!=null){
-                    this.image = this.image+this.dataStudent.detail.foto;
+                    this.picture_id = this.dataStudent.detail.foto;
+                    this.getPicture();
                     }else{
                         this.dataStudent.detail = {
                             tanggal_lahir:'tidak tersedia',
@@ -366,7 +387,21 @@ export default {
                         };
                     }
             });
-        }
+        },
+            getPicture(){
+                if(this.picture_id == null){
+                    return;
+                }
+                this.dataStudent.detail.foto = this.picture_id;
+               let uri = '/api/images-detail/'+this.picture_id;
+                axios.get(uri,{
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                }).then((response) => {
+                    this.picture = response.data.filename;
+                });
+            },
     }
 }
 </script>

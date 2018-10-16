@@ -17598,7 +17598,7 @@ body {
 }
 
 .box-login .login-body {
-  min-height: 350px;
+  min-height: 240px;
   padding: 20px;
   border-radius: 3px;
   background-color: #ffffff;
@@ -17652,6 +17652,39 @@ body {
 
 .footer-table-pagination .flex .justify-end .bg-teal-dark {
   background-color: #172029;
+}
+
+.dashboardCardPrimary {
+  background-color: #61ace9;
+  border-color: transparent;
+  color: #fff;
+  text-align: center;
+}
+
+.dashboardCardPrimary .center {
+  font-size: 50px;
+}
+
+.dashboardCardWarning {
+  background-color: #ffec3d;
+  border-color: transparent;
+  color: black;
+  text-align: center;
+}
+
+.dashboardCardWarning .center {
+  font-size: 50px;
+}
+
+.dashboardCardSuccess {
+  background-color: #35b76c;
+  border-color: transparent;
+  color: #fff;
+  text-align: center;
+}
+
+.dashboardCardSuccess .center {
+  font-size: 50px;
 }
 
 .m-t-5 {
@@ -18054,6 +18087,12 @@ body {
 }
 
 .side-menu .side-body a:hover {
+  border-radius: 0px;
+  background-color: #090d12;
+  border-right: solid #d91515;
+}
+
+.side-menu .side-body .router-link-exact-active {
   border-radius: 0px;
   background-color: #090d12;
   border-right: solid #d91515;

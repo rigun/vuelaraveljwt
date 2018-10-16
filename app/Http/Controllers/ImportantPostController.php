@@ -34,6 +34,12 @@ class ImportantPostController extends Controller
         $data = Kategori::where('name',$kategori)->first();
         return $data->post()->with('user')->get();
     }
+    public function IndexSiswa($kategori)
+    {
+        $data = Kategori::where('name',$kategori)->first();
+        $id = JWTAuth::parseToken()->authenticate()->id;
+        return $data->post()->where('author_id',$id)->with('user')->get();
+    }
 
     /**
      * Show the form for creating a new resource.

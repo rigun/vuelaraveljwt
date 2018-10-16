@@ -17,7 +17,7 @@
     <div class="box-login">
 
         <div class="alert alert-danger" v-if="loginError">
-            <p>There was an error, unable to sign in with those credentials.</p>
+            <p>Password atau Username anda salah</p>
         </div>
 
         <div class="login-header">
@@ -46,24 +46,12 @@
 
                  
                 </div>
-                <div class="columns">
-                    <div class="column">
-                    <input class="checkbox" type="checkbox" name="remember" id="remember"  />
-
-                        <label class="checkbox" for="remember">
-                            Ingat Saya
-                        </label>
-                    </div>
-                    <div class="column">
-                    <label class="float-right">
-                </label>
-                    </div>
-                </div>
+              
                 
               
                 <div class="field is-grouped">
                 <div class="control">
-                    <button class="button btn-custom">Masuk</button>
+                    <button class="button btn-custom m-t-35" :class="{'is-loading' : load}" @click="loadUpdate()">Masuk</button>
                 </div>
                
                 </div>
@@ -84,9 +72,13 @@
                 username: '',
                 password: '',
                 loginError: false,
+                load: false,
             }
         },
         methods: {
+            loadUpdate(){
+                this.load = true;
+            },
             submitLogin() {
                 this.loginError = false;
                 axios.post('/api/auth/login', {
@@ -102,6 +94,8 @@
                 }).catch(error => {
                     this.loginError = true
                 });
+                    this.load = false
+
             }
         }
     }

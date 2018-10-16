@@ -107,7 +107,7 @@
                 <p>Data Prestasi yang dihapus tidak dapat dikembalikan lagi, apakah anda yakin ingin menghapusnya ? </p>
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-warning">Hapus Data</button>
+            <button class="button is-warning" :class="{'is-loading' : load}" @click="updateLoad()" >Hapus Data</button>
             <a class="button is-danger" v-on:click="modalDelete()" >Cancel</a>
           </footer>
           </form>
@@ -164,7 +164,8 @@ import VueAdsPagination from 'vue-ads-pagination';
                 start: 0,
                 end: 0,
                 count: 0,
-                filter: 'Semua'
+                load: false,
+                filter: 'Semua',
             }
         },
         created: function() {
@@ -177,6 +178,9 @@ import VueAdsPagination from 'vue-ads-pagination';
             }
         },
          methods: {
+           updateLoad(){
+            this.load = true;
+          },
            pageChange(page, start, end) {
               this.page = page;
               this.start = start;
@@ -223,15 +227,27 @@ import VueAdsPagination from 'vue-ads-pagination';
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                alert("Data Siswa berhasil dihapus");
                 this.activeDelete = false;
                 this.id = '';
                 this.getCreation();
+                    this.$toast.open({
+                  duration: 2000,
+                  message: 'Berhasil di hapus',
+                  position: 'is-bottom',
+                  type: 'is-success',
+                  queue: false,
+              })
               }).catch(error => {
-                alert("Mohon maaf, terjadi kesalahan, silahkan coba lagi.");
                 this.activeDelete = false;
                 this.id = '';
                 this.getCreation();
+                  this.$toast.open({
+                  duration: 2000,
+                  message: 'Coba lagi',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             }
          },
