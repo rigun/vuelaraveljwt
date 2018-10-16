@@ -35,6 +35,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     // Route::get('/importantpost/detail/{id}/{kategori}', 'ImportantPostController@show');
     Route::post('/importantpost/create/{kategori}','ImportantPostController@store');
     Route::post('/importantpost/update/{id}', 'ImportantPostController@update');
+    Route::post('/importantpost/update/siswa/{id}', 'ImportantPostController@updateSiswa');
     Route::delete('/importantpost/delete/{id}', 'ImportantPostController@destroy');
 
     Route::get('/posts/unique', 'PostController@apiCheckUnique');
@@ -53,6 +54,9 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/images-show/slider/', 'UploadImagesController@showSlide');
     
     Route::get('/count', 'PostController@getCount');
+    Route::get('/countPost', 'PostController@getCountPost');
+    Route::patch('/updatePassword/{id}', 'UserController@updatePassword');
+    Route::patch('/firstLogin', 'UserController@firstLogin');
 
 });
 

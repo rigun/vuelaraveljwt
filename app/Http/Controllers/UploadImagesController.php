@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 use App\Upload;
+use App\UsersDetail;
+use App\Role;
+
 use JWTAuth;
 use App\User;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -135,6 +138,14 @@ class UploadImagesController extends Controller
         }
 
         $picture = Upload::where('filename',$save_name)->first();
+        $author_id = JWTAuth::parseToken()->authenticate()->id;
+        $user = User::findOrFail($author_id);
+        if($user->roles()->first()->name == 'user'){
+            $idDetail = UsersDetail::where('user_id',$author_id)->first();
+            $detailUser = UsersDetail::findOrFail($idDetail->id);
+            $detailUser->foto = $picture->id;
+            $detailUser->save();
+        }
         return Response::json([
             'picture' => $picture
         ], 200);
@@ -179,6 +190,7 @@ class UploadImagesController extends Controller
             $upload->type = "slider";
             $upload->save();
         }
+        
         return Response::json([
             'message' => 'Image saved Successfully'
         ], 200);
@@ -212,7 +224,14 @@ class UploadImagesController extends Controller
         if (!empty($uploaded_image)) {
             $uploaded_image->delete();
         }
- 
+        $author_id = JWTAuth::parseToken()->authenticate()->id;
+        $user = User::findOrFail($author_id);
+        if($user->roles()->first()->name == 'user'){
+            $idDetail = UsersDetail::where('user_id',$author_id)->first();
+            $detailUser = UsersDetail::findOrFail($idDetail->id);
+            $detailUser->foto = null;
+            $detailUser->save();
+        }
         return "Terhapus";
     }
 }

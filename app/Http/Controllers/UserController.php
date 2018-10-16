@@ -144,6 +144,10 @@ class UserController extends Controller
             $detailUser->alamat = $request->input('detail.alamat');
             $detailUser->kelas = $request->input('detail.kelas');
             $detailUser->angkatan = $request->input('detail.angkatan');
+            if(!is_null($request->input('detail.foto'))){
+                $detailUser->foto = $request->input('detail.foto');
+
+            }
             $detailUser->save();
 
           }else{
@@ -154,11 +158,53 @@ class UserController extends Controller
             $detailUser->kelas = $request->input('detail.kelas');
             $detailUser->angkatan = $request->input('detail.angkatan');
             $detailUser->user_id = $id;
+            if(!is_null($request->input('detail.foto'))){
+                $detailUser->foto = $request->input('detail.foto');
+
+            }
             $detailUser->save();
           }
           
     
          
+          return response()->json($json);
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        $this->validateWith([
+            'password_lama' => 'required',
+            'password_baru' => 'required',
+
+          ]);
+          $user = User::findOrFail($id);
+          if(Hash::check($request->password_lama, $user->password)){
+            $user->password = Hash::make($request->password_baru);    
+            $json=['status' => 'success','msg'=>'Password berhasil diubah'];
+          }else{
+            $json=['status' => 'failed','msg'=>'Password yang anda masukkan salah, silahkan coba lagi'];
+          }
+          $user->save();
+          
+          return response()->json($json);
+    }
+    public function firstLogin(Request $request)
+    {
+        $this->validateWith([
+            'password_baru' => 'required',
+          ]);
+          $id = JWTAuth::parseToken()->authenticate()->id;
+
+          $user = User::findOrFail($id);
+          $user->password = Hash::make($request->password_baru); 
+             
+          $json=['status' => 'success','msg'=>'Password berhasil diubah'];
+          $user->save();
+
+          $idDetail = UsersDetail::where('user_id',$id)->first();
+          $detailUser = UsersDetail::findOrFail($idDetail->id); 
+          $detailUser->status = 1;
+          $detailUser->save();
           return response()->json($json);
     }
 
@@ -200,7 +246,7 @@ class UserController extends Controller
                     return response()->json(['token_absent'], $e->getStatusCode());
 
             }
-            $roles = $user->roles->first()->name;
-            return response()->json(compact('user'));
+            $userdata = User::with(['detail','roles'])->where('id',$user->id)->first();
+            return response()->json(compact('userdata'));
     }
 }

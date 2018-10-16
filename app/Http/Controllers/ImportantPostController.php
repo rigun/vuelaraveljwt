@@ -139,6 +139,28 @@ class ImportantPostController extends Controller
 
         return $post;
     }
+    public function updateSiswa(Request $request, $id)
+    {
+        $this->validateWith([
+            'slug' => 'required',
+            'title' => 'required',
+            'content' => 'required',
+            'picture_id' => 'required'
+
+        ]);
+        
+
+        $post = Post::findOrFail($id);
+        $post->slug =  $request->slug;
+        $post->title = $request->title;
+        $post->content = Purifier::clean($request->content);
+        $post->published_at = date("Y-m-d h:i:s");
+        $post->status = 0;
+        $post->picture_id = $request->picture_id;
+        $post->save();
+
+        return $post;
+    }
 
     /**
      * Remove the specified resource from storage.

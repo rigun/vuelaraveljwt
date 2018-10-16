@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-
+use App\Role;
 class AuthController extends Controller
 {
     public function __construct()
@@ -38,10 +38,12 @@ class AuthController extends Controller
 
     protected function respondWithToken($token)
     {
+      
       return response()->json([
         'access_token' => $token,
         'token_type' => 'bearer',
-        'expires_in' => auth()->factory()->getTTL() * 60
+        'expires_in' => auth()->factory()->getTTL() * 60,
+        'role' => auth()->user()->roles()->first()->name
       ]);
     }
     public function me()

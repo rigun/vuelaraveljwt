@@ -11,8 +11,14 @@
      <div class="columns">
          <div class="column">
              <div class="card">
-                 <div class="card-content">
+                 <div class="card-content" v-if="roles != 'user'">
                      Jumlah Siswa
+                     <p class="center">
+                         {{number.user}}
+                     </p>
+                 </div>
+                 <div class="card-content" v-else>
+                     ID Pengguna anda
                      <p class="center">
                          {{number.user}}
                      </p>
@@ -89,10 +95,15 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
             vueDropzone: vue2Dropzone,
         },
         mounted(){
-            this.getCount();
+            if(localStorage.getItem('roles') != 'user'){
+                this.getCount();
+            }else{
+                this.getCountPost();
+            }
         },
         data(){
             return{
+                roles: localStorage.getItem('roles'),
                 header: localStorage.getItem('token'),
                 dropzoneOptions: {
                     url: '/api/images-save',
@@ -152,6 +163,17 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
             },
             getCount(){
                 let uri = '/api/count';
+                axios.get(uri,{
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                }).then((response) => {
+                    this.number = response.data;
+                    
+                });
+            },
+            getCountPost(){
+                let uri = '/api/countPost/';
                 axios.get(uri,{
                     headers: {
                         Authorization: 'Bearer ' + localStorage.getItem('token')

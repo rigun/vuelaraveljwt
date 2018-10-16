@@ -82,8 +82,11 @@
                             <div class="column" v-if="$route.params.detail == 'create'" >
                                  <button type="submit" class="button is-fullwidth"  > Draft</button>
                             </div>
-                            <div class="column" v-else>
+                            <div class="column" v-if="$route.params.detail == 'update' && roles != 'user'">
                                 <button type="submit" class="button is-success is-fullwidth" > Publish</button>
+                            </div>
+                            <div class="column" v-if="$route.params.detail == 'update' && roles == 'user'">
+                                <button type="submit" class="button is-warning is-fullwidth" > Update</button>
                             </div>
                         </div>
 
@@ -111,6 +114,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
         data(){
             
             return{
+                roles: localStorage.getItem('roles'),
                 dropzoneOptions: {
                     url:'/api/images-save/post',
                     thumbnailWidth: 150,
@@ -183,9 +187,11 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                 });
             },
             createPost(){
-                if(this.$route.params.detail == 'update'){
+                if(this.$route.params.detail == 'update' && this.roles != 'user'){
                     var uri = '/api/importantpost/update/'+this.$route.params.id;
-                }else{
+                }else if(this.$route.params.detail == 'update' && this.roles == 'user'){
+                    var uri = '/api/importantpost/update/siswa/'+this.$route.params.id;
+                }else if(this.$route.params.detail == 'create'){
                     var uri = '/api/importantpost/create/Karya Siswa';
                 }
               axios.post(uri, {content: this.content, slug: this.slug, title: this.title, picture_id: this.picture_id},{

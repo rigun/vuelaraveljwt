@@ -3,10 +3,11 @@
 <div class="flex-container">
       <div class="columns m-t-10">
         <div class="column">
-          <h1 class="title">Karya Siswa</h1>
+          <h1 class="title" v-if="roles != 'user'" >Karya Siswa</h1>
+          <h1 class="title" v-else>Karya Saya</h1>
         </div>
         <div class="column">
-          <router-link v-bind:to="{ name: 'KaryaSiswaPost', params: { detail: 'create', id:'new' }}" class="button is-primary is-pulled-right"><i class="fa fa-user-plus m-r-10"></i> Tambahkan Karya Siswa</router-link>
+          <router-link v-bind:to="{ name: 'KaryaSiswaPost', params: { detail: 'create', id:'new' }}" class="button is-primary is-pulled-right"><i class="fa fa-user-plus m-r-10"></i> <span v-if="roles == 'user'">Tambahkan Karya Saya</span><span v-if="roles != 'user'">Tambahkan Karya Siswa</span></router-link>
         </div>
       </div>
       <div class="columns m-t-10">
@@ -50,7 +51,7 @@
                   <td>http://127.0.0.1/blog/{{ karya.slug }}</td>
                   <td>{{ karya.created_at }}</td>
                   <td><span v-if="karya.status == 1">Publish</span><span v-if="karya.status == 0">Draft</span></td>
-                  <td>
+                  <td >
                       <router-link v-bind:to="{name: 'KaryaSiswaPost', params: {detail: 'update', id:karya.id}}"  class="button is-primary m-r-5"  >Detail</router-link>
                       <a class="button is-danger" href="#" v-on:click.prevent="modalDelete();setIdDelete(karya)">Hapus</a></td>
                 </tr>
@@ -113,6 +114,7 @@ import VueAdsPagination from 'vue-ads-pagination';
       },
         data(){
             return{
+              roles: localStorage.getItem('roles'),
                 search: '',
                 active: false,
                 activeDelete:false,

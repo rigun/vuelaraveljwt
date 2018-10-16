@@ -144,4 +144,11 @@ class PostController extends Controller
         $postPublish = Post::where('status','1')->count();
         return json_encode(['user'=>$user,'postDraf'=>$postDraf,'postPublish'=>$postPublish]);
     }
+    public function getCountPost(){
+        $author_id = JWTAuth::parseToken()->authenticate()->id;
+        $user = $author_id;
+        $postDraf = Post::where([['author_id','=',$author_id],['status','=','0']])->count();
+        $postPublish = Post::where([['author_id','=',$author_id],['status','=','1']])->count();
+        return json_encode(['user'=>$user,'postDraf'=>$postDraf,'postPublish'=>$postPublish]);
+    }
 }

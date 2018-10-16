@@ -94,8 +94,10 @@
                     password: this.password
                 }).then(response => {
                     // login user, store the token and redirect to dashboard
+                    console.log(response);
                     store.commit('loginUser')
                     localStorage.setItem('token', response.data.access_token)
+                    localStorage.setItem('roles', response.data.role)
                     this.$router.push({ name: 'DashboardContent' })
                 }).catch(error => {
                     this.loginError = true
