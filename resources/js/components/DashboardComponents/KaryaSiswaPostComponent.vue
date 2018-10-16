@@ -31,7 +31,7 @@
                                 Post
                             </label>
                             <p class="control">
-                                <editor v-model="content" :init="{plugins: 'image imagetools', height: '500'}"></editor>
+                                <editor api-key="8ouwu4yketmtz8pglm0b3g0rhtfdm3ta0atalz5o3d7d6na8" v-model="content" :init="{plugins: 'image imagetools', height: '500'}"></editor>
                             </p>
                         </div>
                         
@@ -99,7 +99,7 @@
 </form>
 
     </div>
-<!-- <editor api-key="7qnvjsuap7tf4yk5t9v56511ndqs11rpv1autp3kye0xydzd " :init="{plugins: 'wordcount'}"></editor> -->
+<!-- <editor api-key="8ouwu4yketmtz8pglm0b3g0rhtfdm3ta0atalz5o3d7d6na8" :init="{plugins: 'wordcount'}"></editor> -->
 </div>
 </template>
 
