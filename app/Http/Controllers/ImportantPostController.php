@@ -93,7 +93,11 @@ class ImportantPostController extends Controller
     {
         $kategori = Kategori::where('name',$kategori)->first();
         $post = $kategori->post()->where('id',$id)->first();
-        $image = Upload::findOrFail($post->picture_id);
+        if($post->picture_id != null){
+            $image = Upload::findOrFail($post->picture_id);
+        }else{
+            $image = null;
+        }
         return json_encode(['post'=>$post,'picture'=>$image]);
     }
 

@@ -58,6 +58,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/countPost', 'PostController@getCountPost');
     Route::patch('/updatePassword/{id}', 'UserController@updatePassword');
     Route::patch('/firstLogin', 'UserController@firstLogin');
+    Route::post('/storeProfile', 'UploadImagesController@storeProfile');
+    Route::delete('/deleteProfile/{id}', 'UploadImagesController@destroyProfile');
 
 });
 

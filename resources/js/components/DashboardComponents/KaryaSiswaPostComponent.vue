@@ -187,8 +187,14 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     this.title = response.data.post.title;
                     this.slug = response.data.post.slug;
                     this.created_at = response.data.post.created_at;
-                    this.picture = response.data.picture.filename;
-                    this.picture_id = response.data.picture.id;
+                    if(response.data.picture != null){
+                        this.picture = response.data.picture.filename;
+                        this.picture_id = response.data.picture.id;
+                    }else{
+                        this.picture = '';
+                        this.picture_id = '';
+                    }
+
                   
                 });
             },

@@ -184,7 +184,9 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                         this.slug = response.data[0].slug;
                         this.created_at = response.data[0].created_at;
                         this.picture_id = response.data[0].picture_id;
-                        this.getPicture();
+                        if(this.picture_id != null){
+                            this.getPicture();
+                        }
                     }else{
                         // console.log(reponse);
                     }

@@ -325,7 +325,7 @@ export default {
     data(){
         return{
             dropzoneOptions: {
-                    url:'/api/images-save/post',
+                    url:'/api/storeProfile',
                     thumbnailWidth: 150,
                     maxFilesize: 2,
                     addRemoveLinks: true,
@@ -472,7 +472,7 @@ export default {
                 });
             },
             deletePicture(){
-                let uri = '/api/images-delete/'+this.picture_id;
+                let uri = '/api/deleteProfile/'+this.picture_id;
                     axios.delete(uri,{
                         headers: {
                             Authorization: 'Bearer ' + localStorage.getItem('token')

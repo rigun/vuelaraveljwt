@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->longText('content');
             $table->integer('status')->default(1);
-            $table->string('picture_id');
+            $table->unsignedInteger('picture_id')->nullable();
             $table->dateTime('published_at');
             $table->timestamps();
 

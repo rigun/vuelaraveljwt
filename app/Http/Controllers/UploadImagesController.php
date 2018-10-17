@@ -8,6 +8,7 @@ use Intervention\Image\Facades\Image;
 use App\Upload;
 use App\UsersDetail;
 use App\Role;
+use App\Post;
 
 use JWTAuth;
 use App\User;
@@ -138,6 +139,48 @@ class UploadImagesController extends Controller
         }
 
         $picture = Upload::where('filename',$save_name)->first();
+        
+        return Response::json([
+            'picture' => $picture
+        ], 200);
+    }
+
+    public function storeProfile(Request $request)
+    {
+        $photos = $request->file('file');
+ 
+        if (!is_array($photos)) {
+            $photos = [$photos];
+        }
+ 
+        if (!is_dir($this->photos_path)) {
+            mkdir($this->photos_path, 0777);
+        }
+ 
+        for ($i = 0; $i < count($photos); $i++) {
+            $photo = $photos[$i];
+            $name = sha1(date('YmdHis') . str_random(30));
+            $save_name = $name . '.' . $photo->getClientOriginalExtension();
+            $resize_name = $name . str_random(2) . '.' . $photo->getClientOriginalExtension();
+ 
+            Image::make($photo)
+                ->resize(250, null, function ($constraints) {
+                    $constraints->aspectRatio();
+                })
+                ->save($this->photos_path . '/' . $resize_name);
+ 
+            $photo->move($this->photos_path, $save_name);
+ 
+            $upload = new Upload();
+            $upload->filename = $save_name;
+            $upload->resized_name = $resize_name;
+            $upload->original_name = basename($photo->getClientOriginalName());
+            $upload->author_id = JWTAuth::parseToken()->authenticate()->id;
+            $upload->type = "profilePicture";
+            $upload->save();
+        }
+
+        $picture = Upload::where('filename',$save_name)->first();
         $author_id = JWTAuth::parseToken()->authenticate()->id;
         $user = User::findOrFail($author_id);
         if($user->roles()->first()->name == 'user'){
@@ -202,6 +245,36 @@ class UploadImagesController extends Controller
      * @param Request $request
      */
     public function destroy($id)
+    {
+       
+        $uploaded_image = Upload::findOrFail($id);
+ 
+        if (empty($uploaded_image)) {
+            return Response::json(['message' => 'Sorry file does not exist'], 400);
+        }
+ 
+        $file_path = $this->photos_path . '/' . $uploaded_image->filename;
+        $resized_file = $this->photos_path . '/' . $uploaded_image->resized_name;
+ 
+        if (file_exists($file_path)) {
+            unlink($file_path);
+        }
+ 
+        if (file_exists($resized_file)) {
+            unlink($resized_file);
+        }
+ 
+        if (!empty($uploaded_image)) {
+            $uploaded_image->delete();
+        }
+        if($post = Post::where('picture_id',$id)->first()){
+            $post->picture_id = null;
+            $post->save();
+        }
+       
+        return "Terhapus";
+    }
+    public function destroyProfile($id)
     {
        
         $uploaded_image = Upload::findOrFail($id);
