@@ -53,7 +53,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/images-show', 'UploadImagesController@index');
     Route::get('/images-detail/{id}', 'UploadImagesController@show');
     Route::get('/images-show/slider/', 'UploadImagesController@showSlide');
-    
+
     Route::get('/count', 'PostController@getCount');
     Route::get('/countPost', 'PostController@getCountPost');
     Route::patch('/updatePassword/{id}', 'UserController@updatePassword');
