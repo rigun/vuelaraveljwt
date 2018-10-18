@@ -5,7 +5,7 @@
         <div class="column">
           <h1 class="title">Manage Siswa</h1>
         </div>
-        <div class="column">
+        <div class="column" style="height: 60px;">
           <button class="button is-success is-pulled-right" v-on:click="modalCreate"><i class="fa fa-user-plus m-r-10"></i> Tambahkan Data Siswa</button>
         </div>
       </div>

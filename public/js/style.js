@@ -8,3 +8,12 @@ function myHamburger(x) {
 function myDropdwonSide(x){
     document.getElementById("list"+x).classList.toggle('dropdown-hiddenSide');
 }
+
+function rightDropDown(){
+    if($( window ).width() <1100 ){
+        document.getElementById('navbarRight').classList.toggle('navbar-dropdown-change');
+        document.getElementById('textRightNav').classList.toggle('navbar-text-right-change');
+        document.getElementById('logoRightNav').classList.toggle('navbar-text-logo-change');
+    }
+
+}

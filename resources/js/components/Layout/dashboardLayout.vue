@@ -15,12 +15,12 @@
                     </div>
                 </div>
                 <div class="navbar-end">
-                    <div class="navbar-item notif-space">
+                    <!-- <div class="navbar-item notif-space">
                         <i class="fa fa-bell"></i>
-                    </div>
+                    </div> -->
                     <div class="navbar-item dropdown-space has-dropdown is-hoverable">
                     <div class="navbar-item">
-                        <div class="text-item">
+                        <div id="textRightNav" class="text-item" onclick="rightDropDown()">
                             <p class="mute-text" >
                                 {{roles}}
                             </p>
@@ -30,10 +30,10 @@
                             </h2>
 
                         </div>
-                        <i class="fa fa-user-circle m-l-15 size-40"></i>
+                        <i id="logoRightNav" class="fa fa-user-circle m-l-15 size-40" onclick="rightDropDown()"></i>
                     </div>
                     <div class="navbar-dropdown arrow-up"></div>
-                        <ul class="navbar-dropdown is-boxed  is-right box-dropdown-custom">
+                        <ul id="navbarRight" class="navbar-dropdown is-boxed  is-right box-dropdown-custom">
                             <li><a class="navbar-item" href="#">Notifications</a></li>
                             <li><a class="navbar-item" href="#">Profile</a></li>
                             <hr class="navbar-divider">

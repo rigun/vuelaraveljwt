@@ -5,7 +5,7 @@
         <div class="column">
           <h1 class="title">Manage Admin</h1>
         </div>
-        <div class="column">
+        <div class="column" style="height: 60px;">
           <button class="button is-success is-pulled-right" v-on:click="modalCreate"><i class="fa fa-user-plus m-r-10"></i> Buat Admin Baru</button>
         </div>
       </div>
