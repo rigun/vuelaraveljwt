@@ -1,15 +1,5 @@
 <template>
-   <!-- <div class="content">
-       <div class="container">
-           <div class="card">
-               <div class="card-content">
-                   Selamat Datang di website SMPN 4 Depok
-                   <router-link v-bind:to="{path: '/login'}"><i class="fa fa-home m-r-10" aria-hidden="true"></i>  <span>Login</span> </router-link>
-               </div>
-           </div>
-       </div>
-   </div> -->
-   <div class="content">
+   <div class="content" id="top">
      <nav class="navbar navbar-expand fixed-top" id="mainNav">
 
          <div class="row">
@@ -23,7 +13,7 @@
                      <div class="row">
 
                          <div class="navbarLogin">
-                             <ul class="navbar-nav">
+                             <ul class="navbar-nav" style="list-style:none">
                                      <li class="nav-item">
                                        <router-link v-bind:to="{path: '/login'}">
                                          <i class="fa fa-home m-r-10" aria-hidden="true"></i>
@@ -154,11 +144,12 @@
              </div>
              <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
                  <div>
-                     <img data-u="image" src="/images/home/022.jpg" />
+                     <img data-u="image" :src="'/images/upload/'+dataSlider.slider1" />
+                     <h1><br/><br/>{{dataSlider.slider1}}</h1>
                      <div data-u="thumb">
-                         <img data-u="thumb" class="i" src="/images/home/022-s96x48.jpg" />
-                         <span class="ti">Title</span><br />
-                         <span class="d">Slide Description</span>
+                         <img data-u="thumb" class="i" :src="'/images/upload/'+dataSlider.slider1" />
+                         <span class="ti">{{dataSlider.slider1}}</span><br />
+                         <span class="d">lorem</span>
                      </div>
                  </div>
                  <div>
@@ -270,51 +261,153 @@
          </div>
      </section>
 
-     <section id="article">
-         <section id="prestasi">
-             <div class="container">
-                 <div class="row">
-                     <div class="col-4">
-                             <div class="box-article">
-                                     <img src="/images/home/021.jpg">
-                                     <br/>
-                                     <h4>Prestasi</h4>
-                                     <span>Jumat, 17 Agustus 2018</span><br/>
-                                     <h1>Judul Prestasi</h1><br/>
-                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam eros nulla, vitae volutpat enim ultricies id. Morbi est leo, commodo a massa non, porttitor ultrices ipsum. Praesent felis turpis, ultrices nec efficitur in, feugiat ac lorem. Nullam malesuada nibh ac nisi fringilla pharetra.</p>
-                                     <h4>Selengkapnya ></h4>
-                                 </div>
-                     </div>
-                     <div class="col-4">
-                             <div class="box-article">
-                                     <img src="/images/home/021.jpg">
-                                     <br/>
-                                     <h4>Prestasi</h4>
-                                     <span>Jumat, 17 Agustus 2018</span><br/>
-                                     <h1>Judul Prestasi</h1><br/>
-                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam eros nulla, vitae volutpat enim ultricies id. Morbi est leo, commodo a massa non, porttitor ultrices ipsum. Praesent felis turpis, ultrices nec efficitur in, feugiat ac lorem. Nullam malesuada nibh ac nisi fringilla pharetra.</p>
-                                     <h4>Selengkapnya ></h4>
-                                 </div>
-                     </div>
-                     <div class="col-4">
-                             <div class="box-article">
-                                     <img src="/images/home/021.jpg">
-                                     <br/>
-                                     <h4>Prestasi</h4>
-                                     <span>Jumat, 17 Agustus 2018</span><br/>
-                                     <h1>Judul Prestasi</h1><br/>
-                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam eros nulla, vitae volutpat enim ultricies id. Morbi est leo, commodo a massa non, porttitor ultrices ipsum. Praesent felis turpis, ultrices nec efficitur in, feugiat ac lorem. Nullam malesuada nibh ac nisi fringilla pharetra.</p>
-                                     <h4>Selengkapnya ></h4>
-                                 </div>
-                     </div>
-                 </div>
-                 <div class="row">
-                     <div class="btn-box">
-                         <button>Prestasi Lainnya</button>
-                         </div>
+     <section id="headline" style="margin-top:200px;">
+       <center>
+       <!-- row headline-->
+       <div class="container-fluid" style="text-align:center; margin-left:21%;padding:0px;">
 
-                 </div>
+
+        <div class="row col-offset-fluid clearfix" style="margin-top:20px">
+
+            <div style="width:740px;">
+                <!-- headline-->
+        <div class="headline ga--headline clearfix">
+            <div class="headline__big clearfix">
+                <ul class="headline__big__row clearfix js-hl-big" style="margin-left:0px; margin-top:0px">
+                    <li class="headline__big__item">
+            <a class="headline__big__link" href="https://nasional.kompas.com/read/2018/10/17/11593571/jokowi-urusan-utang-rumah-sakit-sampai-ke-presiden-kebangetan">
+                <div class="headline__subtitle">Headline</div>
+                <!-- <div class="live__subtitle live__subtitle--hl">Live Report</div> -->
+                <div class="headline__big__img"><img src="https://asset.kompas.com/crop/0x0:1000x667/740x500/data/photo/2018/10/16/553995677.jpg" alt="Jokowi: Urusan Utang Rumah Sakit Sampai ke Presiden, Kebangetan!"/></div>
+                <div class="headline__big__box">
+                    <h1 class="headline__big__title">Jokowi: Urusan Utang Rumah Sakit Sampai ke Presiden, Kebangetan!</h1>
+                    <div class="headline__big__date">17/10/2018, 11:59 WIB</div>
+                            </div>
+            </a>
+        </li>
+        <li class="headline__big__item">
+            <a class="headline__big__link" href="https://ekonomi.kompas.com/read/2018/10/17/132251326/peringkat-daya-saing-indonesia-naik-ke-posisi-45">
+                <div class="headline__subtitle">Headline</div>
+                <!-- <div class="live__subtitle live__subtitle--hl">Live Report</div> -->
+                <div class="headline__big__img"><img src="https://asset.kompas.com/crop/79x0:879x533/740x500/data/photo/2018/02/26/3149983892.jpg" alt="Peringkat Daya Saing Indonesia Naik ke Posisi 45"/></div>
+                <div class="headline__big__box">
+                    <h2 class="headline__big__title">Peringkat Daya Saing Indonesia Naik ke Posisi 45</h2>
+                    <div class="headline__big__date">17/10/2018, 13:22 WIB</div>
+                            </div>
+            </a>
+        </li>
+        <li class="headline__big__item">
+            <a class="headline__big__link" href="https://megapolitan.kompas.com/read/2018/10/17/13505011/polisi-duga-peluru-yang-ditemukan-di-gedung-dpr-hari-ini-sama-dengan">
+                <div class="headline__subtitle">Headline</div>
+                <!-- <div class="live__subtitle live__subtitle--hl">Live Report</div> -->
+                <div class="headline__big__img"><img src="https://asset.kompas.com/crop/39x0:883x563/740x500/data/photo/2018/10/17/21080260581.jpeg" alt="Polisi Duga Peluru yang Ditemukan di Gedung DPR Hari Ini Sama dengan Peluru Nyasar Sebelumnya"/></div>
+                <div class="headline__big__box">
+                    <h2 class="headline__big__title">Polisi Duga Peluru yang Ditemukan Nyasar Sebelumnya</h2>
+                    <div class="headline__big__date">17/10/2018, 13:50 WIB</div>
+                            </div>
+            </a>
+        </li>
+
+        <li class="headline__big__item">
+            <a class="headline__big__link" href="https://megapolitan.kompas.com/read/2018/10/17/13505011/polisi-duga-peluru-yang-ditemukan-di-gedung-dpr-hari-ini-sama-dengan">
+                <div class="headline__subtitle">Headline</div>
+                <!-- <div class="live__subtitle live__subtitle--hl">Live Report</div> -->
+                <div class="headline__big__img"><img src="https://asset.kompas.com/crop/39x0:883x563/740x500/data/photo/2018/10/17/21080260581.jpeg" alt="Polisi Duga Peluru yang Ditemukan di Gedung DPR Hari Ini Sama dengan Peluru Nyasar Sebelumnya"/></div>
+                <div class="headline__big__box">
+                    <h2 class="headline__big__title">Polisi Duga Pelu Peluru Nyasar Sebelumnya</h2>
+                    <div class="headline__big__date">17/10/2018, 13:50 WIB</div>
+                            </div>
+            </a>
+        </li>
+
+                </ul>
+            </div>
+            <div class="headline__thumb clearfix">
+                <ul class="headline__thumb__row clearfix js-hl-thumb" style="margin-top:0px; margin-left:0px;">
+                    <li class="headline__thumb__item">
+            <div class="headline__thumb__img"><img src="https://asset.kompas.com/crop/0x0:1000x667/185x124/data/photo/2018/10/16/553995677.jpg" alt="Jokowi: Urusan Utang Rumah Sakit Sampai ke Presiden, Kebangetan!"/></div>
+            <a class="headline__thumb__link" href="https://nasional.kompas.com/read/2018/10/17/11593571/jokowi-urusan-utang-rumah-sakit-sampai-ke-presiden-kebangetan">
+                <h2 class="headline__thumb__title">Jokowi: Urusan Utang Rumah Sakit Sampai ke Presiden, Kebangetan!</h2>
+            </a>
+        </li><li class="headline__thumb__item">
+            <div class="headline__thumb__img"><img src="https://asset.kompas.com/crop/79x0:879x533/185x124/data/photo/2018/02/26/3149983892.jpg" alt="Peringkat Daya Saing Indonesia Naik ke Posisi 45"/></div>
+            <a class="headline__thumb__link" href="https://ekonomi.kompas.com/read/2018/10/17/132251326/peringkat-daya-saing-indonesia-naik-ke-posisi-45">
+                <h2 class="headline__thumb__title">Peringkat Daya Saing Indonesia Naik ke Posisi 45</h2>
+            </a>
+        </li><li class="headline__thumb__item">
+            <div class="headline__thumb__img"><img src="https://asset.kompas.com/crop/39x0:883x563/185x124/data/photo/2018/10/17/21080260581.jpeg" alt="Polisi Duga Peluru yang Ditemukan di Gedung DPR Hari Ini Sama dengan Peluru Nyasar Sebelumnya"/></div>
+            <a class="headline__thumb__link" href="https://megapolitan.kompas.com/read/2018/10/17/13505011/polisi-duga-peluru-yang-ditemukan-di-gedung-dpr-hari-ini-sama-dengan">
+                <h2 class="headline__thumb__title">Polisi Duga Peluru yang Ditemukan di ebelumnya</h2>
+            </a>
+        </li>
+        <li class="headline__thumb__item">
+            <div class="headline__thumb__img"><img src="https://asset.kompas.com/crop/39x0:883x563/185x124/data/photo/2018/10/17/21080260581.jpeg" alt="Polisi Duga Peluru yang Ditemukan di Gedung DPR Hari Ini Sama dengan Peluru Nyasar Sebelumnya"/></div>
+            <a class="headline__thumb__link" href="https://megapolitan.kompas.com/read/2018/10/17/13505011/polisi-duga-peluru-yang-ditemukan-di-gedung-dpr-hari-ini-sama-dengan">
+                <h2 class="headline__thumb__title">Polisi Duga Pelumnya</h2>
+            </a>
+        </li>
+         </ul>
+            </div>
+        </div>    </div>
+        </div></div>
+      </center>
+     </section>
+
+     <section id="article" style="top:50px;">
+         <section id="prestasi">
+           <div class="container">
+             <div class="row">
+               <h1 style="margin-top:0px">Prestasi Siswa</h1>
              </div>
+               <div class="owl-carousel owl-theme row" id="karya_slider">
+                  <div class="">
+                           <div class="box-article" style="margin:0; max-width:none">
+                                   <img src="/images/home/021.jpg">
+                                   <br/>
+                                   <h4>Prestasi</h4>
+                                   <span>Jumat, 17 Agustus 2018</span><br/>
+                                   <h1>Judul Prestasi</h1><br/>
+                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam eros nulla, vitae volutpat enim ultricies id. Morbi est leo, commodo a massa non, porttitor ultrices ipsum. Praesent felis turpis, ultrices nec efficitur in, feugiat ac lorem. Nullam malesuada nibh ac nisi fringilla pharetra.</p>
+                                   <h4>Selengkapnya ></h4>
+                               </div>
+                   </div>
+
+                   <div class="">
+                            <div class="box-article" style="margin:0; max-width:none">
+                                    <img src="/images/home/021.jpg">
+                                    <br/>
+                                    <h4>Prestasi</h4>
+                                    <span>Jumat, 17 Agustus 2018</span><br/>
+                                    <h1>Judul Prestasi</h1><br/>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam eros nulla, vitae volutpat enim ultricies id. Morbi est leo, commodo a massa non, porttitor ultrices ipsum. Praesent felis turpis, ultrices nec efficitur in, feugiat ac lorem. Nullam malesuada nibh ac nisi fringilla pharetra.</p>
+                                    <h4>Selengkapnya ></h4>
+                                </div>
+                    </div>
+
+                    <div class="">
+                             <div class="box-article" style="margin:0; max-width:none">
+                                     <img src="/images/home/021.jpg">
+                                     <br/>
+                                     <h4>Prestasi</h4>
+                                     <span>Jumat, 17 Agustus 2018</span><br/>
+                                     <h1>Judul Prestasi</h1><br/>
+                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam eros nulla, vitae volutpat enim ultricies id. Morbi est leo, commodo a massa non, porttitor ultrices ipsum. Praesent felis turpis, ultrices nec efficitur in, feugiat ac lorem. Nullam malesuada nibh ac nisi fringilla pharetra.</p>
+                                     <h4>Selengkapnya ></h4>
+                                 </div>
+                     </div>
+
+
+               </div>
+
+
+
+               <div class="row" >
+                   <div class="btn-box" style="margin-top:30px;">
+                       <button>Prestasi Lainnya</button>
+                       </div>
+
+               </div>
+           </div>
 
          </section>
          <section id="vm">
@@ -355,73 +448,62 @@
              </div>
          </section>
          <section id="KaryaSS">
-                 <div class="container">
-                     <div class="row">
-                         <div class="col-9">
-                             <h1>Karya Siswa Siswi</h1>
-                         </div>
-                         <div class="col-3">
-                             <h1>Pengumuman</h1>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-3">
-                                 <div class="box-article">
-                                         <img src="/images/home/021.jpg">
-                                         <br/>
-                                         <h4>Puisi</h4>
-                                         <span>Jumat, 17 Agustus 2018</span><br/>
-                                         <span>Abdul</span><br/>
-                                         <h2>Judul </h2><br/>
-                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam eros nulla, vitae volutpat enim ultricies id. Morbi est leo, commodo a massa non, porttitor ultrices ipsum. Praesent felis turpis, ultrices nec efficitur in, feugiat ac lorem. Nullam malesuada nibh ac nisi fringilla pharetra.</p>
-                                         <h4>Selengkapnya ></h4>
-                                     </div>
-                         </div>
-                         <div class="col-3">
-                                 <div class="box-article">
-                                         <img src="/images/home/021.jpg">
-                                         <br/>
-                                         <h4>Cerita Pendek</h4>
-                                         <span>Jumat, 17 Agustus 2018</span><br/>
-                                         <span>Abdul</span><br/>
-                                         <h2>Judul </h2><br/>
-                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam eros nulla, vitae volutpat enim ultricies id. Morbi est leo, commodo a massa non, porttitor ultrices ipsum. Praesent felis turpis, ultrices nec efficitur in, feugiat ac lorem. Nullam malesuada nibh ac nisi fringilla pharetra.</p>
-                                         <h4>Selengkapnya ></h4>
-                                     </div>
-                         </div>
-                         <div class="col-3">
-                                 <div class="box-article">
-                                         <img src="/images/home/021.jpg">
-                                         <br/>
-                                         <h4>Kerajinan Tangan</h4>
-                                         <span>Jumat, 17 Agustus 2018</span><br/>
-                                         <span>Abdul</span><br/>
-                                         <h2>Judul </h2><br/>
-                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam eros nulla, vitae volutpat enim ultricies id. Morbi est leo, commodo a massa non, porttitor ultrices ipsum. Praesent felis turpis, ultrices nec efficitur in, feugiat ac lorem. Nullam malesuada nibh ac nisi fringilla pharetra.</p>
-                                         <h4>Selengkapnya ></h4>
-                                     </div>
-                         </div>
-                         <div class="col-3">
-                                 <div class="box-article box-pengumuman">
-                                         <img src="/images/home/021.jpg">
-                                         <br/>
-                                         <h4>Pengumuman</h4>
-                                         <span>Jumat, 17 Agustus 2018</span><br/>
-                                         <span>Abdul</span><br/>
-                                         <h2>Judul </h2><br/>
-                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam eros nulla, vitae volutpat enim ultricies id. Morbi est leo, commodo a massa non, porttitor ultrices ipsum. Praesent felis turpis, ultrices nec efficitur in, feugiat ac lorem. Nullam malesuada nibh ac nisi fringilla pharetra.</p>
-                                         <h4>Selengkapnya ></h4>
-                                     </div>
-                         </div>
-                     </div><br/>
-                     <div class="row">
-                         <div class="btn-box">
-                             <button>Prestasi Lainnya</button>
-                             </div>
+           <div class="container">
+             <div class="row">
+               <h1 style="margin-top:50px">Karya Siswa</h1>
+             </div>
+               <div class="owl-carousel owl-theme row" id="karya_slider">
+                  <div class="">
+                           <div class="box-article" style="margin:0; max-width:none">
+                                   <img src="/images/home/021.jpg">
+                                   <br/>
+                                   <h4>Puisi</h4>
+                                   <span>Jumat, 17 Agustus 2018</span><br/>
+                                   <span>Abdul</span><br/>
+                                   <h1>Judul Karya</h1><br/>
+                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam eros nulla, vitae volutpat enim ultricies id. Morbi est leo, commodo a massa non, porttitor ultrices ipsum. Praesent felis turpis, ultrices nec efficitur in, feugiat ac lorem. Nullam malesuada nibh ac nisi fringilla pharetra.</p>
+                                   <h4>Selengkapnya ></h4>
+                               </div>
+                   </div>
 
-                     </div>
-                 </div>
+                   <div class="">
+                            <div class="box-article" style="margin:0; max-width:none">
+                                    <img src="/images/home/021.jpg">
+                                    <br/>
+                                    <h4>Cerita Pendek</h4>
+                                    <span>Jumat, 17 Agustus 2018</span><br/>
+                                    <span>Abdul</span><br/>
+                                    <h1>Judul Karya</h1><br/>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam eros nulla, vitae volutpat enim ultricies id. Morbi est leo, commodo a massa non, porttitor ultrices ipsum. Praesent felis turpis, ultrices nec efficitur in, feugiat ac lorem. Nullam malesuada nibh ac nisi fringilla pharetra.</p>
+                                    <h4>Selengkapnya ></h4>
+                                </div>
+                    </div>
 
+                    <div class="">
+                             <div class="box-article" style="margin:0; max-width:none">
+                                     <img src="/images/home/021.jpg">
+                                     <br/>
+                                     <h4>Kerajinan Tangan</h4>
+                                     <span>Jumat, 17 Agustus 2018</span><br/>
+                                     <span>Abdul</span><br/>
+                                     <h1>Judul Karya</h1><br/>
+                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam eros nulla, vitae volutpat enim ultricies id. Morbi est leo, commodo a massa non, porttitor ultrices ipsum. Praesent felis turpis, ultrices nec efficitur in, feugiat ac lorem. Nullam malesuada nibh ac nisi fringilla pharetra.</p>
+                                     <h4>Selengkapnya ></h4>
+                                 </div>
+                     </div>
+
+
+               </div>
+
+
+
+               <div class="row" >
+                   <div class="btn-box" style="margin-top:30px;">
+                       <button>Karya Lainnya</button>
+                       </div>
+
+               </div>
+           </div>
              </section>
              <section id="mapSec">
                      <div id="map" style="width:100%;height:400px;background:yellow;margin-top:40px;"></div>
@@ -431,7 +513,7 @@
                      <h1>Siap untuk menjadi bagian dari kami ? </h1><br/>
                      <hr/><br/>
                      <div class="row">
-                     <div class="col-6">
+                     <div class="col-xs-12 col-md-4 col-sm-6 col-lg-6">
                      <h2>Sekolah Menegah Pertama Negeri 4 Depok</h2>
                      <h4><strong>Kontak</strong></h4>
                      <p>08*********</p>
@@ -443,8 +525,8 @@
                      <p>08*********</p>
                      <p>Ex@Example.com</p><br/>
                      </div>
-                     <div class="col-6">
-                         <img style="width: 90%;" src="backupData/Logo.png">
+                     <div class="col-xs-12 col-md-4 col-sm-6 col-lg-6">
+                         <img style="width: 90%;" src="/images/Logo.png">
                      </div>
                  </div>
                      <hr/>
@@ -459,10 +541,63 @@
 </template>
 
 <script>
+
     import 'bootstrap/dist/css/bootstrap.min.css';
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        data(){
+            return{
+                dataSlider: {
+                    slider1:'',
+                    slider2:'',
+                    slider3:'',
+                    slider4:'',
+                    slider5:'',
+                    slider6:'',
+                    slider7:'',
+                    slider8:'',
+                    slider9:'',
+                    slider10:'',
+                },
+            }
+        },
+        created(){
+            this.getPicture();
+        },
+        methods:{
+            getPicture(){
+
+               let uri = '/api/images-show/slider/';
+                axios.get(uri,{
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                }).then((response) => {
+                    for(var i in response.data){
+                        if(response.data[i].resized_name == 'slider1'){
+                            this.dataSlider.slider1 = response.data[i].filename
+                        }else if(response.data[i].resized_name == 'slider2'){
+                            this.dataSlider.slider2 = response.data[i].filename
+                        }else if(response.data[i].resized_name == 'slider3'){
+                            this.dataSlider.slider3 = response.data[i].filename
+                        }else if(response.data[i].resized_name == 'slider4'){
+                            this.dataSlider.slider4 = response.data[i].filename
+                        }else if(response.data[i].resized_name == 'slider5'){
+                            this.dataSlider.slider5 = response.data[i].filename
+                        }else if(response.data[i].resized_name == 'slider6'){
+                            this.dataSlider.slider6 = response.data[i].filename
+                        }else if(response.data[i].resized_name == 'slider7'){
+                            this.dataSlider.slider7 = response.data[i].filename
+                        }else if(response.data[i].resized_name == 'slider8'){
+                            this.dataSlider.slider8 = response.data[i].filename
+                        }else if(response.data[i].resized_name == 'slider9'){
+                            this.dataSlider.slider9 = response.data[i].filename
+                        }else if(response.data[i].resized_name == 'slider10'){
+                            this.dataSlider.slider10 = response.data[i].filename
+                        }
+                    }
+                });
+            },
+
         }
     }
 </script>

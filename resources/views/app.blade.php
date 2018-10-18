@@ -12,6 +12,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/homestyle.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/k_slickheadline.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/owlc/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/owlc/owl.theme.default.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="mainLayout">
@@ -23,6 +26,10 @@
     <script src="{{ asset('js/homeslider.js') }}"></script>
     <script src="{{ asset('js/style.js') }}"></script>
     <script src="{{ asset('js/homestyle.js') }}"></script>
+    <script src="{{ asset('js/slick.js') }}"></script>
+    <script src="{{ asset('js/headline.js') }}"></script>
+    <script src="{{ asset('js/pindahan.js') }}"></script>
+    <script src="{{ asset('js/owlc/owl.carousel.js') }}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4m3960a0NxbUHCNND05Us9fwb0MSJvoI&callback=myMap"></script>
 
 </html>

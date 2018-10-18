@@ -50,7 +50,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/images-show', 'UploadImagesController@index');
     Route::get('/images-detail/{id}', 'UploadImagesController@show');
     Route::get('/images-show/slider/', 'UploadImagesController@showSlide');
-    
+
     Route::get('/count', 'PostController@getCount');
 
 });
