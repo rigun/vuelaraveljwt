@@ -34,6 +34,7 @@ Route::group(['prefix' => 'dashboard'],function(){
 
     Route::get('/siswa',function () {return view('app');});
     Route::get('/siswa/detail/{id}',function () {return view('app');});
+    Route::get('/profile/{id}',function () {return view('app');});
     Route::get('/admin',function () {return view('app');});
     Route::get('/slider',function () {return view('app');});
     Route::get('/karyaSiswa',function () {return view('app');});

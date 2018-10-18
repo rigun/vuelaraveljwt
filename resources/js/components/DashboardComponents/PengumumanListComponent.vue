@@ -1,6 +1,6 @@
 <template id="students-list">
 <div class="contentlist">
-<div class="flex-container m-b-35">
+<div class="flex-container ">
       <div class="columns m-t-10">
         <div class="column">
           <h1 class="title">Pengumuman</h1>
@@ -13,7 +13,7 @@
         <div class="column">
             <div class="field has-addons">
                 <p class="control">
-                    <input class="input" type="text" placeholder="Cari. . ">
+                    <input class="input"  v-model="search"  type="text" placeholder="Cari Judul. . ">
                 </p>
                 <p class="control">
                     <a class="button is-static">
@@ -21,9 +21,29 @@
                     </a>
                 </p>
             </div>
-        
         </div>
         
+        <div class="column">
+            <div class="field is-horizontal is-pulled-right">
+              <div class="field-label is-normal">
+                <label class="label">Filter</label>
+              </div>
+              <div class="field-body">
+                <div class="field is-narrow">
+                  <div class="control">
+                    <div class="select is-fullwidth">
+                      <select  v-model="filter">
+                        <option>Semua</option>
+                        <option>Draft</option>
+                        <option>Publish</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
       </div>
 
       <div class="card p-b-20">
@@ -44,7 +64,7 @@
             <tbody>
                   
                 <tr v-for="(karya, index) in filterCreation" :key="karya.id">
-                  <th>{{ index + 1 }}</th>
+                  <th>{{ index + 1 + start }}</th>
                   <td>{{ karya.title }}</td>
                   <td>{{ karya.user.name }}</td>
                   <td>http://127.0.0.1/blog/{{ karya.slug }}</td>
@@ -58,12 +78,13 @@
             </tbody>
           </table>
           <div class="footer-table-pagination">
-            <span class="is-pulled-left">
-                
-            </span>
-            <span class="is-pulled-right">
-           
-            </span>
+            <vue-ads-pagination v-if="count!=0"
+                :page="0"
+                :itemsPerPage="100"
+                :total-items="count"
+                :max-visible-pages="3"
+                @page-change="pageChange"
+            />
         </div>  
         </div>
        
@@ -86,7 +107,7 @@
                 <p>Data Pengumuman yang dihapus tidak dapat dikembalikan lagi, apakah anda yakin ingin menghapusnya ? </p>
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-warning">Hapus Data</button>
+            <button class="button is-warning" :class="{'is-loading' : load}" @click="updateLoad()">Hapus Data</button>
             <a class="button is-danger" v-on:click="modalDelete()" >Cancel</a>
           </footer>
           </form>
@@ -104,9 +125,15 @@
 }    
 </style>
 <script>
+import VueAdsPagination from 'vue-ads-pagination';
+
     export default {
+      components: {
+          VueAdsPagination,
+      },
         data(){
             return{
+                search: '',
                 active: false,
                 activeDelete:false,
                 id:'',
@@ -132,13 +159,33 @@
                   },
                 karyas:[],
                 year:'',
+                page: 0,
+                start: 0,
+                end: 0,
+                count: 0,
+                filter: 'Semua',
+                load: false,
+
             }
         },
         created: function() {
+          if(localStorage.getItem('roles') == 'user'){
+                  this.$router.push({ name: 'DashboardContent' });
+          }else{
             this.getCreation();
+          }
         },
          methods: {
+           updateLoad(){
+            this.load = true;
+          },
+          pageChange(page, start, end) {
+              this.page = page;
+              this.start = start;
+              this.end = end;
+          },
             getCreation(){
+              this.load = false;
                   let uri = '/api/importantpost/Pengumuman';
                   axios.get(uri,{
                   headers: {
@@ -146,6 +193,8 @@
                   }
               }).then((response) => {
                       this.dataCreation = response.data;
+                      this.count = this.dataCreation.length;
+
                   }).catch(error => {
                       // console.log(error);
                   });
@@ -178,22 +227,46 @@
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                alert("Data Siswa berhasil dihapus");
                 this.activeDelete = false;
                 this.id = '';
                 this.getCreation();
+                     this.$toast.open({
+                  duration: 2000,
+                  message: 'Berhasil di hapus',
+                  position: 'is-bottom',
+                  type: 'is-success',
+                  queue: false,
+              })
               }).catch(error => {
-                alert("Mohon maaf, terjadi kesalahan, silahkan coba lagi.");
                 this.activeDelete = false;
                 this.id = '';
                 this.getCreation();
+                this.$toast.open({
+                  duration: 2000,
+                  message: 'Coba lagi',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             }
          },
         computed: {
             filterCreation: function(){
                 if(this.dataCreation.length) {
-                    return this.dataCreation;
+                    return this.dataCreation.filter((row, index) => {
+                            if(this.search != '') return row.title.toLowerCase().includes(this.search.toLowerCase());                            
+                
+                            if(this.filter != 'Semua'){
+                                  if(this.filter == 'Publish'){
+                                    if(row.status == 1) return true;
+                                  }else if(this.filter == 'Draft'){
+                                    if(row.status == 0) return true;
+                                  }
+                                }else{
+                                  if(index >= this.start && index < this.end) return true;
+                                }      
+                      });
                 }
             }
         }

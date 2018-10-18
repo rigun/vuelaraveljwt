@@ -124,7 +124,9 @@ transition: 0.3s;
     background-color: #333;
     font-family: Arial;
   }
-
+  .dashnav{
+      overflow: visible;
+  }
   /* Links inside the navbar */
   .navbar a {
     float: left;

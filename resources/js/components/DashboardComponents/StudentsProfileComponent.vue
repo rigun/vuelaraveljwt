@@ -33,7 +33,8 @@
                     </label>
                 </div>
                 <div class="column">
-                      <button class="button is-warning is-pulled-right" v-on:click="modalUpdate()"> Perbaharui Data Siswa</button>
+                      <button class="button is-info is-pulled-right" v-on:click="modalForget()"> Ubah Password</button>
+                      <button class="button is-primary is-pulled-right  m-r-10" v-on:click="modalUpdate()"> Perbaharui Data</button>
                    
                 </div>
             </div>
@@ -47,9 +48,19 @@
         <div class="column">
             <div class="card">
                 <div class="card-content">
-                    <img v-if="dataStudent.detail == null || dataStudent.detail.foto == null" src="/images/empty_avatar.jpg">
-                    <img v-else :src="'/images/upload/'+picture" />
-                   
+                    <div class="column" v-if="dataStudent.detail == null || dataStudent.detail.foto == null" >
+                        <vue-dropzone ref="myVueDropzone" id="dropzone" 
+                                @vdropzone-success="vsuccess"
+                                @vdropzone-file-added="vfileAdded" 
+                            :options="dropzoneOptions"
+                            :duplicateCheck="true">
+                            </vue-dropzone>
+                    </div>
+                    <div class="column" v-else>
+                        <img :src="'/images/upload/'+picture" />
+                        <button class="button button-primary" @click="deletePicture()">Hapus Foto </button>
+                    </div>
+                    
 
                 </div>
             </div>
@@ -155,39 +166,7 @@
                     </label>
                 </div>
             </div>
-            <div class="columns">
-                <div class="column is-one-third">
-                    <label class="label">
-                       Predikat
-                    </label>
-                </div>
-                    <label class="label" style="padding: 0.75rem">
-                        :
-                    </label>
-                <div class="column">
-                    <label class="label">
-                        {{dataStudent.detail.predikat}}
-                    </label>
-                </div>
-            </div>
-            <div class="columns">
-                <div class="column is-one-third">
-                    <label class="label">
-                       Poin
-                    </label>
-                </div>
-                    <label class="label" style="padding: 0.75rem">
-                        :
-                    </label>
-                <div class="column">
-                    <label class="label">
-                        {{dataStudent.detail.poin}}
-                    </label>
-                </div>
-            </div>
-            
-            
-            
+             
 
                 </div>
             </div>
@@ -200,7 +179,7 @@
       <div class="modal-background" v-on:click="modalUpdate()" ></div>
         <div class="modal-card">
           <header class="modal-card-head">
-            <p class="modal-card-title">Perbaharui Data Siswa</p>
+            <p class="modal-card-title">Perbaharui Data Saya</p>
           </header>
             <form v-on:submit.prevent ="updateStudent()">
 
@@ -211,13 +190,13 @@
                 <div class="field">
                   <label for="name" class="label">Nama</label>
                   <p class="control">
-                    <input type="text" class="input" v-model="dataStudent.name" name="name" id="name" required>
+                    <input type="text" class="input" v-model="dataStudent.name" name="name" id="name" readonly>
                   </p>
                 </div>
                 <div class="field">
                   <label for="name" class="label">Username</label>
                   <p class="control">
-                    <input type="text" class="input" v-model="dataStudent.username" name="username" id="username" required>
+                    <input type="text" class="input" v-model="dataStudent.username" name="username" id="username" readonly>
                   </p>
                 </div>
                 <div class="columns">
@@ -270,23 +249,64 @@
                             </select>
                         </div>
                     </div>
-                    <div class="column">
-                      <label for="name" class="label">Password</label>
-                       <div class="field">
-                            <p class="control">
-                                <b-checkbox v-model="dataStudent.password_options" >reset</b-checkbox>
-                            </p>
-                        </div>
-                    </div>
                 </div>
                 
               </div> <!-- end of .column -->
             </div> <!-- end of .columns for forms -->       
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-success" :class="{'is-loading' : load}" @click="updateLoad()">Perbaharui Data</button>
+            <button class="button is-success">Perbaharui Data</button>
 
             <a class="button is-danger" v-on:click="modalUpdate()" >Cancel</a>
+          </footer>
+          </form>
+
+      </div>
+    </div>
+    
+    <div  class="modal" v-bind:class="{ 'is-active' : activeForget }">
+      <div class="modal-background" v-on:click="modalForget()" ></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Perbaharui Data Saya</p>
+          </header>
+            <form v-on:submit.prevent ="updateStudentPassword()">
+
+            <section class="modal-card-body">
+            
+            <div class="columns">
+              <div class="column">
+                <div class="field">
+                  <label for="name" class="label">Password Lama</label>
+                  <p class="control">
+                    <input type="password" class="input" v-model="dataPassword.password_lama" required>
+                  </p>
+                </div>
+                <div class="field">
+                  <label for="name" class="label">Password Baru</label>
+                  <p class="control">
+                    <input type="password" class="input" v-bind:class="{ 'is-danger' : wrongPassword }" v-model="dataPassword.password_baru" @keyup="cek" required>
+                  </p>
+
+                </div>
+                <div class="field">
+                  <label for="name" class="label">Konfirmasi Password Baru</label>
+                  <p class="control">
+                    <input type="password" class="input" v-bind:class="{ 'is-danger' : wrongPassword }" v-model="dataPassword.password_konfirmasi" @keyup="cek" required>
+                  </p>
+                  <label for="name" class="label" v-if="wrongPassword == true"><span style="color:red">Password tidak cocok</span></label>
+
+                </div>
+                
+              
+                
+              </div> <!-- end of .column -->
+            </div> <!-- end of .columns for forms -->       
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-success" :disabled="wrongPassword">Ubah Password</button>
+
+            <a class="button is-danger" v-on:click="modalForget()" >Cancel</a>
           </footer>
           </form>
 
@@ -296,32 +316,57 @@
     
 </template>
 <script>
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 export default {
+    components: {
+            vueDropzone: vue2Dropzone,
+        },
     data(){
         return{
-            dataStudent : null,
+            dropzoneOptions: {
+                    url:'/api/storeProfile',
+                    thumbnailWidth: 150,
+                    maxFilesize: 2,
+                    addRemoveLinks: true,
+                    headers: {
+                      Authorization :'Bearer ' + localStorage.getItem('token')
+                  },
+                },
+            dataStudent : [],
             siswas:[],
-            image:'/image/',
+            picture:'',
+            picture_id:null,
             error: null,
             activeUpdate: false,
+            activeForget: false,
             year:'',
-            picture:'',
-            picture_id: null,
-            load: false,
+            dataPassword:{
+                password_lama:'',
+                password_baru:'',
+                password_konfirmasi: '',
+            },
+            wrongPassword: false,
         }
     },
     created: function() {
-        if(localStorage.getItem('roles') == 'user'){
+        if(localStorage.getItem('roles') != 'user'){
                 this.$router.push({ name: 'DashboardContent' });
             }else{
+
         this.getStudent();
         this.getThisYear();
             }
+        
     },
     methods:{
-        updateLoad(){
-            this.load = true;
-        },
+        vfileAdded(file){
+                this.dropzoneOptions.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+            },
+            vsuccess(file, response) {
+                this.picture_id = response.picture.id;
+               this.getPicture();
+            },
         getThisYear(){
             this.year = new Date().getFullYear();
         },
@@ -334,6 +379,24 @@ export default {
                 alert("error");
               }
             },
+        modalForget(){
+              if(this.activeForget == true){
+                this.activeForget = false;
+              }else if(this.activeForget == false){
+                this.activeForget = true;
+              }else{
+                alert("error");
+              }
+            },
+        cek(){
+            if(this.dataPassword.password_baru != '' && this.dataPassword.password_konfirmasi != ''){
+                if(this.dataPassword.password_baru != this.dataPassword.password_konfirmasi){
+                    this.wrongPassword = true;
+                }else{
+                    this.wrongPassword = false;
+                }
+            }
+        },
         updateStudent(){
               let uri = '/api/siswa/update/'+this.$route.params.id;
               axios.patch(uri, this.dataStudent,{
@@ -341,31 +404,32 @@ export default {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                
+                alert(response.data.msg);
                 this.activeUpdate = false;
                 this.getStudent();
-                this.$toast.open({
-                    duration: 2000,
-                    message: response.data.msg,
-                    position: 'is-bottom',
-                    type: 'is-success',
-                    queue: false,
-                });
               }).catch(error => {
-                
+                alert("username sudah ada");
                 this.activeUpdate = false;
                 this.getStudent();
-                this.$toast.open({
-                    duration: 2000,
-                    message: 'Coba lagi',
-                    position: 'is-bottom',
-                    type: 'is-danger',
-                    queue: false,
                 });
+            },
+        updateStudentPassword(){
+              let uri = '/api/updatePassword/'+this.$route.params.id;
+              axios.patch(uri, this.dataPassword,{
+                  headers: {
+                      Authorization: 'Bearer ' + localStorage.getItem('token')
+                  }
+              }).then((response) => {
+                alert(response.data.msg);
+                this.activeForget = false;
+                this.getStudent();
+              }).catch(error => {
+                alert(error.data.msg);
+                this.activeForget = false;
+                this.getStudent();
                 });
             },
         getStudent(){
-            this.load = false;
             let uri = '/api/siswa/detail/'+this.$route.params.id;
             axios.get(uri,{
                   headers: {
@@ -375,8 +439,11 @@ export default {
                 this.dataStudent = response.data[0];
                 this.dataStudent.password_options =false;
                 if(this.dataStudent.detail!=null){
-                    this.picture_id = this.dataStudent.detail.foto;
-                    this.getPicture();
+                    if(this.dataStudent.detail.foto != null){
+                        this.picture_id = this.dataStudent.detail.foto;
+                        this.getPicture();
+                    }
+
                     }else{
                         this.dataStudent.detail = {
                             tanggal_lahir:'tidak tersedia',
@@ -384,6 +451,7 @@ export default {
                             alamat:'tidak tersedia',
                             angkatan:'',
                             kelas:'',
+                            foto: null,
                         };
                     }
             });
@@ -399,8 +467,21 @@ export default {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
                 }).then((response) => {
+                    console.log(response);
                     this.picture = response.data.filename;
                 });
+            },
+            deletePicture(){
+                let uri = '/api/deleteProfile/'+this.picture_id;
+                    axios.delete(uri,{
+                        headers: {
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
+                        }
+                    }).then((response) => {
+                        this.picture_id= null;
+                        this.picture = null;
+                        this.dataStudent.detail.foto = null;
+                    });
             },
     }
 }

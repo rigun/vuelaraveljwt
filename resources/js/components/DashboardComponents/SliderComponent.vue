@@ -1,6 +1,6 @@
 <template id="admin-list">
 <div class="contentlist">
-<div class="flex-container m-b-35">
+<div class="flex-container">
 
       <div class="columns m-t-10">
         <div class="column">
@@ -24,10 +24,13 @@
                                     :options="dropzoneOptions1"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
+                                    <h3 style="text-align:center">Slide 1</h3>
                          </div>
                          <div class="column is-one-third" v-else>
                                <img :src="'/images/upload/'+dataSlider.slider1" />
-                            <button class="button button-primary" @click="deletePicture(dataFoto.id1,dataSlider.slider1)">Hapus Foto </button>
+                            <button class="button button-primary is-danger" @click="deletePicture(dataFoto.id1,dataSlider.slider1)">Hapus Foto </button>
+                            <button class="button button-primary is-info" @click="copyToClipboard(dataSlider.slider1)">Copy link</button>
+
                          </div>
 
 
@@ -40,10 +43,14 @@
                                     :options="dropzoneOptions2"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
+                                    <h3 style="text-align:center">Slide 2</h3>
+
                          </div>
                          <div class="column is-one-third" v-else>
                                <img :src="'/images/upload/'+dataSlider.slider2" />
-                            <button class="button button-primary" @click="deletePicture(dataFoto.id2,dataSlider.slider2)">Hapus Foto </button>
+                            <button class="button button-primary is-danger" @click="deletePicture(dataFoto.id2,dataSlider.slider2)">Hapus Foto </button>
+                            <button class="button button-primary is-info" @click="copyToClipboard(dataSlider.slider2)">Copy link</button>
+
                          </div>
 
 
@@ -56,10 +63,14 @@
                                     :options="dropzoneOptions3"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
+                                    <h3 style="text-align:center">Slide 3</h3>
+
                          </div>
                         <div class="column is-one-third" v-else>
                                <img :src="'/images/upload/'+dataSlider.slider3" />
-                            <button class="button button-primary" @click="deletePicture(dataFoto.id3,dataSlider.slider3)">Hapus Foto </button>
+                            <button class="button button-primary is-danger" @click="deletePicture(dataFoto.id3,dataSlider.slider3)">Hapus Foto </button>
+                            <button class="button button-primary is-info" @click="copyToClipboard(dataSlider.slider3)">Copy link</button>
+
                          </div>
 
                          <div class="column is-one-third" v-if="dataSlider.slider4 == ''">
@@ -71,10 +82,14 @@
                                     :options="dropzoneOptions4"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
+                                    <h3 style="text-align:center">Slide 4</h3>
+
                          </div>
                          <div class="column is-one-third" v-else>
                                <img :src="'/images/upload/'+dataSlider.slider4" />
-                            <button class="button button-primary" @click="deletePicture(dataFoto.id4,dataSlider.slider4)">Hapus Foto </button>
+                            <button class="button button-primary is-danger" @click="deletePicture(dataFoto.id4,dataSlider.slider4)">Hapus Foto </button>
+                            <button class="button button-primary is-info" @click="copyToClipboard(dataSlider.slider4)">Copy link</button>
+
                          </div>
 
                          <div class="column is-one-third" v-if="dataSlider.slider5 == ''">
@@ -86,10 +101,14 @@
                                     :options="dropzoneOptions5"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
+                                    <h3 style="text-align:center">Slide 5</h3>
+
                          </div>
                         <div class="column is-one-third" v-else>
                                <img :src="'/images/upload/'+dataSlider.slider5" />
-                            <button class="button button-primary" @click="deletePicture(dataFoto.id5,dataSlider.slider5)">Hapus Foto </button>
+                            <button class="button button-primary is-danger" @click="deletePicture(dataFoto.id5,dataSlider.slider5)">Hapus Foto </button>
+                            <button class="button button-primary is-info" @click="copyToClipboard(dataSlider.slider5)">Copy link</button>
+
                          </div>
 
                          <div class="column is-one-third" v-if="dataSlider.slider6 == ''">
@@ -101,10 +120,14 @@
                                     :options="dropzoneOptions6"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
+                                    <h3 style="text-align:center">Slide 6</h3>
+
                          </div>
                         <div class="column is-one-third" v-else>
                                <img :src="'/images/upload/'+dataSlider.slider6" />
-                            <button class="button button-primary" @click="deletePicture(dataFoto.id6,dataSlider.slider6)">Hapus Foto </button>
+                            <button class="button button-primary is-danger" @click="deletePicture(dataFoto.id6,dataSlider.slider6)">Hapus Foto </button>
+                            <button class="button button-primary is-info" @click="copyToClipboard(dataSlider.slider6)">Copy link</button>
+
                          </div>
 
                          <div class="column is-one-third" v-if="dataSlider.slider7 == ''">
@@ -116,10 +139,14 @@
                                     :options="dropzoneOptions7"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
+                                    <h3 style="text-align:center">Slide 7</h3>
+
                          </div>
                         <div class="column is-one-third" v-else>
                                <img :src="'/images/upload/'+dataSlider.slider7" />
-                            <button class="button button-primary" @click="deletePicture(dataFoto.id7,dataSlider.slider7)">Hapus Foto </button>
+                            <button class="button button-primary is-danger" @click="deletePicture(dataFoto.id7,dataSlider.slider7)">Hapus Foto </button>
+                            <button class="button button-primary is-info" @click="copyToClipboard(dataSlider.slider7)">Copy link</button>
+
                          </div>
 
                          <div class="column is-one-third" v-if="dataSlider.slider8 == ''">
@@ -131,10 +158,14 @@
                                     :options="dropzoneOptions8"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
+                                    <h3 style="text-align:center">Slide 8</h3>
+
                          </div>
                          <div class="column is-one-third" v-else>
                                <img :src="'/images/upload/'+dataSlider.slider8" />
-                            <button class="button button-primary" @click="deletePicture(dataFoto.id8,dataSlider.slider8)">Hapus Foto </button>
+                            <button class="button button-primary is-danger" @click="deletePicture(dataFoto.id8,dataSlider.slider8)">Hapus Foto </button>
+                            <button class="button button-primary is-info" @click="copyToClipboard(dataSlider.slider8)">Copy link</button>
+
                          </div>
 
                          <div class="column is-one-third" v-if="dataSlider.slider9 == ''">
@@ -146,10 +177,14 @@
                                     :options="dropzoneOptions9"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
+                                    <h3 style="text-align:center">Slide 9</h3>
+
                          </div>
                         <div class="column is-one-third" v-else>
                                <img :src="'/images/upload/'+dataSlider.slider9" />
-                            <button class="button button-primary" @click="deletePicture(dataFoto.id9,dataSlider.slider9)">Hapus Foto </button>
+                            <button class="button button-primary is-danger" @click="deletePicture(dataFoto.id9,dataSlider.slider9)">Hapus Foto </button>
+                            <button class="button button-primary is-info" @click="copyToClipboard(dataSlider.slider9)">Copy link</button>
+
                          </div>
 
                          <div class="column is-one-third" v-if="dataSlider.slider10 == ''">
@@ -161,10 +196,14 @@
                                     :options="dropzoneOptions10"
                                     :duplicateCheck="true">
                                     </vue-dropzone>
+                                    <h3 style="text-align:center">Slide 10</h3>
+
                          </div>
                         <div class="column is-one-third" v-else>
                                <img :src="'/images/upload/'+dataSlider.slider10" />
-                            <button class="button button-primary" @click="deletePicture(dataFoto.id10,dataSlider.slider10)">Hapus Foto </button>
+                            <button class="button button-primary is-danger" @click="deletePicture(dataFoto.id10,dataSlider.slider10)">Hapus Foto </button>
+                            <button class="button button-primary is-info" @click="copyToClipboard(dataSlider.slider10)">Copy link</button>
+
                          </div>
 
                          
@@ -323,9 +362,40 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
             }
         },
         created(){
+            if(localStorage.getItem('roles') == 'user'){
+                this.$router.push({ name: 'DashboardContent' });
+            }else{
             this.getPicture();
+            }
         },
         methods:{
+            copyToClipboard: function(val) {
+                let temp = document.createElement('textarea');
+                temp.value = '/images/upload/'+val;
+                document.body.appendChild(temp);
+                temp.select();
+                try {
+                    let success = document.execCommand('copy');
+                    let type = (success ? 'success' : 'warning');
+                    let msg = (success ? `Copied to Clipboard: ${val}` : "Copy failed, your browser may not support this feature");
+                    this.$emit('copied', type, msg, val);
+                    this.$toast.open({
+                        duration: 5000,
+                        message: 'Berhasil di copy',
+                        position: 'is-bottom',
+                        type: 'is-success'
+                    })
+                } catch (err) {
+                    this.$emit('copy-failed', val);
+                    this.$toast.open({
+                        duration: 5000,
+                        message: 'Coba lagi',
+                        position: 'is-bottom',
+                        type: 'is-danger'
+                    })
+                }
+                document.body.removeChild(temp);
+            },
             vmounted(){
                 
             },
@@ -397,12 +467,24 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                 });
             },
             deletePicture(id,name){
+                this.$toast.open({
+                        duration: 500,
+                        message: 'Menghapus',
+                        position: 'is-bottom',
+                        type: 'is-info',
+                        queue: false,
+                    })
                 let uri = '/api/images-delete/'+id;
                     axios.delete(uri,{
                         headers: {
                             Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     }).then((response) => {
+                        this.$toast.open({
+                            message: 'Berhasil di hapus',
+                            position: 'is-bottom',
+                            type: 'is-success'
+                        })
                         if(name.slice(0,7) == 'slider1'){
                             this.dataSlider.slider1 = '';
                             this.dataFoto.id1 = '';
@@ -435,6 +517,12 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                             this.dataFoto.id10 = '';
                         }
                         this.getPicture();
+                    }).catch(error=>{
+                        this.$toast.open({
+                            message: 'Silahkan coba lagi',
+                            position: 'is-bottom',
+                            type: 'is-danger'
+                        })
                     });
             },
             vsuccess(file, response) {

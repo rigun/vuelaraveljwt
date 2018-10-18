@@ -1,19 +1,20 @@
 <template id="students-list">
 <div class="contentlist">
-<div class="flex-container m-b-35">
+<div class="flex-container">
       <div class="columns m-t-10">
         <div class="column">
-          <h1 class="title">Karya Siswa</h1>
+          <h1 class="title" v-if="roles != 'user'" >Karya Siswa</h1>
+          <h1 class="title" v-else>Karya Saya</h1>
         </div>
         <div class="column">
-          <router-link v-bind:to="{ name: 'KaryaSiswaPost', params: { detail: 'create', id:'new' }}" class="button is-primary is-pulled-right"><i class="fa fa-user-plus m-r-10"></i> Tambahkan Karya Siswa</router-link>
+          <router-link v-bind:to="{ name: 'KaryaSiswaPost', params: { detail: 'create', id:'new' }}" class="button is-primary is-pulled-right"><i class="fa fa-user-plus m-r-10"></i> <span v-if="roles == 'user'">Tambahkan Karya Saya</span><span v-if="roles != 'user'">Tambahkan Karya Siswa</span></router-link>
         </div>
       </div>
       <div class="columns m-t-10">
         <div class="column">
             <div class="field has-addons">
                 <p class="control">
-                    <input class="input" type="text" placeholder="Cari. . ">
+                    <input class="input" type="text"  v-model="search"  placeholder="Cari Judul. . ">
                 </p>
                 <p class="control">
                     <a class="button is-static">
@@ -22,6 +23,27 @@
                 </p>
             </div>
         
+        </div>
+        
+        <div class="column">
+            <div class="field is-horizontal is-pulled-right">
+              <div class="field-label is-normal">
+                <label class="label">Filter</label>
+              </div>
+              <div class="field-body">
+                <div class="field is-narrow">
+                  <div class="control">
+                    <div class="select is-fullwidth">
+                      <select  v-model="filter">
+                        <option>Semua</option>
+                        <option>Draft</option>
+                        <option>Publish</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
         
       </div>
@@ -44,26 +66,27 @@
             <tbody>
                   
                 <tr v-for="(karya, index) in filterCreation" :key="karya.id">
-                  <th>{{ index + 1 }}</th>
+                  <th>{{ index + 1 + start }}</th>
                   <td>{{ karya.title }}</td>
                   <td>{{ karya.user.name }}</td>
                   <td>http://127.0.0.1/blog/{{ karya.slug }}</td>
                   <td>{{ karya.created_at }}</td>
                   <td><span v-if="karya.status == 1">Publish</span><span v-if="karya.status == 0">Draft</span></td>
-                  <td>
+                  <td >
                       <router-link v-bind:to="{name: 'KaryaSiswaPost', params: {detail: 'update', id:karya.id}}"  class="button is-primary m-r-5"  >Detail</router-link>
-                      <a class="button is-danger" href="#" v-on:click.prevent="modalDelete();setIdDelete(karya)">Hapus</a></td>
+                      <a class="button is-danger" href="#"  v-on:click.prevent="modalDelete();setIdDelete(karya)">Hapus</a></td>
                 </tr>
             
             </tbody>
           </table>
           <div class="footer-table-pagination">
-            <span class="is-pulled-left">
-                
-            </span>
-            <span class="is-pulled-right">
-           
-            </span>
+            <vue-ads-pagination v-if="count!=0"
+                :page="0"
+                :itemsPerPage="100"
+                :total-items="count"
+                :max-visible-pages="3"
+                @page-change="pageChange"
+            />
         </div>  
         </div>
        
@@ -86,7 +109,7 @@
                 <p>Data Karya Siswa yang dihapus tidak dapat dikembalikan lagi, apakah anda yakin ingin menghapusnya ? </p>
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-warning">Hapus Data</button>
+            <button class="button is-warning" :class="{'is-loading' : load}" @click="updateLoad()">Hapus Data</button>
             <a class="button is-danger" v-on:click="modalDelete()" >Cancel</a>
           </footer>
           </form>
@@ -104,9 +127,16 @@
 }    
 </style>
 <script>
+import VueAdsPagination from 'vue-ads-pagination';
+
     export default {
+      components: {
+          VueAdsPagination,
+      },
         data(){
             return{
+              roles: localStorage.getItem('roles'),
+                search: '',
                 active: false,
                 activeDelete:false,
                 id:'',
@@ -132,20 +162,43 @@
                   },
                 karyas:[],
                 year:'',
+                 page: 0,
+                start: 0,
+                end: 0,
+                count: 0,
+                filter: 'Semua',
+                load: false,
+
             }
         },
         created: function() {
             this.getCreation();
         },
          methods: {
+           pageChange(page, start, end) {
+              this.page = page;
+              this.start = start;
+              this.end = end;
+          },
+          updateLoad(){
+            this.load = true;
+          },
             getCreation(){
-                  let uri = '/api/importantpost/Karya Siswa';
+               this.load = false;
+              
+                  if(localStorage.getItem('roles') == 'user'){
+                    var uri = '/api/importantpost/siswa/Karya Siswa';
+                  }else{
+                    var uri = '/api/importantpost/Karya Siswa';
+                  };
                   axios.get(uri,{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
+                console.log(response.data);
                       this.dataCreation = response.data;
+                      this.count = this.dataCreation.length;
                   }).catch(error => {
                       // console.log(error);
                   });
@@ -178,22 +231,45 @@
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                alert("Data Siswa berhasil dihapus");
                 this.activeDelete = false;
                 this.id = '';
                 this.getCreation();
+                    this.$toast.open({
+                  duration: 2000,
+                  message: 'Berhasil di hapus',
+                  position: 'is-bottom',
+                  type: 'is-success',
+                  queue: false,
+              })
               }).catch(error => {
-                alert("Mohon maaf, terjadi kesalahan, silahkan coba lagi.");
                 this.activeDelete = false;
                 this.id = '';
                 this.getCreation();
+                  this.$toast.open({
+                  duration: 2000,
+                  message: 'Coba lagi',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             }
          },
         computed: {
             filterCreation: function(){
                 if(this.dataCreation.length) {
-                    return this.dataCreation;
+                    return this.dataCreation.filter((row, index) => {
+                            if(this.search != '') return row.title.toLowerCase().includes(this.search.toLowerCase());
+                            if(this.filter != 'Semua'){
+                              if(this.filter == 'Publish'){
+                                if(row.status == 1) return true;
+                              }else if(this.filter == 'Draft'){
+                                if(row.status == 0) return true;
+                              }
+                            }else{
+                              if(index >= this.start && index < this.end) return true;
+                            }                           
+                          });
                 }
             }
         }

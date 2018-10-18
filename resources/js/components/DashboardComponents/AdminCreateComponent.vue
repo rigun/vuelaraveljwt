@@ -1,6 +1,6 @@
 <template id="admin-list">
 <div class="contentlist">
-<div class="flex-container m-b-35">
+<div class="flex-container">
       <div class="columns m-t-10">
         <div class="column">
           <h1 class="title">Manage Admin</h1>
@@ -13,7 +13,7 @@
         <div class="column">
             <div class="field has-addons">
                 <p class="control">
-                    <input class="input" type="text" placeholder="Cari. . ">
+                    <input class="input" type="text" v-model="search" placeholder="Cari. . " >
                 </p>
                 <p class="control">
                     <a class="button is-static">
@@ -42,7 +42,7 @@
             <tbody>
                   
                 <tr v-for="(admin, index) in filterAdmin " :key="admin.id">
-                  <th>{{ index + 1 }}</th>
+                  <th>{{ index + 1 + start}}</th>
                   <td>{{ admin.name }}</td>
                   <td>{{ admin.username }}</td>
                   <td>{{ admin.created_at }}</td>
@@ -52,12 +52,13 @@
             </tbody>
           </table>
           <div class="footer-table-pagination">
-            <span class="is-pulled-left">
-                
-            </span>
-            <span class="is-pulled-right">
-           
-            </span>
+            <vue-ads-pagination v-if="countAdmin!=0"
+                :page="0"
+                :itemsPerPage="100"
+                :total-items="countAdmin"
+                :max-visible-pages="3"
+                @page-change="pageChange"
+            />
         </div>  
         </div>
        
@@ -102,7 +103,7 @@
             </div> <!-- end of .columns for forms -->       
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-success">Buat Admin</button>
+            <button class="button is-success" :class="{'is-loading' : load}" @click="updateLoad()">Buat Admin</button>
 
             <a class="button is-danger" v-on:click="modalCreate" >Cancel</a>
           </footer>
@@ -152,7 +153,7 @@
             </div> <!-- end of .columns for forms -->       
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-success">Ubah Data</button>
+            <button class="button is-success"  :class="{'is-loading' : load}" @click="updateLoad()">Ubah Data</button>
 
             <a class="button is-danger" v-on:click="modalUpdate()" >Cancel</a>
           </footer>
@@ -174,7 +175,7 @@
                 <p>Admin yang dihapus tidak dapat dikembalikan lagi, apakah anda yakin ingin menghapusnya ? </p>
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-warning">Hapus Data</button>
+            <button class="button is-warning"  :class="{'is-loading' : load}" @click="updateLoad()">Hapus Data</button>
 
             <a class="button is-danger" v-on:click="modalDelete()" >Cancel</a>
           </footer>
@@ -186,9 +187,14 @@
 </template>
 
 <script>
+import VueAdsPagination from 'vue-ads-pagination';
     export default {
+       components: {
+          VueAdsPagination,
+      },
         data(){
             return{
+                search: '',
                 active: false,
                 activeUpdate: false,
                 activeDelete:false,
@@ -210,20 +216,40 @@
                   roles:2
                   },
                 admins:[],
+                page: 0,
+                start: 0,
+                end: 0,
+                countAdmin: 0,
+                load: false,
             }
         },
         created: function() {
+          if(localStorage.getItem('roles') == 'user'){
+                  this.$router.push({ name: 'DashboardContent' });
+          }else{
             this.getAdmin();
+          }
+            
         },
          methods: {
+           pageChange(page, start, end) {
+              this.page = page;
+              this.start = start;
+              this.end = end;
+          },
+          updateLoad(){
+            this.load = true;
+          },
             getAdmin(){
+              this.load = false;
                   let uri = '/api/admin';
                   axios.get(uri,{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                      this.admins = response.data.data;
+                      this.admins = response.data;
+                      this.countAdmin = this.admins.length;
                   }).catch(error => {
                       // console.log(error.response)
                   });
@@ -262,6 +288,7 @@
               this.dataAdmin = data;
             },
             createAdmin: function() {
+             
               let uri = '/api/admin/create';
               axios.post(uri, this.dataAdmin,{
                 headers: {
@@ -270,30 +297,61 @@
             }).then((response) => {
                 this.active = false;
                 this.dataAdmin = this.dataAdminNull;
-                this.getAdmin();
+                   this.getAdmin();
+                this.$toast.open({
+                    duration: 2000,
+                    message: 'Admin berhasil di tambahkan',
+                    position: 'is-bottom',
+                    type: 'is-success',
+                    queue: false,
+                });
               }).catch(error => {
                 alert(error);
                 this.active = false;
                 this.dataAdmin = this.dataAdminNull;
                 this.getAdmin();
+                this.$toast.open({
+                  duration: 2000,
+                  message: 'Terjadi Kesalahan, Silahkan coba lagi',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             },
             updateAdmin(){
+              
               let uri = '/api/admin/update/'+this.dataAdmin.id;
               axios.patch(uri, this.dataAdmin,{
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
             }).then((response) => {
-                alert(response.data.msg);
+               
                 this.activeUpdate = false;
                 this.dataAdmin = this.dataAdminNull;
                 this.getAdmin();
+
+                 this.$toast.open({
+                  duration: 2000,
+                  message: response.data.msg,
+                  position: 'is-bottom',
+                  type: 'is-success',
+                  queue: false,
+              })
               }).catch(error => {
-                alert("username sudah ada");
+              
                 this.activeUpdate = false;
                 this.dataAdmin = this.dataAdminNull;
                 this.getAdmin();
+
+                  this.$toast.open({
+                  duration: 2000,
+                  message: 'Coba lagi dengan username yang berbeda',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             },
             deleteAdmin(){
@@ -303,24 +361,43 @@
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
             }).then((response) => {
-                alert("Admin berhasil dihapus");
                 this.activeDelete = false;
                 this.id = '';
                 this.getAdmin();
+                
+                  this.$toast.open({
+                  duration: 2000,
+                  message: 'Berhasil di hapus',
+                  position: 'is-bottom',
+                  type: 'is-success',
+                  queue: false,
+              })
               }).catch(error => {
-                alert("username sudah ada");
                 this.activeDelete = false;
                 this.id = '';
                 this.getAdmin();
+                
+                  this.$toast.open({
+                  duration: 2000,
+                  message: 'Coba lagi',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             }
          },
         computed: {
             filterAdmin: function(){
                 if(this.admins.length) {
-                    return this.admins;
+                    return this.admins.filter((row, index) => {
+                            if(this.search != '') return row.name.toLowerCase().includes(this.search.toLowerCase());
+                            if(index >= this.start && index < this.end) return true;
+                          });
                 }
-            }
-        }
-    }
+            },
+            
+        },
+        
+}
 </script>

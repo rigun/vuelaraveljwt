@@ -17573,7 +17573,7 @@ label.panel-block:hover {
 }
 
 body {
-  background-color: #f5f5f5;
+  background-color: #f5f5f5 !important;
   min-height: 650px;
 }
 
@@ -17598,7 +17598,7 @@ body {
 }
 
 .box-login .login-body {
-  min-height: 350px;
+  min-height: 240px;
   padding: 20px;
   border-radius: 3px;
   background-color: #ffffff;
@@ -17621,6 +17621,70 @@ body {
   color: white;
   background-image: -webkit-gradient(linear, right top, left top, from(#02bcc3), to(#04969f));
   background-image: linear-gradient(to left, #02bcc3, #04969f);
+}
+
+.footer-table-pagination .flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.footer-table-pagination .flex .leading-loose {
+  width: 50%;
+  float: left;
+}
+
+.footer-table-pagination .flex .justify-end {
+  width: 50%;
+  -ms-flex-pack: end !important;
+  -webkit-box-pack: end !important;
+          justify-content: flex-end !important;
+}
+
+.footer-table-pagination .flex .justify-end button {
+  border-radius: 4px;
+  border: solid 1px #d9d9d9;
+  background-color: #ffffff;
+  color: #172029;
+  -webkit-transition: 0.5ms;
+  transition: 0.5ms;
+}
+
+.footer-table-pagination .flex .justify-end .bg-teal-dark {
+  background-color: #172029;
+}
+
+.dashboardCardPrimary {
+  background-color: #61ace9;
+  border-color: transparent;
+  color: #fff;
+  text-align: center;
+}
+
+.dashboardCardPrimary .center {
+  font-size: 50px;
+}
+
+.dashboardCardWarning {
+  background-color: #ffec3d;
+  border-color: transparent;
+  color: black;
+  text-align: center;
+}
+
+.dashboardCardWarning .center {
+  font-size: 50px;
+}
+
+.dashboardCardSuccess {
+  background-color: #35b76c;
+  border-color: transparent;
+  color: #fff;
+  text-align: center;
+}
+
+.dashboardCardSuccess .center {
+  font-size: 50px;
 }
 
 .m-t-5 {
@@ -18028,6 +18092,12 @@ body {
   border-right: solid #d91515;
 }
 
+.side-menu .side-body .router-link-exact-active {
+  border-radius: 0px;
+  background-color: #090d12;
+  border-right: solid #d91515;
+}
+
 .side-menu .side-body .menu-list {
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -18091,8 +18161,8 @@ body {
   width: 100%;
 }
 
-#app .dashboardContent-change {
-  width: calc(100% - 80px);
+.dashboardContent-change .dashboardContent {
+  width: calc(100% - 80px) !important;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }

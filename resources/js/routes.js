@@ -15,6 +15,7 @@ const DashboardContent = Vue.component('DashboardContent', require('./components
 const ListAdmin = Vue.component('ListAdmin', require('./components/DashboardComponents/AdminCreateComponent.vue'))
 const ListStudents = Vue.component('ListStudents', require('./components/DashboardComponents/StudentsCreateComponent.vue'))
 const DetailStudents = Vue.component('DetailStudents', require('./components/DashboardComponents/StudentsDetailComponent.vue'))
+const StudentsProfile = Vue.component('StudentsProfile', require('./components/DashboardComponents/StudentsProfileComponent.vue'))
 const PostComponent = Vue.component('PostComponent', require('./components/DashboardComponents/PostComponent.vue'))
 const SliderComponent = Vue.component('SliderComponent', require('./components/DashboardComponents/SliderComponent.vue'))
 const KaryaSiswaList = Vue.component('KaryaSiswaList', require('./components/DashboardComponents/KaryaSiswaListComponent.vue'))
@@ -95,6 +96,11 @@ const routes = [
                 name: 'PrestasiPost',
                 path: 'prestasi/detail/:detail/:id',
                 component: PrestasiPost
+            },
+            {
+                name: 'StudentsProfile',
+                path: 'profile/:id',
+                component: StudentsProfile
             }
           
              

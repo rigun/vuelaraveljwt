@@ -49,7 +49,7 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
             'kategori_name' => 'required',
-            'picture' => 'required'
+            'picture_id' => 'required'
           ]);
           
         $post = new Post;
@@ -58,7 +58,7 @@ class PostController extends Controller
         $post->content = Purifier::clean($request->content);
         $post->published_at = date("Y-m-d h:i:s");
         $post->author_id = JWTAuth::parseToken()->authenticate()->id;
-        $post->picture = $request->picture;
+        $post->picture_id = $request->picture_id;
         $post->save();
 
         $category = Kategori::where('name', $request->kategori_name)->first();
@@ -104,7 +104,7 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
             'kategori_name' => 'required',
-            'picture' => 'required'
+            'picture_id' => 'required'
 
         ]);
         
@@ -115,7 +115,7 @@ class PostController extends Controller
         $post->content = Purifier::clean($request->content);
         $post->published_at = date("Y-m-d h:i:s");
         $post->author_id = JWTAuth::parseToken()->authenticate()->id;
-        $post->picture = $request->picture;
+        $post->picture_id = $request->picture_id;
         $post->save();
 
         
@@ -142,6 +142,13 @@ class PostController extends Controller
         $user = User::whereRoleIs('user')->count();
         $postDraf = Post::where('status','0')->count();
         $postPublish = Post::where('status','1')->count();
+        return json_encode(['user'=>$user,'postDraf'=>$postDraf,'postPublish'=>$postPublish]);
+    }
+    public function getCountPost(){
+        $author_id = JWTAuth::parseToken()->authenticate()->id;
+        $user = $author_id;
+        $postDraf = Post::where([['author_id','=',$author_id],['status','=','0']])->count();
+        $postPublish = Post::where([['author_id','=',$author_id],['status','=','1']])->count();
         return json_encode(['user'=>$user,'postDraf'=>$postDraf,'postPublish'=>$postPublish]);
     }
 }

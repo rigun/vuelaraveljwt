@@ -44,20 +44,7 @@
 
     <div class="button-wrapper wrapper">
       <button class="save-slug-button button is-small" v-show="!isEditing" @click.prevent="editSlug">{{slug.length < 1 ? 'Create New Slug' : 'Edit'}}</button>
-      <b-dropdown hoverable v-show="!isEditing && slug.length > 1">
-        <button class="save-slug-button button is-small" slot="trigger">
-          <span>Actions</span>
-          <b-icon icon="arrow_drop_down"></b-icon>
-        </button>
-        <b-dropdown-item @click="copyToClipboard(fullUrl)" style="font-size: 0.8em;"><b-icon icon="content_copy" size="is-small"></b-icon> Copy Full Url</b-dropdown-item>
-        <b-dropdown-item @click="copyToClipboard(slug)" style="font-size: 0.8em;"><b-icon icon="content_copy" size="is-small"></b-icon> Copy Slug</b-dropdown-item>
-        <b-dropdown-item has-link style="font-size: 0.8em;">
-          <a :href="fullUrl" target="_blank">
-            <b-icon icon="link" size="is-small"></b-icon>
-            Visit Url
-          </a>
-        </b-dropdown-item>
-      </b-dropdown>
+     
       <!-- <button class="save-slug-button button is-small" v-show="!isEditing && slug.length > 1" @click.prevent="copyUrl"><i class="fa fa-copy"></i><span class="m-l-5">Copy</span></button> -->
       <button class="save-slug-button button is-small" v-show="isEditing" @click.prevent="saveSlug">{{customSlug == slug ? 'Cancel' : 'Save'}}</button>
       <button class="save-slug-button button is-small" v-show="isEditing" @click.prevent="resetEditing">Reset</button>

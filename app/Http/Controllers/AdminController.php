@@ -19,12 +19,13 @@ class AdminController extends Controller
      */
     public function index()
     {
-      $users = User::whereRoleIs('administrator')->paginate(10);
+      $users = User::whereRoleIs('administrator')->get();
       return view('manage.admin.index')->withUsers($users);
     }
 
     public function apiIndex(){
-      return User::whereRoleIs('administrator')->paginate(10);
+      $user = User::whereRoleIs('administrator')->get();
+      return $user;
     }
     /**
      * Show the form for creating a new resource.

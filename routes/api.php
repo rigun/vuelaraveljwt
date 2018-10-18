@@ -32,9 +32,11 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::delete('/siswa/delete/{id}', 'UserController@destroy');
 
     Route::get('/importantpost/{kategori}', 'ImportantPostController@Index');
+    Route::get('/importantpost/siswa/{kategori}', 'ImportantPostController@IndexSiswa');
     Route::get('/importantpost/detail/{id}/{kategori}', 'ImportantPostController@show');
     Route::post('/importantpost/create/{kategori}','ImportantPostController@store');
     Route::post('/importantpost/update/{id}', 'ImportantPostController@update');
+    Route::post('/importantpost/update/siswa/{id}', 'ImportantPostController@updateSiswa');
     Route::delete('/importantpost/delete/{id}', 'ImportantPostController@destroy');
 
     Route::get('/posts/unique', 'PostController@apiCheckUnique');
@@ -45,6 +47,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/refresh', 'AuthController@refresh');
 
     Route::post('/images-save', 'UploadImagesController@store');
+    Route::post('/images-save/post', 'UploadImagesController@storePost');
     Route::post('/images-save/slider/{id}', 'UploadImagesController@storeSlide');
     Route::delete('/images-delete/{id}', 'UploadImagesController@destroy');
     Route::get('/images-show', 'UploadImagesController@index');
@@ -52,10 +55,17 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/images-show/slider/', 'UploadImagesController@showSlide');
 
     Route::get('/count', 'PostController@getCount');
+    Route::get('/countPost', 'PostController@getCountPost');
+    Route::patch('/updatePassword/{id}', 'UserController@updatePassword');
+    Route::patch('/firstLogin', 'UserController@firstLogin');
+    Route::post('/storeProfile', 'UploadImagesController@storeProfile');
+    Route::delete('/deleteProfile/{id}', 'UploadImagesController@destroyProfile');
 
 });
 
 Route::get('/images-show/slider/', 'UploadImagesController@showSlide');
+Route::get('/importantpost/detail/{kategori}', 'ImportantPostController@showAll');
+// Route::get('/importantpost/detail/{id}/{kategori}', 'ImportantPostController@show');
 
 // Route::get('/images-show', 'UploadImagesController@index');
 // Route::get('/karyaSiswa', 'KaryaSiswaController@Index');

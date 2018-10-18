@@ -7,7 +7,6 @@
 
 require('./bootstrap');
 window.Vue = require('vue');
-
 import Buefy from 'buefy';
 import router from './routes.js';
 import Editor from '@tinymce/tinymce-vue';
@@ -17,13 +16,11 @@ import JssorSlider from 'jssor-slider';
 
 window.Slug = require('slug');
 Slug.defaults.mode = 'rfc3986';
-
 window.VueRouter = require('vue-router').default;
 
 
 Vue.use(Buefy, VueRouter, axios, jQuery, JssorSlider, bootstrap);
 
-window.Vue = require('vue');
 
 const AppLayout = Vue.component('app-layout', require('./components/appLayout.vue'))
 const editor = Vue.component('editor', Editor)
@@ -35,6 +32,5 @@ new Vue(
         AppLayout,
         editor,
         slugWidget,
-
     )
 ).$mount('#mainLayout');

@@ -1,6 +1,6 @@
 <template id="students-list">
 <div class="contentlist">
-<div class="flex-container m-b-35">
+<div class="flex-container ">
       <div class="columns m-t-10">
         <div class="column">
           <h1 class="title">Manage Siswa</h1>
@@ -13,7 +13,7 @@
         <div class="column">
             <div class="field has-addons">
                 <p class="control">
-                    <input class="input" type="text" placeholder="Cari. . ">
+                    <input class="input" type="text"  v-model="search" placeholder="Cari Nama. . ">
                 </p>
                 <p class="control">
                     <a class="button is-static">
@@ -42,7 +42,7 @@
             <tbody>
                   
                 <tr v-for="(siswa, index) in filterStudent" :key="siswa.id">
-                  <th>{{ index + 1 }}</th>
+                  <th>{{ index + 1 +start }}</th>
                   <td>{{ siswa.name }}</td>
                   <td>{{ siswa.username }}</td>
                   <td>{{ siswa.created_at }}</td>
@@ -54,12 +54,13 @@
             </tbody>
           </table>
           <div class="footer-table-pagination">
-            <span class="is-pulled-left">
-                
-            </span>
-            <span class="is-pulled-right">
-           
-            </span>
+            <vue-ads-pagination v-if="count!=0"
+                :page="0"
+                :itemsPerPage="100"
+                :total-items="count"
+                :max-visible-pages="3"
+                @page-change="pageChange"
+            />
         </div>  
         </div>
        
@@ -147,7 +148,7 @@
             </div> <!-- end of .columns for forms -->       
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-success">Buat Student</button>
+            <button class="button is-success" :class="{'is-loading' : load}" @click="updateLoad()">Buat Student</button>
 
             <a class="button is-danger" v-on:click="modalCreate" >Cancel</a>
           </footer>
@@ -171,7 +172,7 @@
                 <p>Data siswa yang dihapus tidak dapat dikembalikan lagi, apakah anda yakin ingin menghapusnya ? </p>
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-warning">Hapus Data</button>
+            <button class="button is-warning" :class="{'is-loading' : load}" @click="updateLoad()">Hapus Data</button>
             <a class="button is-danger" v-on:click="modalDelete()" >Cancel</a>
           </footer>
           </form>
@@ -189,9 +190,15 @@
 }    
 </style>
 <script>
+import VueAdsPagination from 'vue-ads-pagination';
+
     export default {
+      components: {
+          VueAdsPagination,
+      },
         data(){
             return{
+                search: '',
                 active: false,
                 activeDelete:false,
                 id:'',
@@ -218,13 +225,32 @@
                   },
                 siswas:[],
                 year:'',
+                page: 0,
+                start: 0,
+                end: 0,
+                count: 0,
+                load: false,
+
             }
         },
         created: function() {
+          if(localStorage.getItem('roles') == 'user'){
+                this.$router.push({ name: 'DashboardContent' });
+            }else{
             this.getThisYear();
             this.getStudent();
+
+            }
         },
          methods: {
+          pageChange(page, start, end) {
+              this.page = page;
+              this.start = start;
+              this.end = end;
+          },
+                    updateLoad(){
+            this.load = true;
+          },
             getStudent(){
                   let uri = '/api/siswa';
                   axios.get(uri,{
@@ -232,7 +258,8 @@
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                      this.siswas = response.data.data;
+                      this.siswas = response.data;
+                      this.count = this.siswas.length;
                   }).catch(error => {
                       // console.log(error.response)
                   });
@@ -271,11 +298,24 @@
                 this.active = false;
                 this.dataStudent = this.dataStudentNull;
                 this.getStudent();
+                this.$toast.open({
+                    duration: 2000,
+                    message: 'Siswa berhasil di tambahkan',
+                    position: 'is-bottom',
+                    type: 'is-success',
+                    queue: false,
+                });
               }).catch(error => {
-                alert("username sudah ada");
                 this.active = false;
                 this.dataStudent = this.dataStudentNull;
                 this.getStudent();
+                this.$toast.open({
+                  duration: 2000,
+                  message: 'Terjadi Kesalahan, Silahkan coba lagi',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             },
             deleteStudent(){
@@ -285,22 +325,37 @@
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                alert("Data Siswa berhasil dihapus");
                 this.activeDelete = false;
                 this.id = '';
                 this.getStudent();
+                 this.$toast.open({
+                  duration: 2000,
+                  message: 'Berhasil di hapus',
+                  position: 'is-bottom',
+                  type: 'is-success',
+                  queue: false,
+              })
               }).catch(error => {
-                alert("Mohon maaf, terjadi kesalahan, silahkan coba lagi.");
                 this.activeDelete = false;
                 this.id = '';
                 this.getStudent();
+                this.$toast.open({
+                  duration: 2000,
+                  message: 'Coba lagi',
+                  position: 'is-bottom',
+                  type: 'is-danger',
+                  queue: false,
+              })
                 });
             }
          },
         computed: {
             filterStudent: function(){
                 if(this.siswas.length) {
-                    return this.siswas;
+                    return this.siswas.filter((row, index) => {
+                            if(this.search != '') return row.name.toLowerCase().includes(this.search.toLowerCase());                                            
+                        if(index >= this.start && index < this.end) return true;
+                      });
                 }
             }
         }
