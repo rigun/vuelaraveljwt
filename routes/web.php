@@ -47,3 +47,17 @@ Route::group(['prefix' => 'dashboard'],function(){
     Route::get('/prestasi/detail/create/{id}',function () {return view('app');});
     Route::get('/prestasi/detail/update/{id}',function () {return view('app');});
 });
+
+Route::get('/blog/Pengumuman',function () {return view('app');});
+    Route::get('/blog/Karya Siswa',function () {return view('app');});
+    Route::get('/blog/Kerjasama',function () {return view('app');});
+    Route::get('/blog/Fasilitas',function () {return view('app');});
+    Route::get('/blog/Mata Pelajaran',function () {return view('app');});
+    Route::get('/blog/Jadwal',function () {return view('app');});
+    Route::get('/blog/Kurikulum',function () {return view('app');});
+    Route::get('/blog/Peraturan Akademik',function () {return view('app');});
+    Route::get('/blog/Ekstrakurikuler',function () {return view('app');});
+    Route::get('/blog/Prestasi',function () {return view('app');});
+    Route::get('/blog/Sejarah',function () {return view('app');});
+    Route::get('/blog/Struktur Organisasi',function () {return view('app');});
+    Route::get('/blog/PPDB',function () {return view('app');});

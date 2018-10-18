@@ -25,6 +25,9 @@ const PengumumanPost = Vue.component('PengumumanPost', require('./components/Das
 const PrestasiList = Vue.component('PrestasiList', require('./components/DashboardComponents/PrestasiListComponent.vue'))
 const PrestasiPost = Vue.component('PrestasiPost', require('./components/DashboardComponents/PrestasiPostComponent.vue'))
 
+const LandingComponent = Vue.component('LandingComponent', require('./components/HomeComponents/LandingPage.vue'))
+const PageView = Vue.component('PageView', require('./components/HomeComponents/PageView.vue'))
+
 
 const routes = [
     {
@@ -110,6 +113,18 @@ const routes = [
         name: 'HomeLayout',
         path: '/',
         component: HomeLayout,
+        children: [
+           {
+              name: 'LandingComponent',
+              path: '',
+              component: LandingComponent
+            },
+            {
+                name: 'PageView',
+                path: 'blog/:kategori',
+                component: PageView,
+              },
+        ]
       },
     {
         name: 'LoginLayout',

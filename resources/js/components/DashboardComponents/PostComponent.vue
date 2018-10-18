@@ -20,10 +20,16 @@
                             <p class="control">
                                 <input type="text" class="input" v-model="title">
                             </p>
-                            <p class="control">
-                                <slug-widget url="/" subdirectory="blog" :title="title" @copied="slugCopied" @slug-changed="updateSlug"></slug-widget>
-                                <input type="hidden" v-model="slug" name="slug" />
-                            </p>
+                            <div class="control">
+    
+                                <div class="icon-wrapper wrapper">
+                                    <i :class="icon"></i>
+                                </div>
+                                <div class="url-wrapper wrapper">
+                                <span class="root-url">https://127.0.0.1/blog</span>
+                                <span class="subdirectory-url">/{{$route.params.kategori}}</span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="field">
@@ -119,7 +125,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                 },
                 content:'',
                 title: '',
-                slug: '',
+                slug: $route.params.kategori,
                 created_at: '',
                 id:'',
                 picture: '',

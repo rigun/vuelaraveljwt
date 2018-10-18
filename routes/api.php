@@ -65,12 +65,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
 Route::get('/images-show/slider/', 'UploadImagesController@showSlide');
 Route::get('/importantpost/detail/{kategori}', 'ImportantPostController@showAll');
-// Route::get('/importantpost/detail/{id}/{kategori}', 'ImportantPostController@show');
+Route::get('/posts/detail/{id}', 'PostController@show');
 
-// Route::get('/images-show', 'UploadImagesController@index');
-// Route::get('/karyaSiswa', 'KaryaSiswaController@Index');
-// Route::get('/siswa', 'UserController@apiIndex');
-// Route::get('/count', 'PostController@getCount');
 
 Route::group([
 
