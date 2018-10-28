@@ -30,8 +30,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/siswa/create','UserController@store');
     Route::patch('/siswa/update/{id}', 'UserController@update');
     Route::delete('/siswa/delete/{id}', 'UserController@destroy');
+    Route::post('/uploadExcel', 'UserController@uploadExcel');
 
-    Route::get('/importantpost/{kategori}', 'ImportantPostController@Index');
     Route::get('/importantpost/siswa/{kategori}', 'ImportantPostController@IndexSiswa');
     Route::get('/importantpost/detail/{id}/{kategori}', 'ImportantPostController@show');
     Route::post('/importantpost/create/{kategori}','ImportantPostController@store');
@@ -51,7 +51,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/images-save/slider/{id}', 'UploadImagesController@storeSlide');
     Route::delete('/images-delete/{id}', 'UploadImagesController@destroy');
     Route::get('/images-show', 'UploadImagesController@index');
-    Route::get('/images-detail/{id}', 'UploadImagesController@show');
     Route::get('/images-show/slider/', 'UploadImagesController@showSlide');
 
     Route::get('/count', 'PostController@getCount');
@@ -64,8 +63,13 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 });
 
 Route::get('/images-show/slider/', 'UploadImagesController@showSlide');
+Route::get('/importantpost/{kategori}', 'ImportantPostController@Index');
+Route::get('/landingPagePost/{kategori}', 'ImportantPostController@landingPage');
 Route::get('/importantpost/detail/{kategori}', 'ImportantPostController@showAll');
 Route::get('/posts/detail/{id}', 'PostController@show');
+Route::get('/blog/{slug}', 'ImportantPostController@blog');
+Route::get('/images-detail/{id}', 'UploadImagesController@show');
+
 
 
 Route::group([

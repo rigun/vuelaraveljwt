@@ -7,6 +7,11 @@
         </div>
         <div class="column" style="height: 60px;">
           <button class="button is-success is-pulled-right" v-on:click="modalCreate"><i class="fa fa-user-plus m-r-10"></i> Tambahkan Data Siswa</button>
+      <div class="uploadbutton">
+            <input class="inputFile" type="file" name="file" ref="file" v-on:change="handleFileUpload()" style="z-index: 100"/>
+            <button class="button is-success is-pulled-right" :class="{'is-loading' : load}" style=" width: 144px; z-index: 0"><i class="fa fa-user-plus m-r-10"></i> Upload Excel</button>
+      </div>
+          
         </div>
       </div>
       <div class="columns m-t-10">
@@ -233,7 +238,7 @@ import VueAdsPagination from 'vue-ads-pagination';
 
             }
         },
-        created: function() {
+        mounted: function() {
           if(localStorage.getItem('roles') == 'user'){
                 this.$router.push({ name: 'DashboardContent' });
             }else{
@@ -243,6 +248,27 @@ import VueAdsPagination from 'vue-ads-pagination';
             }
         },
          methods: {
+           handleFileUpload(){
+             this.load = true;
+            let formData = new FormData();
+            formData.append('file',  this.$refs.file.files[0]);
+            axios.post( '/api/uploadExcel',
+                formData,
+                {
+                  headers: {
+                      'Content-Type': 'multipart/form-data',
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                  }
+                }
+              ).then((response) => {
+                console.log('SUCCESS!!');
+              })
+              .catch(error =>{
+                console.log('FAILURE!!');
+                this.getStudent();
+              });
+
+           },
           pageChange(page, start, end) {
               this.page = page;
               this.start = start;
@@ -252,6 +278,8 @@ import VueAdsPagination from 'vue-ads-pagination';
             this.load = true;
           },
             getStudent(){
+                this.load = false;
+
                   let uri = '/api/siswa';
                   axios.get(uri,{
                   headers: {
@@ -326,6 +354,7 @@ import VueAdsPagination from 'vue-ads-pagination';
                   }
               }).then((response) => {
                 this.activeDelete = false;
+                this.load = false;
                 this.id = '';
                 this.getStudent();
                  this.$toast.open({

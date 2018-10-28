@@ -12,14 +12,13 @@ import router from './routes.js';
 import Editor from '@tinymce/tinymce-vue';
 import bootstrap from 'bootstrap';
 import jQuery from 'jquery';
-import JssorSlider from 'jssor-slider';
 
 window.Slug = require('slug');
 Slug.defaults.mode = 'rfc3986';
 window.VueRouter = require('vue-router').default;
 
 
-Vue.use(Buefy, VueRouter, axios, jQuery, JssorSlider, bootstrap);
+Vue.use(Buefy, VueRouter, axios, jQuery, bootstrap);
 
 
 const AppLayout = Vue.component('app-layout', require('./components/appLayout.vue'))

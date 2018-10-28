@@ -27,6 +27,7 @@ const PrestasiPost = Vue.component('PrestasiPost', require('./components/Dashboa
 
 const LandingComponent = Vue.component('LandingComponent', require('./components/HomeComponents/LandingPage.vue'))
 const PageView = Vue.component('PageView', require('./components/HomeComponents/PageView.vue'))
+const PageList = Vue.component('PageList', require('./components/HomeComponents/PageList.vue'))
 
 
 const routes = [
@@ -120,9 +121,19 @@ const routes = [
               component: LandingComponent
             },
             {
-                name: 'PageView',
-                path: 'blog/:kategori',
+                name: 'PageViewBlog',
+                path: 'blog/:post',
                 component: PageView,
+              },
+              {
+                name: 'PageView',
+                path: ':kategori',
+                component: PageView,
+              },
+            {
+                name: 'PageList',
+                path: 'list/:kategori',
+                component: PageList,
               },
         ]
       },

@@ -129,10 +129,13 @@
           if (slug) {
             axios.get('/api/posts/unique', {
               params: {
-                api_token: vm.api_token,
                 slug: slug
-              }
-            }).then(function (response) {
+              },
+               headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            }
+             ).then(function (response) {
               if (response.data) {
                 vm.slug = slug;
                 vm.$emit('slug-changed', slug)

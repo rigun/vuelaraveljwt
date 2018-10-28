@@ -54,8 +54,10 @@
             <aside class="menu">
                 <div id="side-header" class="side-header">
                     <div class="menu-label imgLabel">
+                        <router-link :to="{name: 'LandingComponent'}">
                         <img src="/images/Logo.png" alt="Logo" />
                         <h1>SMP N 4 Depok</h1>
+                        </router-link>
                     </div>
                 </div>
                 <hr class="separator-side">

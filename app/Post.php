@@ -13,4 +13,7 @@ class Post extends Model
     public function kategori(){
         return $this->belongsToMany('App\Kategori','kategori_post','post_id','kategori_id');
     }
+    public function foto(){
+        return $this->belongsTo('App\Upload','picture_id');
+    }
 }

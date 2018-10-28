@@ -1,86 +1,35 @@
 <template id="admin-list">
-<div class="contentlist">
-    <div class="flex-container ">
-        <div class="columns m-t-10">
-            <div class="column">
-                <h1 class="title">{{$route.params.kategori}}</h1>
-            </div>
-        </div>
-           
-<form v-on:submit.prevent ="createPost()">
-        <div class="columns m-t-10">
-            <div class="column">
-                <div class="card p-b-20">
-                    <div class="card-content">
-                     
-                        <div class="field">
-                            <label class="label">
-                                Judul
-                            </label>
-                            <p class="control">
-                                <input type="text" class="input" v-model="title">
-                            </p>
-                            <div class="control">
-    
-                                <div class="icon-wrapper wrapper">
-                                    <i :class="icon"></i>
+    <div id="pageviewContent" class="flex-container " style="margin-bottom: 10px;">
+        <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-content">
+                            <h1>{{header}}</h1>
+                            <h2>{{created_at}}</h2>
+                            <img :src="'../images/upload/'+picture" alt="">
+                            <div class="bodyContent">
+                                <div class="titleContent">
+                                    <h1>{{title}}</h1>
                                 </div>
-                                <div class="url-wrapper wrapper">
-                                <span class="root-url">https://127.0.0.1/blog</span>
-                                <span class="subdirectory-url">/{{$route.params.kategori}}</span>
+                                <div class="Content" v-html="content">
                                 </div>
                             </div>
                         </div>
-
-                        <div class="field">
-                            <label class="label">
-                                Post
-                            </label>
-                            <p class="control">
-                                <editor api-key="7qnvjsuap7tf4yk5t9v56511ndqs11rpv1autp3kye0xydzd" v-model="content" :init="{plugins: 'image imagetools', height: '500'}"></editor>
-                            </p>
-                        </div>
-                        
                     </div>
                 </div>
-            </div>
 
-            <div class="column is-one-quarter-desktop is-narrow-tablet">
-                <div class="card">
-             
-                    <div class="card-content">
-
-                        <div class="columns">
-                            <div class="column is-one-fifth" style="align-self:center">
-                               <i class="fa fa-archive" style="padding:0px;font-size: 21px;"></i>
-                            </div>
-                            <div class="column " v-if="created_at != ''">
-                                 <strong>Status</strong> Publish
-                                 <p>dibuat pada tanggal </p>
-                                 <p>{{created_at}}</p>
-                            </div>
-                            <div class="column " v-else>
-                                 <strong>Status</strong> Belum Dipublish
-                            </div>
+                <div class="column is-one-quarter">
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>Pengumuman</h3>
+                            <hr>
+                            <h3>Prestasi</h3>
+                            <hr>
+                            <h3>Karya Siswa</h3>
                         </div>
                     </div>
-                        <hr style="margin:0px;">
-                    <div class="card-content">
-                    <div class="columns">
-                            
-                            <div class="column">
-                                <button type="submit" class="button is-success is-fullwidth" :class="{'is-loading' : load}" @click="updateLoad()" > Publish</button>
-                            </div>
-                        </div>
-
-                    </div>
-
                 </div>
-            </div> <!-- end of .column.is-one-quarter -->
-
-        </div>
-</form>
-
+        
     </div>
 </div>
 </template>
@@ -90,20 +39,20 @@
         data(){
             
             return{
-                content:'',
+                content:'<p>Belum ada content</p>',
                 title: '',
-                slug: $route.params.kategori,
+                slug: '',
                 created_at: '',
                 id:'',
                 picture: '',
                 picture_id: '',
+                header: ''
             }
         },
         watch: {
             '$route' (to, from) {
-
                 if (from.params.kategori !== to.params.kategori) {
-                    this.content = '';
+                    this.content = '<p>Belum ada content</p>';
                     this.title = '';
                     this.slug = '';
                     this.created_at = '';
@@ -111,18 +60,26 @@
                     this.picture = '';
                     this.picture_id = ''
                     return this.getPost();
-
                 }
             }
         },
         created: function() {
                     this.getPost();
+                    if(this.$route.params.kategori != null){
+                        this.header = this.$route.params.kategori;
+                    }else{
+                        this.header = null;
+                    }
         },
          methods: {
          
             getPost(){
                 this.load=false;
-                let uri = '/api/posts/detail/'+this.$route.params.kategori;
+                if(this.$route.params.kategori != null){
+                    let uri = '/api/posts/detail/'+this.$route.params.kategori;
+                }else{
+                    let uri = '/api/posts/detail/'+this.$route.params.kategori;
+                }
                 axios.get(uri,{
                   headers: {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -135,6 +92,8 @@
                         this.slug = response.data[0].slug;
                         this.created_at = response.data[0].created_at;
                         this.picture_id = response.data[0].picture_id;
+                  console.log(this.created_at);
+
                         if(this.picture_id != null){
                             this.getPicture();
                         }

@@ -243,14 +243,17 @@ transition: 0.3s;
         margin: auto;
         margin-top: 30px;
         padding: 10px;
-        text-align: justify;
+        text-align: justify !important;
+        background: #fbfbfb;;
+        padding: 20px;
+        margin: 10px;
+        border-radius: 10px;
     }
     .box-article h4{
         color: #FCB316;
     }
     .box-article img{
         width: 100%;
-        border-bottom: solid 2px #FCB316;
     }
 .btn-box button{
     border-radius: 12px;
@@ -284,18 +287,17 @@ transition: 0.3s;
     background: #ffe500;
     color: black;
     text-align: center;
-
 }
 
 .bg-text{
-    background: url(../img/021.jpg);
+    background: url(../images/bgSmpn4Depok.jpg);
     background-repeat: no-repeat;
     background-size:cover;
 }
 .box-textVM{
     text-align: justify;
     width: 100%;
-    max-width: 300px;
+    max-width: 450px;
     margin: 40px auto;
     background-color: rgba(255, 255, 255, 0.5);
     border-bottom-left-radius: 15px;
@@ -317,4 +319,15 @@ transition: 0.3s;
     background-color: #BCBEC0;
     padding-top: 90px;
     padding-bottom: 20px;
+}
+
+
+.background-color-all{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #fbfbfb;
+    z-index: -1;
 }

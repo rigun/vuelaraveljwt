@@ -26,8 +26,8 @@
                                     <i :class="icon"></i>
                                 </div>
                                 <div class="url-wrapper wrapper">
-                                <span class="root-url">https://127.0.0.1/blog</span>
-                                <span class="subdirectory-url">/{{$route.params.kategori}}</span>
+                                <span class="root-url"></span>
+                                <span class="subdirectory-url">https://127.0.0.1/{{$route.params.kategori}}</span>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                     <div class="card-content">
                     <div class="columns">
                             
-                            <div class="column" v-if="picture == ''">
+                            <div class="column" v-if="picture == null">
                               <vue-dropzone ref="myVueDropzone" id="dropzone" 
                                         @vdropzone-success="vsuccess"
                                         @vdropzone-file-added="vfileAdded" 
@@ -125,10 +125,10 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                 },
                 content:'',
                 title: '',
-                slug: $route.params.kategori,
+                slug: this.$route.params.kategori,
                 created_at: '',
                 id:'',
-                picture: '',
+                picture: null,
                 picture_id: '',
                 load: false,
                 loadPicture:false

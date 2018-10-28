@@ -271,3 +271,11 @@
 .modal{
     z-index: 2000;
 }
+.imgLabel{
+    a{
+        width: 100%;
+        text-align: left;
+        display: flex;
+        text-decoration: none;
+    }
+}

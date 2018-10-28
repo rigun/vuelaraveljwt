@@ -176,6 +176,7 @@ return [
         Mews\Purifier\PurifierServiceProvider::class,
         Laratrust\LaratrustServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -227,6 +228,7 @@ return [
         'Laratrust'   => Laratrust\LaratrustFacade::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

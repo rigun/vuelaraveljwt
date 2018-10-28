@@ -25,6 +25,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/homeslider.js') }}"></script>
     <script src="{{ asset('js/style.js') }}"></script>
+    <script src="{{ asset('js/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/homestyle.js') }}"></script>
     <script src="{{ asset('js/slick.js') }}"></script>
     <script src="{{ asset('js/headline.js') }}"></script>

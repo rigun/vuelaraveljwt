@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-
+use App\Imports\UsersImport;
 use App\Role;
 use App\UsersDetail;
 use DB;
 use Session;
 use Input;
-
+use File;
+use Excel;
 class UserController extends Controller
 {
     public function index()
@@ -219,9 +220,9 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         if($user->count()>0){
             $user->delete();
-            return response()->json(['statur'=>'success','msg'=>'Data siswa berhasil dihapus']);
+            return response()->json(['status'=>'success','msg'=>'Data siswa berhasil dihapus']);
         } else {
-            return response()->json(['statur'=>'error','msg'=>'Gagal menghapus data Siswa']);
+            return response()->json(['status'=>'error','msg'=>'Gagal menghapus data Siswa']);
         }
     }
 
@@ -248,5 +249,61 @@ class UserController extends Controller
             }
             $userdata = User::with(['detail','roles'])->where('id',$user->id)->first();
             return response()->json(compact('userdata'));
+    }
+
+    public function uploadExcel(Request $request){
+        //validate the xls file
+        $this->validate($request, array(
+            'file'      => 'required'
+        ));
+ 
+        if($request->hasFile('file')){
+            $extension = File::extension($request->file->getClientOriginalName());
+            if ($extension == "xlsx" || $extension == "xls" || $extension == "csv") {
+ 
+                $path = $request->file->getRealPath();
+                // $data = Excel::load($path, function($reader) {
+                // })->get();
+                $data = Excel::toCollection(new UsersImport, $request->file);
+                foreach($data as $key => $value){
+                    foreach($value as $value2){
+                        if($value2['tanggal'] < 10){
+                            $tanggal = '0'.$value2['tanggal'];
+                        }else{
+                            $tanggal = $value2['tanggal'];
+                        }
+                        if($value2['bulan'] < 10){
+                            $bulan = '0'.$value2['bulan'];
+                        }else{
+                            $bulan = $value2['bulan'];
+                        }
+                        $password = trim($tanggal.'/'.$bulan.'/'.$value2['tahun']);
+                
+                        $user = new User();
+                        $user->name = $value2['name'];
+                        $user->username = $value2['username'];
+                        $user->password = Hash::make($password);
+                        $user->save();
+    
+                        $detailUser = new UsersDetail();
+                        $detailUser->tanggal_lahir = $value2['tahun'].'-'.$bulan.'-'.$tanggal;
+                        $detailUser->tempat_lahir = $value2['tempat_lahir'];
+                        $detailUser->alamat = $value2['alamat'];
+                        $detailUser->kelas = $value2['kelas'];
+                        $detailUser->angkatan = $value2['angkatan'];
+                        $detailUser->user_id = $user->id;
+                        $detailUser->save();
+    
+                        if ($value2['roles']) {
+                            $user->syncRoles(explode(',', $value2['roles']));
+                        }
+                    }
+                    
+                }
+                return response()->json(['status'=>'success','msg'=> $user]);
+            }else {
+                return response()->json(['status'=>'error','msg'=>'Data siswa gagal ditambahkan']);
+            }
+        }
     }
 }

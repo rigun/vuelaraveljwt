@@ -32,7 +32,12 @@ class ImportantPostController extends Controller
     public function index($kategori)
     {
         $data = Kategori::where('name',$kategori)->first();
-        return $data->post()->with('user')->get();
+        return $data->post()->orderBy('id', 'desc')->with(['user','foto'])->get();
+    }
+    public function landingPage($kategori)
+    {
+        $data = Kategori::where('name',$kategori)->first();
+        return $data->post()->orderBy('published_at', 'desc')->where('status','1')->with(['user','foto'])->get();
     }
     public function IndexSiswa($kategori)
     {
@@ -206,5 +211,10 @@ class ImportantPostController extends Controller
     public function apiCheckUnique(Request $request)
     {
         return json_encode(!Post::where('slug', '=', $request->slug)->exists());
+    }
+
+    public function blog($slug)
+    {
+        return Post::where('slug', '=', $slug)->first();
     }
 }

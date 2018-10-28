@@ -48,16 +48,21 @@ Route::group(['prefix' => 'dashboard'],function(){
     Route::get('/prestasi/detail/update/{id}',function () {return view('app');});
 });
 
-Route::get('/blog/Pengumuman',function () {return view('app');});
-    Route::get('/blog/Karya Siswa',function () {return view('app');});
-    Route::get('/blog/Kerjasama',function () {return view('app');});
-    Route::get('/blog/Fasilitas',function () {return view('app');});
-    Route::get('/blog/Mata Pelajaran',function () {return view('app');});
-    Route::get('/blog/Jadwal',function () {return view('app');});
-    Route::get('/blog/Kurikulum',function () {return view('app');});
-    Route::get('/blog/Peraturan Akademik',function () {return view('app');});
-    Route::get('/blog/Ekstrakurikuler',function () {return view('app');});
-    Route::get('/blog/Prestasi',function () {return view('app');});
-    Route::get('/blog/Sejarah',function () {return view('app');});
-    Route::get('/blog/Struktur Organisasi',function () {return view('app');});
-    Route::get('/blog/PPDB',function () {return view('app');});
+    Route::get('/Pengumuman',function () {return view('app');});
+    Route::get('/Karya Siswa',function () {return view('app');});
+    Route::get('/Kerjasama',function () {return view('app');});
+    Route::get('/Fasilitas',function () {return view('app');});
+    Route::get('/Mata Pelajaran',function () {return view('app');});
+    Route::get('/Jadwal',function () {return view('app');});
+    Route::get('/Kurikulum',function () {return view('app');});
+    Route::get('/Peraturan Akademik',function () {return view('app');});
+    Route::get('/Ekstrakurikuler',function () {return view('app');});
+    Route::get('/Prestasi',function () {return view('app');});
+    Route::get('/Sejarah',function () {return view('app');});
+    Route::get('/Struktur Organisasi',function () {return view('app');});
+    Route::get('/PPDB',function () {return view('app');});
+    Route::get('/blog/{post}',function () {return view('app');});
+
+    Route::get('/list/Karya Siswa',function () {return view('app');});
+    Route::get('/list/Prestasi',function () {return view('app');});
+    Route::get('/list/Pengumuman',function () {return view('app');});

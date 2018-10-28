@@ -3,10 +3,11 @@
     <nav class="navbar has-shadow is-dark">
         <div class="container">
             <div class="navbar-start">
-                <a href="#" class="navbar-item">
+                        <router-link :to="{name: 'LandingComponent'}"  class="navbar-item" style="text-align: left;display: flex;color: white;">
+               
                     <img src="/images/Logo.png" alt="Logo" />
                     <p class="m-l-15">SMP Negeri 4 Depok</p>
-                </a>
+                        </router-link>
 
             </div>
             
