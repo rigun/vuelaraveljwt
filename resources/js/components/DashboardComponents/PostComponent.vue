@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="url-wrapper wrapper">
                                 <span class="root-url"></span>
-                                <span class="subdirectory-url">https://127.0.0.1/{{$route.params.kategori}}</span>
+                                <span class="subdirectory-url">https://smpn4depok.sch.id/{{$route.params.kategori}}</span>
                                 </div>
                             </div>
                         </div>

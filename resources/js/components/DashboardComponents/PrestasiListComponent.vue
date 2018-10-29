@@ -67,7 +67,7 @@
                   <th>{{ index + 1 + start }}</th>
                   <td>{{ karya.title }}</td>
                   <td>{{ karya.user.name }}</td>
-                  <td>http://127.0.0.1/blog/{{ karya.slug }}</td>
+                  <td>https://smpn4depok.sch.id/blog/{{ karya.slug }}</td>
                   <td>{{ karya.created_at }}</td>
                   <td><span v-if="karya.status == 1">Publish</span><span v-if="karya.status == 0">Draft</span></td>
                   <td>

@@ -50,7 +50,7 @@
                   <th>{{ index + 1 + start }}</th>
                   <td>{{ row.original_name }}</td>
                   <td>{{ row.user.name }}</td>
-                  <td>http://127.0.0.1/file/{{ row.filename }}</td>
+                  <td>https://smpn4depok.sch.id/file/{{ row.filename }}</td>
                   <td >
                       <a class="button is-success m-r-5" v-if="row.status == 1" @click="updateStatus(row)" >Show</a>
                       <a class="button is-warning m-r-5" v-if="row.status == 0" @click="updateStatus(row)" >Hide</a>
