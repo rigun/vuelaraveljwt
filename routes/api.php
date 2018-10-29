@@ -60,8 +60,13 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/storeProfile', 'UploadImagesController@storeProfile');
     Route::delete('/deleteProfile/{id}', 'UploadImagesController@destroyProfile');
 
+    Route::post('/file', 'LinkFileController@store');
+    Route::delete('/file/{id}', 'LinkFileController@destroy');
+    Route::put('/file/{id}', 'LinkFileController@update');
 });
 
+Route::get('/file', 'LinkFileController@index');
+Route::get('/file/landing', 'LinkFileController@landing');
 Route::get('/images-show/slider/', 'UploadImagesController@showSlide');
 Route::get('/importantpost/{kategori}', 'ImportantPostController@Index');
 Route::get('/landingPagePost/{kategori}', 'ImportantPostController@landingPage');

@@ -215,6 +215,11 @@ class ImportantPostController extends Controller
 
     public function blog($slug)
     {
-        return Post::where('slug', '=', $slug)->first();
+        if(Post::where('slug', '=', $slug)->exists()){
+            $post = Post::where('slug', '=', $slug)->with('kategori')->first();
+        }else{
+            $post = 'not found';
+        }
+        return $post;
     }
 }

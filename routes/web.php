@@ -46,6 +46,8 @@ Route::group(['prefix' => 'dashboard'],function(){
     Route::get('/prestasi',function () {return view('app');});
     Route::get('/prestasi/detail/create/{id}',function () {return view('app');});
     Route::get('/prestasi/detail/update/{id}',function () {return view('app');});
+    Route::get('/uploadFile',function () {return view('app');});
+
 });
 
     Route::get('/Pengumuman',function () {return view('app');});

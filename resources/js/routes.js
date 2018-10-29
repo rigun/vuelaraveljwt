@@ -24,6 +24,7 @@ const PengumumanList = Vue.component('PengumumanList', require('./components/Das
 const PengumumanPost = Vue.component('PengumumanPost', require('./components/DashboardComponents/PengumumanPostComponent.vue'))
 const PrestasiList = Vue.component('PrestasiList', require('./components/DashboardComponents/PrestasiListComponent.vue'))
 const PrestasiPost = Vue.component('PrestasiPost', require('./components/DashboardComponents/PrestasiPostComponent.vue'))
+const UploadFile = Vue.component('UploadFile', require('./components/DashboardComponents/FileCRUDComponent.vue'))
 
 const LandingComponent = Vue.component('LandingComponent', require('./components/HomeComponents/LandingPage.vue'))
 const PageView = Vue.component('PageView', require('./components/HomeComponents/PageView.vue'))
@@ -32,6 +33,17 @@ const PageList = Vue.component('PageList', require('./components/HomeComponents/
 
 const routes = [
     {
+        name: 'LoginLayout',
+        path: '/login',
+        component: LoginLayout,
+      },
+    {
+        name: 'Logout',
+        path: '/logout',
+        component: Logout,
+      },
+    {
+        
         name: 'DashboardLayout',
         path: '/dashboard/',
         component: DashboardLayout,
@@ -105,7 +117,12 @@ const routes = [
                 name: 'StudentsProfile',
                 path: 'profile/:id',
                 component: StudentsProfile
-            }
+            },
+            {
+                name: 'UploadFile',
+                path: 'uploadFile',
+                component: UploadFile
+            },
           
              
           ]
@@ -137,16 +154,7 @@ const routes = [
               },
         ]
       },
-    {
-        name: 'LoginLayout',
-        path: '/login',
-        component: LoginLayout,
-      },
-    {
-        name: 'Logout',
-        path: '/logout',
-        component: Logout,
-      },
+    
 ];
 const router = new VueRouter({mode: 'history', routes: routes});
 router.beforeEach((to, from, next) => {

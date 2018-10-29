@@ -76,7 +76,7 @@ class PostController extends Controller
     public function show($id)
     {
         $kategori = Kategori::where('name', $id)->first();
-        return $kategori->post;
+        return $kategori->post()->with('kategori')->first();
     }
 
     /**

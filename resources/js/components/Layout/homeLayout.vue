@@ -16,7 +16,7 @@
                          <div class="navbarLogin">
                              <ul class="navbar-nav" style="list-style:none; margin: 0">
                                      <li class="nav-item">
-                                       <router-link v-bind:to="{path: '/login'}">
+                                       <router-link v-bind:to="{name: 'LoginLayout'}">
                                        <i v-if="mssg != 'Login'" class="fa fa-user m-r-10" aria-hidden="true"></i> 
                                          <i v-else class="fa fa-home m-r-10" aria-hidden="true"></i>
                                          <span>{{mssg}}</span>
@@ -79,7 +79,6 @@
                                                  <div class="dropdown-content">
                                                    <router-link v-bind:to="{ name: 'PageView', params: { kategori: 'Peraturan Akademik' }}"><i class="fa fa-list m-r-10" aria-hidden="true"></i>  <span>Peraturan Akademik</span></router-link>
                                                     <router-link v-bind:to="{ name: 'PageView', params: { kategori: 'Ekstrakurikuler' }}"><i class="fa fa-flag m-r-10" aria-hidden="true"></i>  <span>Ekstrakulikuler</span></router-link>
-                                                    <router-link v-bind:to="{ name: 'PrestasiList' }"><i class="fa fa-star m-r-10" aria-hidden="true"></i>  <span>Prestasi</span></router-link>
                                                  </div>
                                                </div>
                                    </div>
@@ -112,22 +111,22 @@
                              </div>
                              <div class="col-2 ">
                                  <div class="nav-item colLeft">
-                                 <a class="js-scroll-trigger" href="#vm">Visi Misi</a>
+                                 <a class="js-scroll-trigger" href="/#vm">Visi Misi</a>
                                  </div>
                              </div>
                              <div class="col-2 ">
                                  <div class="nav-item colRight">
-                                 <a class="js-scroll-trigger" href="#KaryaSS">Karya Siswa</a>
+                                 <a class="js-scroll-trigger" href="/#KaryaSS">Karya Siswa</a>
                                  </div>
                              </div>
                              <div class="col-2 ">
                                  <div class="nav-item">
-                                 <a class="js-scroll-trigger" href="#mapSec">Alamat</a>
+                                 <a class="js-scroll-trigger" href="/#mapSec">Alamat</a>
                                  </div>
                              </div>
                              <div class="col-2 ">
                                  <div class="nav-item">
-                                 <a class="js-scroll-trigger" href="#CU">Hubungi Kami</a>
+                                 <a class="js-scroll-trigger" href="/#CU">Hubungi Kami</a>
                                  </div>
                              </div>
                          </div>
@@ -147,18 +146,18 @@
 
              <section id="CU">
                  <div class="container">
-                     <h1>Sekolah Dengan Nilai Akreditasi Sekolah '<strong>A</strong>' </h1><br/>
+                     <h1>Akreditasi SMP Negeri 4 Depok '<strong>A</strong>' </h1><br/>
                      <hr/><br/>
                      <div class="row">
                      <div class="col-xs-12 col-md-4 col-sm-6 col-lg-6">
-                     <h2>Sekolah Menegah Pertama Negeri 4 Depok</h2>
+                     <h2>SMP Negeri 4 Depok</h2>
                      <h4><strong>Kontak</strong></h4>
                      <p>(0274)485542</p>
                      <p>smpnempatdepok@yahoo.com</p><br/>
                      <h4><strong>Alamat</strong></h4>
                      <p>Babarsari, Caturtunggal, Depok, Sleman, Yogyakarta</p>    
                      <h4><strong>Jam Operasional</strong></h4>
-                     <p>JAM 07.00 SAMPAI JAM 13.30</p>
+                     <p>Pukul 07.00 - 13.30 WIB</p>
                      </div>
                      <div class="col-xs-12 col-md-4 col-sm-6 col-lg-6">
                          <img style="width: 90%;" src="/images/Logo.png">

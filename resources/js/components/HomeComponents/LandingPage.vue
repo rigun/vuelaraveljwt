@@ -92,95 +92,90 @@
      </div>
 
      <div id="headline" style="margin-top:200px;">
-       <center>
-       <!-- row headline-->
-       <div class="container-fluid" style="text-align:center; margin-left:21%;padding:0px;">
+         <div class="container is-fluid">
+             <div class="row">
+               <h1 style="margin-top:50px">Pengumuman</h1>
+             </div>
+            <div class="tile is-ancestor">
+               
 
+                <div class="tile is-vertical is-8">
+                    <div class="tile">
+                        <div class="tile is-parent is-vertical">
+                            <article class="tile is-child box" v-if="dataPengumuman[0] != null">
+                        <img :src="'/images/upload/'+ dataPengumuman[0].foto.filename" alt="">
 
-        <div class="row col-offset-fluid clearfix" style="margin-top:20px">
+                                <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: dataPengumuman[0].slug }}"> <p class="title">{{dataPengumuman[0].title}}</p></router-link>
+                           
+                            <p class="subtitle">{{dataPengumuman[0].published_at}}</p>
+                            <p class="subtitle">{{getPostBody(dataPengumuman[0].content)}}</p>
+                            </article>
+                            <article class="tile is-child box" v-if="dataPengumuman[1] != null">
+                       <img :src="'/images/upload/'+ dataPengumuman[1].foto.filename" alt="">
 
-            <div style="width:740px;">
-                <!-- headline-->
-        <div class="headline ga--headline clearfix">
-            <div class="headline__big clearfix">
-                <ul class="headline__big__row clearfix js-hl-big" style="margin-left:0px; margin-top:0px">
-                    <li class="headline__big__item">
-            <a class="headline__big__link" href="https://nasional.kompas.com/read/2018/10/17/11593571/jokowi-urusan-utang-rumah-sakit-sampai-ke-presiden-kebangetan">
-                <div class="headline__subtitle">Headline</div>
-                <!-- <div class="live__subtitle live__subtitle--hl">Live Report</div> -->
-                <div class="headline__big__img"><img src="https://asset.kompas.com/crop/0x0:1000x667/740x500/data/photo/2018/10/16/553995677.jpg" alt="Jokowi: Urusan Utang Rumah Sakit Sampai ke Presiden, Kebangetan!"/></div>
-                <div class="headline__big__box">
-                    <h1 class="headline__big__title">Jokowi: Urusan Utang Rumah Sakit Sampai ke Presiden, Kebangetan!</h1>
-                    <div class="headline__big__date">17/10/2018, 11:59 WIB</div>
+                                <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: dataPengumuman[1].slug }}"> <p class="title">{{dataPengumuman[1].title}}</p></router-link>
+
+                            <p class="subtitle">{{dataPengumuman[1].published_at}}</p>
+                            <p class="subtitle">{{getPostBody(dataPengumuman[1].content)}}</p>
+                            </article>
+                        </div>
+                        <div class="tile is-parent is-vertical">
+                            <article class="tile is-child box" v-if="dataPengumuman[2] != null">
+                      <img :src="'/images/upload/'+ dataPengumuman[2].foto.filename" alt="">
+
+                                <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: dataPengumuman[2].slug }}"> <p class="title">{{dataPengumuman[2].title}}</p></router-link>
+
+                            <p class="subtitle">{{dataPengumuman[2].published_at}}</p>
+                            <p class="subtitle">{{getPostBody(dataPengumuman[2].content)}}</p>
+                            </article>
+                            <article class="tile is-child box" v-if="dataPengumuman[3] != null">
+                      <img :src="'/images/upload/'+ dataPengumuman[3].foto.filename" alt="">
+
+                                <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: dataPengumuman[3].slug }}"> <p class="title">{{dataPengumuman[3].title}}</p></router-link>
+
+                            <p class="subtitle">{{dataPengumuman[3].published_at}}</p>
+                            <p class="subtitle">{{getPostBody(dataPengumuman[3].content)}}</p>
+                            </article>
+                        </div>
+                        <div class="tile is-parent is-vertical">
+                            <article class="tile is-child box" v-if="dataPengumuman[4] != null">
+                      <img :src="'/images/upload/'+ dataPengumuman[4].foto.filename" alt="">
+
+                                <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: dataPengumuman[4].slug }}"> <p class="title">{{dataPengumuman[4].title}}</p></router-link>
+
+                            <p class="subtitle">{{dataPengumuman[4].published_at}}</p>
+                            <p class="subtitle">{{getPostBody(dataPengumuman[4].content)}}</p>
+                            </article>
+                            <article class="tile is-child box" v-if="dataPengumuman[5] != null">
+                     <img :src="'/images/upload/'+ dataPengumuman[5].foto.filename" alt="">
+
+                                <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: dataPengumuman[5].slug }}"> <p class="title">{{dataPengumuman[5].title}}</p></router-link>
+
+                            <p class="subtitle">{{dataPengumuman[5].published_at}}</p>
+                            <p class="subtitle">{{getPostBody(dataPengumuman[5].content)}}</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <p class="title">Lainnya</p>
+                        <p class="subtitle">Link Download File</p>
+                        <div class="content" style="height: auto;max-height: 370px;overflow:auto;">
+                            <div v-for="file in files" :key="file.id">
+                                <hr>
+                            <p ><a :href="'/file/'+file.filename">{{file.original_name}}</a></p>
+
                             </div>
-            </a>
-        </li>
-        <li class="headline__big__item">
-            <a class="headline__big__link" href="https://ekonomi.kompas.com/read/2018/10/17/132251326/peringkat-daya-saing-indonesia-naik-ke-posisi-45">
-                <div class="headline__subtitle">Headline</div>
-                <!-- <div class="live__subtitle live__subtitle--hl">Live Report</div> -->
-                <div class="headline__big__img"><img src="https://asset.kompas.com/crop/79x0:879x533/740x500/data/photo/2018/02/26/3149983892.jpg" alt="Peringkat Daya Saing Indonesia Naik ke Posisi 45"/></div>
-                <div class="headline__big__box">
-                    <h2 class="headline__big__title">Peringkat Daya Saing Indonesia Naik ke Posisi 45</h2>
-                    <div class="headline__big__date">17/10/2018, 13:22 WIB</div>
-                            </div>
-            </a>
-        </li>
-        <li class="headline__big__item">
-            <a class="headline__big__link" href="https://megapolitan.kompas.com/read/2018/10/17/13505011/polisi-duga-peluru-yang-ditemukan-di-gedung-dpr-hari-ini-sama-dengan">
-                <div class="headline__subtitle">Headline</div>
-                <!-- <div class="live__subtitle live__subtitle--hl">Live Report</div> -->
-                <div class="headline__big__img"><img src="https://asset.kompas.com/crop/39x0:883x563/740x500/data/photo/2018/10/17/21080260581.jpeg" alt="Polisi Duga Peluru yang Ditemukan di Gedung DPR Hari Ini Sama dengan Peluru Nyasar Sebelumnya"/></div>
-                <div class="headline__big__box">
-                    <h2 class="headline__big__title">Polisi Duga Peluru yang Ditemukan Nyasar Sebelumnya</h2>
-                    <div class="headline__big__date">17/10/2018, 13:50 WIB</div>
-                            </div>
-            </a>
-        </li>
+                            <hr>
+                        </div>
+                    </article>
+                </div>
 
-        <li class="headline__big__item">
-            <a class="headline__big__link" href="https://megapolitan.kompas.com/read/2018/10/17/13505011/polisi-duga-peluru-yang-ditemukan-di-gedung-dpr-hari-ini-sama-dengan">
-                <div class="headline__subtitle">Headline</div>
-                <!-- <div class="live__subtitle live__subtitle--hl">Live Report</div> -->
-                <div class="headline__big__img"><img src="https://asset.kompas.com/crop/39x0:883x563/740x500/data/photo/2018/10/17/21080260581.jpeg" alt="Polisi Duga Peluru yang Ditemukan di Gedung DPR Hari Ini Sama dengan Peluru Nyasar Sebelumnya"/></div>
-                <div class="headline__big__box">
-                    <h2 class="headline__big__title">Polisi Duga Pelu Peluru Nyasar Sebelumnya</h2>
-                    <div class="headline__big__date">17/10/2018, 13:50 WIB</div>
-                            </div>
-            </a>
-        </li>
+                </div><!-- end of tile-->
 
-                </ul>
-            </div>
-            <div class="headline__thumb clearfix">
-                <ul class="headline__thumb__row clearfix js-hl-thumb" style="margin-top:0px; margin-left:0px;">
-                    <li class="headline__thumb__item">
-            <div class="headline__thumb__img"><img src="https://asset.kompas.com/crop/0x0:1000x667/185x124/data/photo/2018/10/16/553995677.jpg" alt="Jokowi: Urusan Utang Rumah Sakit Sampai ke Presiden, Kebangetan!"/></div>
-            <a class="headline__thumb__link" href="https://nasional.kompas.com/read/2018/10/17/11593571/jokowi-urusan-utang-rumah-sakit-sampai-ke-presiden-kebangetan">
-                <h2 class="headline__thumb__title">Jokowi: Urusan Utang Rumah Sakit Sampai ke Presiden, Kebangetan!</h2>
-            </a>
-        </li><li class="headline__thumb__item">
-            <div class="headline__thumb__img"><img src="https://asset.kompas.com/crop/79x0:879x533/185x124/data/photo/2018/02/26/3149983892.jpg" alt="Peringkat Daya Saing Indonesia Naik ke Posisi 45"/></div>
-            <a class="headline__thumb__link" href="https://ekonomi.kompas.com/read/2018/10/17/132251326/peringkat-daya-saing-indonesia-naik-ke-posisi-45">
-                <h2 class="headline__thumb__title">Peringkat Daya Saing Indonesia Naik ke Posisi 45</h2>
-            </a>
-        </li><li class="headline__thumb__item">
-            <div class="headline__thumb__img"><img src="https://asset.kompas.com/crop/39x0:883x563/185x124/data/photo/2018/10/17/21080260581.jpeg" alt="Polisi Duga Peluru yang Ditemukan di Gedung DPR Hari Ini Sama dengan Peluru Nyasar Sebelumnya"/></div>
-            <a class="headline__thumb__link" href="https://megapolitan.kompas.com/read/2018/10/17/13505011/polisi-duga-peluru-yang-ditemukan-di-gedung-dpr-hari-ini-sama-dengan">
-                <h2 class="headline__thumb__title">Polisi Duga Peluru yang Ditemukan di ebelumnya</h2>
-            </a>
-        </li>
-        <li class="headline__thumb__item">
-            <div class="headline__thumb__img"><img src="https://asset.kompas.com/crop/39x0:883x563/185x124/data/photo/2018/10/17/21080260581.jpeg" alt="Polisi Duga Peluru yang Ditemukan di Gedung DPR Hari Ini Sama dengan Peluru Nyasar Sebelumnya"/></div>
-            <a class="headline__thumb__link" href="https://megapolitan.kompas.com/read/2018/10/17/13505011/polisi-duga-peluru-yang-ditemukan-di-gedung-dpr-hari-ini-sama-dengan">
-                <h2 class="headline__thumb__title">Polisi Duga Pelumnya</h2>
-            </a>
-        </li>
-         </ul>
-            </div>
-        </div>    </div>
-        </div></div>
-      </center>
+                
+         </div><!--end of container -->
      </div>
 
      <div id="article" style="top:50px;">
@@ -197,10 +192,9 @@
                             <img :src="'/images/upload/'+prestasi.foto.filename">
                         </div>
                             <br/>
-                            <span>{{ prestasi.title }}</span><br/>
                             <h1>{{ prestasi.title }}</h1><br/>
                             <div class="contentPost"> {{getPostBody(prestasi.content)}} </div>
-                            <router-link v-bind:to="{ name: 'PageViewBlog', params: { kategori: prestasi.slug }}"><button>Selengkapnya</button></router-link>
+                            <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: prestasi.slug }}"><p>Selengkapnya</p></router-link>
                          </div>
                      </div>
                  </div>
@@ -275,7 +269,7 @@
                                 <span>{{ karya.title }}</span><br/>
                                 <h1>{{ karya.title }}</h1><br/>
                                 <div class="contentPost"> {{getPostBody(karya.content)}} </div>
-                                <h4>Selengkapnya ></h4>
+                                <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: karya.slug }}"><p>Selengkapnya</p></router-link>
                             </div>
                         </div>
                     </div>
@@ -319,15 +313,27 @@ import JssorSlider from 'jssor-slider'
                 },
                 dataCreation: [],
                 dataPrestasi: [],
+                dataPengumuman: [],
+                files:[],
             }
         },
         mounted(){
             this.getPicture();
             this.getPrestasi();
             this.getCreation();
+            this.getPengumuman();
+            this.getFile();
         },
         methods:{
-            
+            getFile(){
+                var uri = '/api/file/landing';
+                  axios.get(uri).then((response) => {
+                console.log(response.data);
+                      this.files = response.data;
+                  }).catch(error => {
+                      // console.log(error);
+                  });
+            },
             getPicture(){
                let uri = '/api/images-show/slider/';
                 axios.get(uri).then((response) => {
@@ -452,6 +458,14 @@ import JssorSlider from 'jssor-slider'
                   let uri = '/api/landingPagePost/Prestasi';
                   axios.get(uri).then((response) => {
                       this.dataPrestasi = response.data;
+                  }).catch(error => {
+                      // console.log(error);
+                  });
+            },
+            getPengumuman(){
+                  let uri = '/api/landingPagePost/Pengumuman';
+                  axios.get(uri).then((response) => {
+                      this.dataPengumuman = response.data;
                   }).catch(error => {
                       // console.log(error);
                   });

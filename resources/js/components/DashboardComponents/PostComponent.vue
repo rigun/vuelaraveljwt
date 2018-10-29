@@ -140,10 +140,10 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                 if (from.params.kategori !== to.params.kategori) {
                     this.content = '';
                     this.title = '';
-                    this.slug = '';
+                    this.slug = this.$route.params.kategori;
                     this.created_at = '';
                     this.id = '';
-                    this.picture = '';
+                    this.picture = null;
                     this.picture_id = ''
                     return this.getPost();
 

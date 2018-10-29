@@ -34,8 +34,10 @@
                     </div>
                     <div class="navbar-dropdown arrow-up"></div>
                         <ul id="navbarRight" class="navbar-dropdown is-boxed  is-right box-dropdown-custom">
-                            <li><a class="navbar-item" href="#">Notifications</a></li>
-                            <li><a class="navbar-item" href="#">Profile</a></li>
+                            <li>
+                            <router-link v-if="roles != 'user'" class="navbar-item" v-bind:to="{ name: 'UploadFile'}"> Upload File</router-link>
+                            <router-link v-else class="navbar-item" v-bind:to="{name: 'StudentsProfile', params: {id:user.id}}" > <i class="fa fa-user m-r-10" aria-hidden="true"></i> Profile Saya </router-link>
+                            </li>
                             <hr class="navbar-divider">
                             <li>  <router-link v-bind:to="{name: 'Logout'}" class="navbar-item">
                                         <span class="icon">
@@ -69,7 +71,6 @@
                     <ul class="menu-list">
                         <li><router-link v-bind:to="{name: 'DashboardContent'}"><i class="fa fa-home m-r-10" aria-hidden="true"></i>  <span>Dashboard</span> </router-link></li>
                         <li v-if="roles == 'user'"><router-link v-bind:to="{ name: 'KaryaSiswaList'}" ><i class="fa fa-bookmark m-r-10" aria-hidden="true"></i>  <span>Karya Saya</span> </router-link></li>                        
-                        <li v-if="roles == 'user'"><router-link v-bind:to="{name: 'StudentsProfile', params: {id:user.id}}" > <i class="fa fa-user m-r-10" aria-hidden="true"></i> <span>Profile Saya</span> </router-link></li>                        
                         <li v-if="roles == 'superadministrator'"><router-link v-bind:to="{path: '/dashboard/admin'}"  ><i class="fa fa-user m-r-10" aria-hidden="true"></i>  <span>Manage Admin</span> </router-link></li>
                         <li v-if="roles != 'user'"><router-link v-bind:to="{path: '/dashboard/siswa'}"  ><i class="fa fa-users m-r-10" aria-hidden="true"></i>  <span>Manage Siswa</span> </router-link></li>
                         <li v-if="roles != 'user'"><router-link v-bind:to="{path: '/dashboard/slider'}"  ><i class="fa fa-slideshare m-r-10" aria-hidden="true"></i>  <span>Manage Slider</span> </router-link></li>

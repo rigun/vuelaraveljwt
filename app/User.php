@@ -43,6 +43,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Upload::class);
     }
 
+    public function file(){
+        return $this->hasMany(LinkFile::class);
+    }
 
     public function getJWTIdentifier()
     {
