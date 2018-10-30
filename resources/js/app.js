@@ -24,7 +24,7 @@ Vue.use(Buefy, VueRouter, axios, jQuery, bootstrap);
 const AppLayout = Vue.component('app-layout', require('./components/appLayout.vue'))
 const editor = Vue.component('editor', Editor)
 const slugWidget = Vue.component('slug-widget', require('./components/slugWidget.vue'));
-
+Vue.config.productionTip = false;
 new Vue(
     Vue.util.extend(
         {router},
