@@ -109,7 +109,7 @@
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                  console.log(response);
+                //   console.log(response);
                     if(response.data != [] && response.data != 'not found'){
                         this.id = response.data.id;
                         this.content = response.data.content;
@@ -129,7 +129,7 @@
                         // console.log(reponse);
                     }
                 }).catch(error => {
-                      console.log(error);
+                    //   console.log(error);
                   });
             },
          
@@ -140,7 +140,7 @@
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
                 }).then((response) => {
-                    console.log(response);
+                    // console.log(response);
                     this.picture = response.data.filename;
                 });
             },

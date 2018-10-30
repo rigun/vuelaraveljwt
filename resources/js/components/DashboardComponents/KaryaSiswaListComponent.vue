@@ -196,7 +196,7 @@ import VueAdsPagination from 'vue-ads-pagination';
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                       this.dataCreation = response.data;
                       this.count = this.dataCreation.length;
                   }).catch(error => {

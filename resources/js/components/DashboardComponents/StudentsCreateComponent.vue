@@ -261,12 +261,12 @@ import VueAdsPagination from 'vue-ads-pagination';
                   }
                 }
               ).then((response) => {
-                console.log('SUCCESS!!');
+                // console.log('SUCCESS!!');
                 this.getStudent();
 
               })
               .catch(error =>{
-                console.log('FAILURE!!');
+                // console.log('FAILURE!!');
                 this.getStudent();
               });
 

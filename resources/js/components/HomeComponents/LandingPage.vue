@@ -328,7 +328,7 @@ import JssorSlider from 'jssor-slider'
             getFile(){
                 var uri = '/api/file/landing';
                   axios.get(uri).then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                       this.files = response.data;
                   }).catch(error => {
                       // console.log(error);
@@ -364,7 +364,7 @@ import JssorSlider from 'jssor-slider'
                 });
             },
             setSlider(){
-                console.log("slider");
+                // console.log("slider");
                 $("#slider1").attr("src", '/images/upload/'+this.dataSlider.slider1);
                 $("#slider2").attr("src", '/images/upload/'+this.dataSlider.slider2);
                 $("#slider3").attr("src", '/images/upload/'+this.dataSlider.slider3);

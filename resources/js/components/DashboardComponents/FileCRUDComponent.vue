@@ -147,11 +147,11 @@ import VueAdsPagination from 'vue-ads-pagination';
                     }
                   }
                 ).then((response) => {
-                  console.log('SUCCESS!!');
+                  // console.log('SUCCESS!!');
                   this.getFile();
                 })
                 .catch(error =>{
-                  console.log('FAILURE!!');
+                  // console.log('FAILURE!!');
                   this.getFile();
                 });
 
@@ -168,7 +168,7 @@ import VueAdsPagination from 'vue-ads-pagination';
                this.load = false;
                 var uri = '/api/file';
                   axios.get(uri).then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                       this.dataFile = response.data;
                       this.count = this.dataFile.length;
                 this.filterFile= this.dataFile;
@@ -233,11 +233,11 @@ import VueAdsPagination from 'vue-ads-pagination';
                     }
                   }
                 ).then((response) => {
-                  console.log('SUCCESS!!');
+                  // console.log('SUCCESS!!');
                   this.getFile();
                 })
                 .catch(error =>{
-                  console.log('FAILURE!!');
+                  // console.log('FAILURE!!');
                   this.getFile();
                 });
 

@@ -467,7 +467,7 @@ export default {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
                 }).then((response) => {
-                    console.log(response);
+                    // console.log(response);
                     this.picture = response.data.filename;
                 });
             },

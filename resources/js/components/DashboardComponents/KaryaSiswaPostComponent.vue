@@ -240,7 +240,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
                 }).then((response) => {
-                    console.log(response);
+                    // console.log(response);
                     this.picture = response.data.filename;
                 });
             },

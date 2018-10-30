@@ -143,7 +143,7 @@
                 vm.setSlug(newVal, count+1)
               }
             }).catch(function (error) {
-              console.log(error);
+              // console.log(error);
             });
           }
         },
@@ -157,11 +157,11 @@
             let type = (success ? 'success' : 'warning');
             let msg = (success ? `Copied to Clipboard: ${val}` : "Copy failed, your browser may not support this feature");
             this.$emit('copied', type, msg, val);
-            console.log("Copied to Clipboard:", val);
+            // console.log("Copied to Clipboard:", val);
           } catch (err) {
             this.$emit('copy-failed', val);
-            console.log("Copy failed, your browser may not support this feature.");
-            console.log("Attempted to copy:", val);
+            // console.log("Copy failed, your browser may not support this feature.");
+            // console.log("Attempted to copy:", val);
           }
           document.body.removeChild(temp);
         }

@@ -222,7 +222,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                     });
             },
             vsuccess(file, response) {
-                console.log(response);
+                // console.log(response);
                this.getPicture();
             },
             vsuccessMuliple(files, response) {
