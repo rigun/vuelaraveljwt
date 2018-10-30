@@ -22,9 +22,7 @@
                             </p>
                             <div class="control">
     
-                                <div class="icon-wrapper wrapper">
-                                    <i :class="icon"></i>
-                                </div>
+                             
                                 <div class="url-wrapper wrapper">
                                 <span class="root-url"></span>
                                 <span class="subdirectory-url">https://smpn4depok.sch.id/{{$route.params.kategori}}</span>
