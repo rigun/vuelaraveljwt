@@ -44,7 +44,7 @@ const routes = [
       },
     {
         
-        name: 'DashboardLayout',
+        // name: 'DashboardLayout',
         path: '/dashboard/',
         component: DashboardLayout,
         meta: { requiresAuth: true },
@@ -128,7 +128,7 @@ const routes = [
           ]
       },
     {
-        name: 'HomeLayout',
+        // name: 'HomeLayout',
         path: '/',
         component: HomeLayout,
         children: [
