@@ -5,8 +5,8 @@
                     <div class="card">
                         <div class="card-content blogContent">
                             <h3 >{{kategoriContent}}</h3>
-                            <div class="imgUpload" style="max-height: 330px; text-align:center">
-                                <img :src="'../images/upload/'+picture" alt="">
+                            <div class="imgUpload" style="max-height: 360px; text-align:center;margin-bottom: 20px;">
+                                <img :src="'../images/upload/'+picture" alt="" style="max-height: 330px;margin-top: 20px;margin-bottom: 30px;">
                             </div>
                             <div class="bodyContent">
                                 <div class="titleContent">
