@@ -5,11 +5,13 @@
                     <div class="card">
                         <div class="card-content blogContent">
                             <h3 >{{kategoriContent}}</h3>
-                            <h4>{{created_at}}</h4>
-                            <img :src="'../images/upload/'+picture" alt="">
+                            <div class="imgUpload" style="max-height: 330px; text-align:center">
+                                <img :src="'../images/upload/'+picture" alt="">
+                            </div>
                             <div class="bodyContent">
                                 <div class="titleContent">
                                     <h1>'{{title}}'</h1>
+                                    <h4>{{created_at}}</h4>
                                 </div>
                                 <div class="Content" v-html="content">
                                 </div>
