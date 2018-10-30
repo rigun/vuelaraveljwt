@@ -249,7 +249,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                         }
                     }).then((response) => {
                         this.picture_id='';
-                        this.picture = '';
+                        this.picture = null;
                         this.loadPicture = false;
                         this.$toast.open({
                             duration: 2000,
