@@ -181,13 +181,13 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                    if(response.data[0] != null){
-                        this.id = response.data[0].id;
-                        this.content = response.data[0].content;
-                        this.title = response.data[0].title;
-                        this.slug = response.data[0].slug;
-                        this.created_at = response.data[0].created_at;
-                        this.picture_id = response.data[0].picture_id;
+                    if(response.data != []){
+                        this.id = response.data.id;
+                        this.content = response.data.content;
+                        this.title = response.data.title;
+                        this.slug = response.data.slug;
+                        this.created_at = response.data.created_at;
+                        this.picture_id = response.data.picture_id;
                         if(this.picture_id != null){
                             this.getPicture();
                         }
