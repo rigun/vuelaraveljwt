@@ -16,7 +16,7 @@ class LinkFileController extends Controller
     private $filepath;
     public function __construct()
     {
-        $this->filepath = public_path('https://smpn4depok.sch.id/file');
+        $this->filepath = public_path('/file');
     }
     /**
      * Display a listing of the resource.

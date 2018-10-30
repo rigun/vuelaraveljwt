@@ -21,7 +21,7 @@ class ImportantPostController extends Controller
  
     public function __construct()
     {
-        $this->photos_path = public_path('https://smpn4depok.sch.id/images/upload');
+        $this->photos_path = public_path('/images/upload');
     }
  
     /**
