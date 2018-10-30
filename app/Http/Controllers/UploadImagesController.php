@@ -21,7 +21,7 @@ class UploadImagesController extends Controller
  
     public function __construct()
     {
-        $this->photos_path = public_path('/images/upload');
+        $this->photos_path = public_path('../../public_html/images/upload');
     }
  
     /**
