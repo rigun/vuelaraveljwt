@@ -35,7 +35,7 @@
                                 Post
                             </label>
                             <p class="control">
-                                <editor api-key="7qnvjsuap7tf4yk5t9v56511ndqs11rpv1autp3kye0xydzd" v-model="content" :init="{plugins: 'image imagetools', height: '500'}"></editor>
+                                <editor api-key="7qnvjsuap7tf4yk5t9v56511ndqs11rpv1autp3kye0xydzd" v-model="content" :init="{plugins: 'image imagetools table', height: '500'}"></editor>
                             </p>
                         </div>
                         
