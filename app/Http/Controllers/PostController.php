@@ -65,7 +65,7 @@ class PostController extends Controller
         $category = Kategori::where('name', $request->kategori_name)->first();
         $post->kategori()->attach($category);
 
-        return json_encode(['post'=>$post,'beforeClean'=>$beforeclean,'afterclean'=>$afterclean]);;
+        return json_encode(['post'=>$post,'beforeClean'=>$beforeclean,'afterclean'=>$afterclean]);
     }
 
     /**

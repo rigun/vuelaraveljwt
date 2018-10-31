@@ -71,7 +71,8 @@ class ImportantPostController extends Controller
             'picture_id' => 'required'
 
           ]);
-          
+          $beforeclean = $request->content;
+        $afterclean =  Purifier::clean($request->content);
         $post = new Post;
         $post->slug =  $request->slug;
         $post->title = $request->title;
@@ -85,7 +86,7 @@ class ImportantPostController extends Controller
         $category = Kategori::where('name', $kategori)->first();
         $post->kategori()->attach($category);
 
-        return $post;
+        return json_encode(['post'=>$post,'beforeClean'=>$beforeclean,'afterclean'=>$afterclean]);
     }
 
     /**
