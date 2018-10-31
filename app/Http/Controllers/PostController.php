@@ -108,8 +108,8 @@ class PostController extends Controller
             'picture_id' => 'required'
 
         ]);
-        
-
+        $beforeclean = $request->content;
+        $afterclean =  Purifier::clean($request->content);
         $post = Post::findOrFail($id);
         $post->slug =  $request->slug;
         $post->title = $request->title;
@@ -121,7 +121,7 @@ class PostController extends Controller
 
         
 
-        return $post;
+        return json_encode(['post'=>$post,'beforeClean'=>$beforeclean,'afterclean'=>$afterclean]);
     }
 
     /**
