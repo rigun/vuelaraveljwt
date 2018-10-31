@@ -51,7 +51,8 @@ class PostController extends Controller
             'kategori_name' => 'required',
             'picture_id' => 'required'
           ]);
-          
+        $beforeclean = $request->content;
+        $afterclean =  Purifier::clean($request->content);
         $post = new Post;
         $post->slug =  $request->slug;
         $post->title = $request->title;
@@ -64,7 +65,7 @@ class PostController extends Controller
         $category = Kategori::where('name', $request->kategori_name)->first();
         $post->kategori()->attach($category);
 
-        return $post;
+        return json_encode(['post'=>$post,'beforeClean'=>$beforeclean,'afterclean'=>$afterclean]);;
     }
 
     /**
