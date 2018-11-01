@@ -1,12 +1,12 @@
-<template id="students-list">
-<div class="contentlist">
-<div class="flex-container">
+<template >
+<div id="students-list" class="contentlist">
+<div class="flex-container" >
       <div class="columns m-t-10">
         <div class="column">
           <h1 class="title" v-if="roles != 'user'" >Karya Siswa</h1>
           <h1 class="title" v-else>Karya Saya</h1>
         </div>
-        <div class="column">
+        <div class="column ">
           <router-link v-bind:to="{ name: 'KaryaSiswaPost', params: { detail: 'create', id:'new' }}" class="button is-primary is-pulled-right"><i class="fa fa-user-plus m-r-10"></i> <span v-if="roles == 'user'">Tambahkan Karya Saya</span><span v-if="roles != 'user'">Tambahkan Karya Siswa</span></router-link>
         </div>
       </div>

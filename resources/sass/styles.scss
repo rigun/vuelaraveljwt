@@ -309,4 +309,9 @@
     #headline{
         margin-top: 10px !important;
     }
+    #students-list{
+        .is-pulled-right{
+            float: none !important;
+        }
+    }
 }

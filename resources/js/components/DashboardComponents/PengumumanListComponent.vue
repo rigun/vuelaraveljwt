@@ -1,5 +1,5 @@
-<template id="students-list">
-<div class="contentlist">
+<template >
+<div id="students-list" class="contentlist">
 <div class="flex-container ">
       <div class="columns m-t-10">
         <div class="column">
