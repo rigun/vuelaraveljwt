@@ -19406,10 +19406,10 @@ body {
     display: block;
     width: 0px;
     height: 0px;
-    border-left: 12px solid yellow;
+    border-left: 12px solid #ff9900;
     border-right: 12px solid transparent;
-    border-bottom: 12px solid transparent;
-    border-top: 12px solid transparent;
+    border-bottom: 12px solid #ff9900;
+    border-top: 12px solid #ff9900;
     border-radius: 0px;
     position: absolute;
     top: calc(100% - 150px);
