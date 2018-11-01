@@ -137,24 +137,7 @@
                             <p class="subtitle">{{getPostBody(dataPengumuman[3].content)}}</p>
                             </article>
                         </div>
-                        <div class="tile is-parent is-vertical">
-                            <article class="tile is-child box" v-if="dataPengumuman[4] != null">
-                      <img :src="'/images/upload/'+ dataPengumuman[4].foto.filename" alt="">
-
-                                <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: dataPengumuman[4].slug }}"> <p class="title">{{dataPengumuman[4].title}}</p></router-link>
-
-                            <p class="subtitle">{{dataPengumuman[4].published_at}}</p>
-                            <p class="subtitle">{{getPostBody(dataPengumuman[4].content)}}</p>
-                            </article>
-                            <article class="tile is-child box" v-if="dataPengumuman[5] != null">
-                     <img :src="'/images/upload/'+ dataPengumuman[5].foto.filename" alt="">
-
-                                <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: dataPengumuman[5].slug }}"> <p class="title">{{dataPengumuman[5].title}}</p></router-link>
-
-                            <p class="subtitle">{{dataPengumuman[5].published_at}}</p>
-                            <p class="subtitle">{{getPostBody(dataPengumuman[5].content)}}</p>
-                            </article>
-                        </div>
+                       
                     </div>
                 </div>
                 <div class="tile is-parent">
@@ -473,7 +456,7 @@ import JssorSlider from 'jssor-slider'
              getPostBody (post) {
             let body = this.stripTags(post);
 
-            return body.length > 300 ? body.substring(0, 300) + '...' : body;           
+            return body.length > 200 ? body.substring(0, 200) + '...' : body;           
             },
 
             stripTags (text) {
