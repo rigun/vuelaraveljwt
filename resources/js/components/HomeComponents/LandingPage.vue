@@ -142,7 +142,7 @@
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box" style="max-height: 443px">
-                        <p class="title">Lainnya</p>
+                        <router-link v-bind:to="{ name: 'PageList', params: { kategori: 'Pengumuman' }}"><p class="title">Lainnya</p></router-link>
                         <p class="subtitle">Link Download File</p>
                         <div class="content" style="height: auto;max-height: 370px;overflow:auto;">
                             <div v-for="file in files" :key="file.id">
