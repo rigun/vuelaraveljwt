@@ -155,3 +155,20 @@ body{
         font-size: 40px
     }
 }
+.navbarLogin{
+    padding-right: 0px;
+    .box-hamburger{
+        display: none;
+    }
+}
+.navbar-nav{
+    .left-item{
+        img{
+            display: none;
+                }
+    }
+   
+}
+.arrow-right{
+    display: none;
+}

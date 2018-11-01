@@ -6,30 +6,41 @@
          <div class="row">
              <div class="bg-navFirst bg-navbar">
 
-                     <button id="btnChanges" class="navbar-toggler navbar-toggler-right" onclick="changesFunction(this)" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                         <div class="bar1 bgBar"></div>
-                         <div class="bar2 bgBar"></div>
-                         <div class="bar3 bgBar"></div>
-                     </button>
+                     
                      <div class="row">
 
                          <div class="navbarLogin">
-                             <ul class="navbar-nav" style="list-style:none; margin: 0">
-                                     <li class="nav-item">
-                                       <router-link v-bind:to="{name: 'LoginLayout'}">
+                             <div class="navbar-nav">
+                                 <div class="nav-item left-item">
+                                     <div class="logo">
+                                         <router-link v-bind:to="{name: 'LandingComponent'}" style="padding: 0px;">
+                                             <img src="/images/Logo.png">
+                                       </router-link>
+                                    </div>
+                                 </div>
+                                 <div class="nav-item right-item">
+                                      <router-link v-bind:to="{name: 'LoginLayout'}">
                                        <i v-if="mssg != 'Login'" class="fa fa-user m-r-10" aria-hidden="true"></i> 
                                          <i v-else class="fa fa-home m-r-10" aria-hidden="true"></i>
                                          <span>{{mssg}}</span>
                                        </router-link>
-                                         <!-- <a class="nav-link" href="#">Login</a> -->
-                                     </li>
-                                 </ul>
+                                </div>
+                                 <div class="nav-item box-hamburger">
+                                    <div class="hamburger" onclick="myHamburgerLanding(this)">
+                                        <div class="bar1"></div>
+                                        <div class="bar2"></div>
+                                        <div class="bar3"></div>
+                                    </div>
+                                </div>
+                             </div>
+                             
                          </div>
                      </div>
 
              </div>
          </div>
-         <div class="row navSecond">
+         <div class="arrow-right" onclick="myHamburgerLandingLeft(this)"><span>X</span></div>
+         <div id="navSecond" class="row navSecond">
 
              <div class="bg-navSecond bg-navbar">
 
@@ -38,7 +49,7 @@
                          <div class="navbar-collapse collapse " id="navbarResponsive">
 
                                <div class="row col-12 text-center">
-                                   <div class="col-2">
+                                   <div class="col-md-2 col-12">
                                          <div class="dropdown">
                                                  <button class="dropbtn">Tentang
                                                    <i class="fa fa-caret-down"></i>
@@ -51,7 +62,7 @@
                                                  </div>
                                                </div>
                                    </div>
-                                   <div class="col-2">
+                                   <div class="col-md-2 col-12">
                                          <div class="dropdown">
                                                  <button class="dropbtn">Akademik
                                                    <i class="fa fa-caret-down"></i>
@@ -63,7 +74,7 @@
                                                  </div>
                                                </div>
                                    </div>
-                                   <div class="col-4">
+                                   <div class="col-4 middleLogo">
                                          <div class="logo">
                                                  <div class="middle">
                                                      <strong><p>SMP Negeri 4<br/>Depok</p></strong>
@@ -71,7 +82,7 @@
                                                  </div>
                                              </div>
                                    </div>
-                                   <div class="col-2">
+                                   <div class="col-md-2 col-12">
                                          <div class="dropdown">
                                                  <button class="dropbtn">Siswa
                                                    <i class="fa fa-caret-down"></i>
@@ -82,7 +93,7 @@
                                                  </div>
                                                </div>
                                    </div>
-                                   <div class="col-2">
+                                   <div class="col-md-2 col-12">
                                          <div class="dropdown">
                                                         <router-link class="dropbtn" v-bind:to="{ name: 'PageView', params: { kategori: 'PPDB' }}"  ><i class="fa fa-file m-r-10" aria-hidden="true"></i>  <span>PPDB</span> </router-link>
                                                  </div>
@@ -94,37 +105,37 @@
              </div>
 
          </div>
-         <div class="row navThird">
+         <div  id="navThird"  class="row navThird">
 
              <div class="bg-navThird bg-navbar">
 
                          <div class="col-12 row text-center">
-                             <div class="col-2 ">
+                             <div class="col-md-2 col-12 ">
                                  <div class="nav-item">
                                  <a class="js-scroll-trigger" href="/#slider">Home</a>
                                  </div>
                              </div>
-                             <div class="col-2 ">
+                             <div class="col-md-2 col-12 ">
                                  <div class="nav-item">
                                  <a class="js-scroll-trigger" href="/#prestasi">Prestasi</a>
                                  </div>
                              </div>
-                             <div class="col-2 ">
+                             <div class="col-md-2 col-12 ">
                                  <div class="nav-item colLeft">
                                  <a class="js-scroll-trigger" href="/#vm">Visi Misi</a>
                                  </div>
                              </div>
-                             <div class="col-2 ">
+                             <div class="col-md-2 col-12 ">
                                  <div class="nav-item colRight">
                                  <a class="js-scroll-trigger" href="/#KaryaSS">Karya Siswa</a>
                                  </div>
                              </div>
-                             <div class="col-2 ">
+                             <div class="col-md-2 col-12 ">
                                  <div class="nav-item">
                                  <a class="js-scroll-trigger" href="/#mapSec">Alamat</a>
                                  </div>
                              </div>
-                             <div class="col-2 ">
+                             <div class="col-md-2 col-12 ">
                                  <div class="nav-item">
                                  <a class="js-scroll-trigger" href="/#CU">Hubungi Kami</a>
                                  </div>
@@ -134,6 +145,7 @@
              </div>
 
          </div>
+
 
      </nav>
      <div id="appPage">
@@ -149,7 +161,7 @@
                      <h1>Akreditasi SMP Negeri 4 Depok '<strong>A</strong>' </h1><br/>
                      <hr/><br/>
                      <div class="row">
-                     <div class="col-xs-12 col-md-4 col-sm-6 col-lg-6">
+                     <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6">
                      <h2>SMP Negeri 4 Depok</h2>
                      <h4><strong>Kontak</strong></h4>
                      <p>(0274)485542</p>
@@ -159,7 +171,7 @@
                      <h4><strong>Jam Operasional</strong></h4>
                      <p>Pukul 07.00 - 13.30 WIB</p>
                      </div>
-                     <div class="col-xs-12 col-md-4 col-sm-6 col-lg-6">
+                     <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6">
                          <img style="width: 90%;" src="/images/Logo.png">
                      </div>
                  </div>

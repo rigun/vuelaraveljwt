@@ -11,9 +11,9 @@
                             </div>
                                 <br/>
                                 <span>{{ content.title }}</span><br/>
-                                <h1>{{ content.title }}</h1><br/>
+                                <h1>{{ content.user.name }}</h1><br/>
                                 <div class="contentPost"> {{getPostBody(content.content)}} </div>
-                                <h4>Selengkapnya ></h4>
+                                <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: content.slug }}"><p>Selengkapnya</p></router-link>
                             </div>
                         </div>
                     </div>

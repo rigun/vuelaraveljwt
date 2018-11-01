@@ -217,7 +217,7 @@
                  <h1>VISI MISI SEKOLAH</h1>
                  <h1>“BERKUALITAS DALAM IPTEK DAN IMTAQ”</h1>
                  <div class="row bg-text">
-                     <div class="col-6">
+                     <div class="col-md-6">
                          <div class="box-textVM">
                              <h1 style="text-align: center;">VISI SEKOLAH</h1>
                              <h2>BERKUALITAS DALAM</h2>
@@ -231,7 +231,7 @@
                              </ol>
                          </div>
                      </div>
-                     <div class="col-6">
+                     <div class="col-md-6">
                          <div class="box-textVM">
                                  <h1 style="text-align: center;">MISI SEKOLAH</h1>
                                  <ol>

@@ -5,6 +5,14 @@ function myHamburger(x) {
     document.getElementById("side-menu").classList.toggle('side-menu-change');
     document.getElementById("app").classList.toggle('dashboardContent-change');
 }
+function myHamburgerLanding(x) {
+    x.classList.toggle("change");
+    document.getElementById("navThird").classList.toggle('navThirdChange');
+}
+function myHamburgerLandingLeft(x) {
+    x.classList.toggle("arrow-rightChange");
+    document.getElementById("navSecond").classList.toggle('navSecondChange');
+}
 function myDropdwonSide(x){
     document.getElementById("list"+x).classList.toggle('dropdown-hiddenSide');
 }
