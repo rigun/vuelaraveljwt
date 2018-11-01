@@ -187,6 +187,7 @@ import VueAdsPagination from 'vue-ads-pagination';
               this.end = end;
           },
             getCreation(){
+              this.load = false;
                   let uri = '/api/importantpost/Prestasi';
                   axios.get(uri,{
                   headers: {

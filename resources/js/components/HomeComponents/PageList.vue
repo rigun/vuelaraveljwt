@@ -54,7 +54,7 @@
               getPostBody (post) {
             let body = this.stripTags(post);
 
-            return body.length > 300 ? body.substring(0, 300) + '...' : body;           
+            return body.length > 200 ? body.substring(0, 200) + '...' : body;           
             },
 
             stripTags (text) {
