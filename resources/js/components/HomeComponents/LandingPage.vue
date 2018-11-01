@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 <div class="tile is-parent">
-                    <article class="tile is-child box">
+                    <article class="tile is-child box" style="max-height: 443px">
                         <p class="title">Lainnya</p>
                         <p class="subtitle">Link Download File</p>
                         <div class="content" style="height: auto;max-height: 370px;overflow:auto;">
