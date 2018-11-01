@@ -251,7 +251,7 @@
                             </div>
                                 <br/>
                                 <h1>{{ karya.title }}</h1>
-                                <span>{{ karya.user.name }}</span><br/>
+                                <h4>{{ karya.user.name }}</h4>
                                 <span>{{ karya.published_at }}</span><br/>
                                 <div class="contentPost"> {{getPostBody(karya.content)}} </div>
                                 <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: karya.slug }}"><p>Selengkapnya</p></router-link>

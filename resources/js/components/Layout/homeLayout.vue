@@ -78,7 +78,7 @@
                                          <div class="logo">
                                                  <div class="middle">
                                                      <strong><p>SMP Negeri 4<br/>Depok</p></strong>
-                                                     <img src="/images/Logo.png">
+                                                    <router-link v-bind:to="{name: 'LandingComponent'}" style="padding: 0px;"> <img src="/images/Logo.png"> </router-link>
                                                  </div>
                                              </div>
                                    </div>
