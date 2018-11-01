@@ -19458,5 +19458,9 @@ body {
   .text-resetpassword {
     font-size: 14px;
   }
+
+  .Content {
+    overflow: scroll;
+  }
 }
 
