@@ -234,10 +234,22 @@ import { vueTopprogress } from 'vue-top-progress'
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                alert(response.data.msg);
+                this.$toast.open({
+                    duration: 2000,
+                    message: response.data.msg,
+                    position: 'is-bottom',
+                    type: 'is-success',
+                    queue: false,
+                });
                 this.activeFirst = false;
               }).catch(error => {
-                alert(error.data.msg);
+                this.$toast.open({
+                    duration: 2000,
+                    message: error.data.msg,
+                    position: 'is-bottom',
+                    type: 'is-danger',
+                    queue: false,
+                });
                 this.activeFirst = false;
                 });
             },
@@ -268,6 +280,7 @@ import { vueTopprogress } from 'vue-top-progress'
                             }
                         }).catch(error => {
                             this.error = error;
+                            this.$router.push({ name: 'Logout' })
                         })  
                 }).catch(error => {
                     this.$router.push({ name: 'Logout' })

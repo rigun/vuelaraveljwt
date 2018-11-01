@@ -376,7 +376,13 @@ export default {
               }else if(this.activeUpdate == false){
                 this.activeUpdate = true;
               }else{
-                alert("error");
+                this.$toast.open({
+                    duration: 2000,
+                    message: 'error',
+                    position: 'is-bottom',
+                    type: 'is-danger',
+                    queue: false,
+                });
               }
             },
         modalForget(){
@@ -385,7 +391,13 @@ export default {
               }else if(this.activeForget == false){
                 this.activeForget = true;
               }else{
-                alert("error");
+                this.$toast.open({
+                    duration: 2000,
+                    message: 'error',
+                    position: 'is-bottom',
+                    type: 'is-danger',
+                    queue: false,
+                });
               }
             },
         cek(){
@@ -404,11 +416,23 @@ export default {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                alert(response.data.msg);
+                  this.$toast.open({
+                    duration: 2000,
+                    message: response.data.msg,
+                    position: 'is-bottom',
+                    type: 'is-danger',
+                    queue: false,
+                });
                 this.activeUpdate = false;
                 this.getStudent();
               }).catch(error => {
-                alert("username sudah ada");
+                  this.$toast.open({
+                    duration: 2000,
+                    message: "username sudah ada",
+                    position: 'is-bottom',
+                    type: 'is-danger',
+                    queue: false,
+                });
                 this.activeUpdate = false;
                 this.getStudent();
                 });
@@ -420,11 +444,23 @@ export default {
                       Authorization: 'Bearer ' + localStorage.getItem('token')
                   }
               }).then((response) => {
-                alert(response.data.msg);
+                this.$toast.open({
+                    duration: 2000,
+                    message: response.data.msg,
+                    position: 'is-bottom',
+                    type: 'is-success',
+                    queue: false,
+                });
                 this.activeForget = false;
                 this.getStudent();
               }).catch(error => {
-                alert(error.data.msg);
+                this.$toast.open({
+                    duration: 2000,
+                    message: error.data.msg,
+                    position: 'is-bottom',
+                    type: 'is-danger',
+                    queue: false,
+                });
                 this.activeForget = false;
                 this.getStudent();
                 });

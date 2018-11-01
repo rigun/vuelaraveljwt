@@ -331,7 +331,13 @@ export default {
               }else if(this.activeUpdate == false){
                 this.activeUpdate = true;
               }else{
-                alert("error");
+                this.$toast.open({
+                    duration: 2000,
+                    message: 'error',
+                    position: 'is-bottom',
+                    type: 'is-danger',
+                    queue: false,
+                });
               }
             },
         updateStudent(){

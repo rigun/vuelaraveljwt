@@ -209,7 +209,13 @@ import VueAdsPagination from 'vue-ads-pagination';
               }else if(this.active == false){
                 this.active = true;
               }else{
-                alert("error");
+                this.$toast.open({
+                    duration: 2000,
+                    message: 'error',
+                    position: 'is-bottom',
+                    type: 'is-danger',
+                    queue: false,
+                });
               }
             },
             modalDelete(){
@@ -218,7 +224,13 @@ import VueAdsPagination from 'vue-ads-pagination';
               }else if(this.activeDelete == false){
                 this.activeDelete = true;
               }else{
-                alert("error");
+                this.$toast.open({
+                    duration: 2000,
+                    message: 'error',
+                    position: 'is-bottom',
+                    type: 'is-danger',
+                    queue: false,
+                });
               }
             },
             setIdDelete(data){
