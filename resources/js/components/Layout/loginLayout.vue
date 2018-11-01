@@ -25,7 +25,7 @@
             <h1>Masuk</h1>
         </div>
         <div class="login-body">
-            <form autocomplete="off" v-on:submit.prevent="submitLogin"  >
+            <form autocomplete="off" v-on:submit.prevent="loadUpdate();submitLogin()"  >
            
             <div class="field">
                     <label class="label">Username</label>
@@ -52,7 +52,7 @@
               
                 <div class="field is-grouped">
                 <div class="control">
-                    <button class="button btn-custom m-t-35" :class="{'is-loading' : load}" @click="loadUpdate()">Masuk</button>
+                    <button class="button btn-custom m-t-35" :class="{'is-loading' : load}">Masuk</button>
                 </div>
                
                 </div>
@@ -92,10 +92,11 @@
                     localStorage.setItem('token', response.data.access_token)
                     localStorage.setItem('roles', response.data.role)
                     this.$router.push({ name: 'DashboardContent' })
+                    this.load = false;
                 }).catch(error => {
                     this.loginError = true
+                    this.load = false;
                 });
-                    this.load = false
 
             }
         }
