@@ -19454,5 +19454,9 @@ body {
   #students-list .is-pulled-right {
     float: none !important;
   }
+
+  .text-resetpassword {
+    font-size: 14px;
+  }
 }
 

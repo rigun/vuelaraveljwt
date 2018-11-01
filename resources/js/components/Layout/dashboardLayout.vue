@@ -130,7 +130,7 @@
       <div class="modal-background" ></div>
         <div class="modal-card">
           <header class="modal-card-head">
-            <p class="modal-card-title" style="text-align:center">Selamat datang <br/>silahkan update password anda terlebih dahulu <br/> Terima Kasih</p>
+            <p class="modal-card-title text-resetpassword" style="text-align:center">Selamat datang <br/>silahkan update password anda terlebih dahulu <br/> Terima Kasih</p>
           </header>
             <form v-on:submit.prevent ="firstLogin()">
 
