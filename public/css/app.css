@@ -18407,13 +18407,10 @@ body {
   height: 36px;
 }
 
-.uploadButton {
+.uploadbutton {
   max-width: 144px;
   float: right;
   position: relative;
-}
-
-.uploadButton .button {
   margin-right: 13px;
 }
 
