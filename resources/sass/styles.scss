@@ -1,4 +1,7 @@
 @media screen and (max-width: 1100px){
+    .modal-card-body{
+        max-height: 188px;
+    }
     #app{
         .dashboardContent{
             width: 100%;

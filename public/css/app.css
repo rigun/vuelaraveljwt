@@ -18439,6 +18439,10 @@ body {
   display: none;
 }
 
+.modal-card-body {
+  max-height: 376px;
+}
+
 .m-t-5 {
   margin-top: 5px;
 }
@@ -19093,6 +19097,10 @@ body {
 }
 
 @media screen and (max-width: 1100px) {
+  .modal-card-body {
+    max-height: 188px;
+  }
+
   #app .dashboardContent {
     width: 100%;
     padding-left: 10px;
