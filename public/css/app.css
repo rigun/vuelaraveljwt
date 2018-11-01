@@ -18401,13 +18401,20 @@ body {
 .inputFile {
   position: absolute;
   opacity: 0;
-  width: 144px;
+  width: 146px;
+  overflow: hidden;
+  cursor: pointer;
+  height: 36px;
 }
 
 .uploadButton {
   max-width: 144px;
   float: right;
   position: relative;
+}
+
+.uploadButton .button {
+  margin-right: 13px;
 }
 
 .blogContent h3 {
