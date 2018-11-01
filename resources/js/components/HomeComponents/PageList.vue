@@ -10,8 +10,9 @@
                                 <img :src="'/images/upload/'+content.foto.filename">
                             </div>
                                 <br/>
-                                <span>{{ content.title }}</span><br/>
-                                <h1>{{ content.user.name }}</h1><br/>
+                                <h1>{{ content.title }}</h1>
+                                <span v-if="$route.params.kategori == 'Karya Siswa'">{{ content.user.name }}</span><br v-if="$route.params.kategori == 'Karya Siswa'"/>
+                                <span>{{ content.published_at }}</span><br/>
                                 <div class="contentPost"> {{getPostBody(content.content)}} </div>
                                 <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: content.slug }}"><p>Selengkapnya</p></router-link>
                             </div>
