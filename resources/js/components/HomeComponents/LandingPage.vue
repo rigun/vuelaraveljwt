@@ -175,7 +175,8 @@
                             <img :src="'/images/upload/'+prestasi.foto.filename">
                         </div>
                             <br/>
-                            <h1>{{ prestasi.title }}</h1><br/>
+                            <h1>{{ prestasi.title }}</h1>
+                            <p>{{prestasi.published_at}}</p>
                             <div class="contentPost"> {{getPostBody(prestasi.content)}} </div>
                             <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: prestasi.slug }}"><p>Selengkapnya</p></router-link>
                          </div>
@@ -249,8 +250,9 @@
                                 <img :src="'/images/upload/'+karya.foto.filename">
                             </div>
                                 <br/>
-                                <span>{{ karya.title }}</span><br/>
+                                <span>{{ karya.user.name }}</span><br/>
                                 <h1>{{ karya.title }}</h1><br/>
+                                <span>{{ karya.published_at }}</span><br/>
                                 <div class="contentPost"> {{getPostBody(karya.content)}} </div>
                                 <router-link v-bind:to="{ name: 'PageViewBlog', params: { post: karya.slug }}"><p>Selengkapnya</p></router-link>
                             </div>
