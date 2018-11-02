@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <div class="column is-one-quarter-desktop is-narrow-tablet">
+            <div class="column is-one-quarter-desktop">
                 <div class="card">
                     <div class="card-content">
                     <div class="columns">
@@ -233,7 +233,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
                 }).then((response) => {
-                    console.log(response);
+                    // console.log(response);
                     this.picture = response.data.filename;
                 });
             },
